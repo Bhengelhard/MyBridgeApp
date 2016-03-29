@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10102" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10080"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXk-tk-rxF">
+                                <rect key="frame" x="166" y="128" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anP-2u-xN8">
+                                <rect key="frame" x="115" y="431" width="144" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3ej-Sk-JNd"/>
+                                    <constraint firstAttribute="width" constant="144" id="WGa-Wn-K83"/>
+                                </constraints>
+                                <state key="normal" title="Login With Facebook"/>
+                                <connections>
+                                    <action selector="fbLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5H-0t-AvW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="anP-2u-xN8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="137" id="3pw-05-sCh"/>
+                            <constraint firstItem="anP-2u-xN8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H9c-Cm-dYf"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="cMo-Jt-lEF" kind="show" identifier="showSigninScreen" id="7Zw-u1-iEd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="zUx-7Q-hEN">
+            <objects>
+                <viewController id="cMo-Jt-lEF" customClass="SignUpViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wc8-na-Rlz"/>
+                        <viewControllerLayoutGuide type="bottom" id="UBQ-FB-IgE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7HS-Z2-bfw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bridge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvh-Y2-D8f">
+                                <rect key="frame" x="157" y="93" width="51" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="IGC-uW-WBX"/>
+                                    <constraint firstAttribute="width" constant="51" id="Mzo-3J-Xrd"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="51" id="Pcj-6b-JJd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="pRD-Wf-FtF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
+                                <rect key="frame" x="67" y="371" width="240" height="199"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Gl-m4b">
+                                <rect key="frame" x="67" y="149" width="240" height="199"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="199" id="087-2X-t2Y"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="6xJ-EN-whV"/>
+                                    <constraint firstAttribute="width" constant="240" id="WLX-Rl-hL7"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="mvh-Y2-D8f" secondAttribute="bottom" constant="35" id="69D-ey-R9k"/>
+                            <constraint firstItem="mvh-Y2-D8f" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="HyQ-am-eev"/>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="cGo-dR-BQs"/>
+                            <constraint firstItem="mvh-Y2-D8f" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" constant="73" id="mGc-cT-Kzs"/>
+                            <constraint firstItem="mvh-Y2-D8f" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" constant="73" id="ufe-g9-bJY"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="userImage" destination="zga-Gl-m4b" id="9ec-xQ-GbD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HbE-ka-aov" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066.5" y="289.5"/>
+        </scene>
+    </scenes>
+</document>
