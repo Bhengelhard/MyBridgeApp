@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10080"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -43,16 +44,16 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <segue destination="cMo-Jt-lEF" kind="show" identifier="showSigninScreen" id="7Zw-u1-iEd"/>
+                        <segue destination="cMo-Jt-lEF" kind="show" identifier="showBridgeViewController" id="7Zw-u1-iEd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Bridge View Controller-->
         <scene sceneID="zUx-7Q-hEN">
             <objects>
-                <viewController id="cMo-Jt-lEF" customClass="SignUpViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cMo-Jt-lEF" customClass="BridgeViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wc8-na-Rlz"/>
                         <viewControllerLayoutGuide type="bottom" id="UBQ-FB-IgE"/>
@@ -61,37 +62,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bridge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvh-Y2-D8f">
-                                <rect key="frame" x="157" y="93" width="51" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
+                                <rect key="frame" x="67" y="371" width="240" height="199"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Gl-m4b">
+                                <rect key="frame" x="67" y="149" width="240" height="199"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="IGC-uW-WBX"/>
-                                    <constraint firstAttribute="width" constant="51" id="Mzo-3J-Xrd"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="51" id="Pcj-6b-JJd"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="pRD-Wf-FtF"/>
+                                    <constraint firstAttribute="width" constant="240" id="EC3-xF-3PZ"/>
+                                    <constraint firstAttribute="height" constant="199" id="V3T-0i-kUz"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwI-nj-Dqo">
+                                <rect key="frame" x="101" y="98" width="173" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="173" id="BNa-fW-VJf"/>
+                                    <constraint firstAttribute="height" constant="21" id="u6O-wp-Oaa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
-                                <rect key="frame" x="67" y="371" width="240" height="199"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Gl-m4b">
-                                <rect key="frame" x="67" y="149" width="240" height="199"/>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Izu-XS-RmV">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="199" id="087-2X-t2Y"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="6xJ-EN-whV"/>
-                                    <constraint firstAttribute="width" constant="240" id="WLX-Rl-hL7"/>
+                                    <constraint firstAttribute="height" constant="44" id="fTe-ZS-49N"/>
                                 </constraints>
-                            </imageView>
+                                <items>
+                                    <navigationItem title="Bridge" id="lpk-RA-hXC">
+                                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="Te7-Zo-fOb">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="logOut" id="yqn-QJ-VoQ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="mvh-Y2-D8f" secondAttribute="bottom" constant="35" id="69D-ey-R9k"/>
-                            <constraint firstItem="mvh-Y2-D8f" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="HyQ-am-eev"/>
-                            <constraint firstItem="zga-Gl-m4b" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="cGo-dR-BQs"/>
-                            <constraint firstItem="mvh-Y2-D8f" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" constant="73" id="mGc-cT-Kzs"/>
-                            <constraint firstItem="mvh-Y2-D8f" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" constant="73" id="ufe-g9-bJY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Izu-XS-RmV" secondAttribute="trailing" constant="-20" id="Q0t-Uz-Fur"/>
+                            <constraint firstItem="Izu-XS-RmV" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" id="Q7O-Gg-bIq"/>
+                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="top" secondItem="Izu-XS-RmV" secondAttribute="bottom" constant="34" id="VaC-v4-pkf"/>
+                            <constraint firstItem="Izu-XS-RmV" firstAttribute="leading" secondItem="7HS-Z2-bfw" secondAttribute="leadingMargin" constant="-20" id="Yix-7b-g2M"/>
+                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="e7a-4v-ZiR"/>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="gFB-Ic-VYl"/>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="lwI-nj-Dqo" secondAttribute="bottom" constant="30" id="hrZ-ZO-Gnx"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -101,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbE-ka-aov" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1066.5" y="289.5"/>
+            <point key="canvasLocation" x="775.5" y="289.5"/>
         </scene>
     </scenes>
 </document>
