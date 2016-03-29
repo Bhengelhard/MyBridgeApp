@@ -1,11 +1,3 @@
-//
-//  SignUpViewController.swift
-//  ParseStarterProject-Swift
-//
-//  Created by Blake Engelhard on 3/28/16.
-//  Copyright © 2016 Parse. All rights reserved.
-//
-
 import UIKit
 import Parse
 import FBSDKCoreKit
