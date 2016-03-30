@@ -12,7 +12,8 @@ class BridgeViewController: UIViewController {
     var displayedUserId = ""
     
     //**Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
-    var ignoredUsers : [String] = [""]
+    var ignoredUsers = [String]()
+    var currentUserAdded = 0
     
     func updateImage() {
         
@@ -21,11 +22,16 @@ class BridgeViewController: UIViewController {
         
         //Querying based on who is not in accepted or rejected arrays of the currentUser
 
+        //making sure the currentUser doesn't show up more than once
         
-        //making sure the currentUser doesn't randomly show up
-        if let user = PFUser.currentUser()?.objectId {
+        if currentUserAdded == 0 {
             
-            ignoredUsers = ignoredUsers + [user]
+            if let user = PFUser.currentUser()?.objectId {
+                
+                ignoredUsers = ignoredUsers + [user]
+                currentUserAdded = 1
+                
+            }
             
         }
         

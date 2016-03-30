@@ -22,6 +22,7 @@
 		CB7A11DD1CA88B7100252CB6 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */; };
 		CB7A11DF1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */; };
 		CB9C20E81CAA333800C03FF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9C20E61CAA333800C03FF2 /* Main.storyboard */; };
+		CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ../../Desktop/ParseSDK/ParseUI.framework; sourceTree = "<group>"; };
 		CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = ../../Desktop/ParseSDK/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CB9C20E71CAA333800C03FF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesViewController.swift; path = MyBridgeApp/MessagesViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				CB5829441CAA26D900DC86C9 /* AppDelegate.swift */,
 				CB5829451CAA26D900DC86C9 /* BridgeViewController.swift */,
 				CB5829461CAA26D900DC86C9 /* ViewController.swift */,
+				CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */,
 				CB9C20E61CAA333800C03FF2 /* Main.storyboard */,
 			);
 			name = MyBridgeApp;
@@ -201,6 +204,7 @@
 			files = (
 				CB5829491CAA26D900DC86C9 /* ViewController.swift in Sources */,
 				CB5829471CAA26D900DC86C9 /* AppDelegate.swift in Sources */,
+				CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */,
 				CB5829481CAA26D900DC86C9 /* BridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

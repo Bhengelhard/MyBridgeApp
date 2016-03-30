@@ -18,28 +18,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXk-tk-rxF">
-                                <rect key="frame" x="166" y="128" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bridge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXk-tk-rxF">
+                                <rect key="frame" x="134" y="128" width="107" height="52"/>
+                                <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="26"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anP-2u-xN8">
                                 <rect key="frame" x="115" y="431" width="144" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3ej-Sk-JNd"/>
-                                    <constraint firstAttribute="width" constant="144" id="WGa-Wn-K83"/>
+                                    <constraint firstAttribute="width" constant="144" id="HZw-Ny-rGy"/>
+                                    <constraint firstAttribute="height" constant="30" id="Qes-PQ-HMv"/>
                                 </constraints>
                                 <state key="normal" title="Login With Facebook"/>
                                 <connections>
                                     <action selector="fbLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5H-0t-AvW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&quot;All of life is rooted in Relationships.&quot;" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlP-aK-aWi">
+                                <rect key="frame" x="20" y="203" width="335" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="335" id="EyZ-U8-h83"/>
+                                    <constraint firstAttribute="height" constant="62" id="oXg-My-5pf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="- Lee A. Harris" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5b-gv-IM4">
+                                <rect key="frame" x="20" y="265" width="335" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="S0z-lx-dKG"/>
+                                    <constraint firstAttribute="width" constant="335" id="lmq-jM-dBG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="anP-2u-xN8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="137" id="3pw-05-sCh"/>
-                            <constraint firstItem="anP-2u-xN8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H9c-Cm-dYf"/>
+                            <constraint firstItem="anP-2u-xN8" firstAttribute="top" secondItem="L5b-gv-IM4" secondAttribute="bottom" constant="139" id="4oD-GN-IJ4"/>
+                            <constraint firstItem="wlP-aK-aWi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UBX-gB-qF2"/>
+                            <constraint firstItem="aXk-tk-rxF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="daN-pk-egh"/>
+                            <constraint firstItem="wlP-aK-aWi" firstAttribute="top" secondItem="aXk-tk-rxF" secondAttribute="bottom" constant="23" id="fOY-Bq-CJ9"/>
+                            <constraint firstItem="L5b-gv-IM4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hwf-en-O2Z"/>
+                            <constraint firstItem="aXk-tk-rxF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="108" id="qOA-bA-K3k"/>
+                            <constraint firstItem="anP-2u-xN8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sS9-nU-lhS"/>
+                            <constraint firstItem="L5b-gv-IM4" firstAttribute="top" secondItem="wlP-aK-aWi" secondAttribute="bottom" id="sqb-MS-xOy"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -49,6 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="453.5" y="289.5"/>
         </scene>
         <!--Bridge View Controller-->
         <scene sceneID="zUx-7Q-hEN">
@@ -94,6 +121,11 @@
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="logOut" id="yqn-QJ-VoQ"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Messages" id="pmt-Eh-Ffd">
+                                            <connections>
+                                                <segue destination="MtK-gn-56M" kind="show" id="qLK-f2-K3f"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -116,7 +148,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbE-ka-aov" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1051.5" y="289.5"/>
+            <point key="canvasLocation" x="903.5" y="289.5"/>
+        </scene>
+        <!--Messages View Controller-->
+        <scene sceneID="yR7-m9-XyN">
+            <objects>
+                <tableViewController id="MtK-gn-56M" customClass="MessagesViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="qMp-lC-fPi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="YYP-KX-0pA">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Messages" id="aU5-qX-BXg">
+                                    <barButtonItem key="leftBarButtonItem" title="Back" id="oxg-KL-WJC">
+                                        <connections>
+                                            <segue destination="cMo-Jt-lEF" kind="show" id="TAV-gy-FO0"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="75" id="6Y8-jO-orf">
+                                <rect key="frame" x="0.0" y="72" width="375" height="75"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Y8-jO-orf" id="qZn-pD-pHQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MtK-gn-56M" id="uM5-LG-Yzf"/>
+                            <outlet property="delegate" destination="MtK-gn-56M" id="8jZ-i1-ssE"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rA7-wX-q1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1364.5" y="289.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TAV-gy-FO0"/>
+    </inferredMetricsTieBreakers>
 </document>
