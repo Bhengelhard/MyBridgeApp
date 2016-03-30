@@ -8,11 +8,33 @@ import FBSDKCoreKit
 class BridgeViewController: UIViewController {
 
     @IBOutlet weak var userImage: UIImageView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    var displayedUserId = ""
+    
+    func updateImage() {
         
+        //Query for Image in BridgeViewController
         var query: PFQuery = PFUser.query()!
         
+        //Querying based on Geolocation boundary - Querying based on who's closest is shown in Uber Udemy tutorial
+        //query.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: 0, longitude: 0), toNorthEast: PFGeoPoint(latitude: 0, longitude: 0))
+        
+        
+        var ignoredUsers : [String] = [""]
+        
+        if let acceptedUsers  = PFUser.currentUser()?["accepted"] as? [String] {
+            
+            ignoredUsers = ignoredUsers + acceptedUsers
+            
+        }
+        
+        if let rejectedUsers = PFUser.currentUser()?["rejected"] as? [String] {
+            
+            ignoredUsers = ignoredUsers + rejectedUsers
+            
+        }
+        
+        query.whereKey("objectId", notContainedIn: ignoredUsers)
         query.limit = 1
         
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
@@ -24,6 +46,8 @@ class BridgeViewController: UIViewController {
             } else if let objects = objects {
                 
                 for object in objects {
+                    
+                    self.displayedUserId = object.objectId!
                     
                     let imageFile = object["fb_profile_picture"] as! PFFile
                     
@@ -47,7 +71,85 @@ class BridgeViewController: UIViewController {
                 
             }
         }
+
         
+    }
+    
+    func wasDragged(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translationInView(self.view)
+        let label = gesture.view!
+        
+        label.center = CGPoint(x: self.view.bounds.width / 2 + translation.x, y: self.view.bounds.height / 2 + translation.y)
+        
+        let xFromCenter = label.center.x - self.view.bounds.width / 2
+        
+        let scale = min(100 / abs(xFromCenter), 1)
+        
+        var rotation = CGAffineTransformMakeRotation(xFromCenter / 200)
+        
+        var stretch = CGAffineTransformScale(rotation, scale, scale)
+        
+        label.transform = stretch
+        
+        if gesture.state == UIGestureRecognizerState.Ended {
+            
+            var acceptedOrRejected = ""
+            
+            if label.center.x < 100 {
+                
+                acceptedOrRejected = "rejected"
+                
+                
+            } else if label.center.x > self.view.bounds.width - 100 {
+                
+                acceptedOrRejected = "accepted"
+                
+            }
+            
+            if acceptedOrRejected != "" {
+                
+                PFUser.currentUser()?.addUniqueObjectsFromArray([displayedUserId], forKey: acceptedOrRejected)
+                
+                PFUser.currentUser()?.saveInBackground()
+                
+            }
+            
+            
+            rotation = CGAffineTransformMakeRotation(0)
+            stretch = CGAffineTransformScale(rotation, 1, 1)
+            label.transform = stretch
+            label.center = CGPoint(x: self.view.bounds.width / 2, y: self.view.bounds.height / 2)
+            
+            updateImage()
+            
+        }
+        
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Creating gesture recognizer
+        let gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+        userImage.addGestureRecognizer(gesture)
+        userImage.userInteractionEnabled = true
+        
+        //Accessing User locations
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            
+            if let geoPoint = geoPoint {
+                
+                PFUser.currentUser()?["location"] = geoPoint
+                PFUser.currentUser()?.saveInBackground()
+                
+            }
+            
+        }
+        
+        updateImage()
 
         // Do any additional setup after loading the view.
     }
