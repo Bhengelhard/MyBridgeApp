@@ -11,16 +11,23 @@ class BridgeViewController: UIViewController {
     
     var displayedUserId = ""
     
+    //**Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
+    var ignoredUsers : [String] = [""]
+    
     func updateImage() {
         
         //Query for Image in BridgeViewController
         var query: PFQuery = PFUser.query()!
         
-        //Querying based on Geolocation boundary - Querying based on who's closest is shown in Uber Udemy tutorial
-        //query.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: 0, longitude: 0), toNorthEast: PFGeoPoint(latitude: 0, longitude: 0))
+        //Querying based on who is not in accepted or rejected arrays of the currentUser
+
         
-        
-        var ignoredUsers : [String] = [""]
+        //making sure the currentUser doesn't randomly show up
+        if let user = PFUser.currentUser()?.objectId {
+            
+            ignoredUsers = ignoredUsers + [user]
+            
+        }
         
         if let acceptedUsers  = PFUser.currentUser()?["accepted"] as? [String] {
             
@@ -35,6 +42,22 @@ class BridgeViewController: UIViewController {
         }
         
         query.whereKey("objectId", notContainedIn: ignoredUsers)
+        
+        //Querying based on Geolocation boundary - Querying based on who's closest is shown in Uber Udemy tutorial
+        
+        if let latitude = PFUser.currentUser()?["location"]!.latitude {
+            
+            if let longitude = PFUser.currentUser()?["location"]!.longitude {
+                
+                query.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: latitude - 1, longitude: longitude - 1), toNortheast: PFGeoPoint(latitude: latitude + 1, longitude: longitude + 1))
+                
+            }
+            
+            
+        }
+
+
+        
         query.limit = 1
         
         query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
