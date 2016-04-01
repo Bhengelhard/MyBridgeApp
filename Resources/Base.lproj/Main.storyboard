@@ -143,6 +143,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="secondUserImage" destination="00Y-4j-rbW" id="c0l-fb-Igi"/>
                         <outlet property="userImage" destination="zga-Gl-m4b" id="9ec-xQ-GbD"/>
                     </connections>
                 </viewController>

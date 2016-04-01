@@ -12,7 +12,8 @@ import Parse
 class MessagesViewController: UITableViewController {
 
     
-    var usernames = [String]()
+    var emails = [String]()
+    var names = [String]()
     var images = [UIImage]()
     
     override func viewDidLoad() {
@@ -30,7 +31,8 @@ class MessagesViewController: UITableViewController {
                 
                 for result in results as! [PFUser]{
                     
-                    self.usernames.append(result["name"] as! String)
+                    self.emails.append(result["email"] as! String)
+                    self.names.append(result["name"] as! String)
                     
                     let imageFile = result["fb_profile_picture"] as! PFFile
                     
@@ -82,14 +84,14 @@ class MessagesViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return usernames.count
+        return names.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = usernames[indexPath.row]
+        cell.textLabel?.text = names[indexPath.row]
         
         if images.count > indexPath.row {
             
@@ -98,6 +100,16 @@ class MessagesViewController: UITableViewController {
         }
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let url = NSURL(string: "mailto:" + emails[indexPath.row])
+        
+        UIApplication.sharedApplication().openURL(url!)
+        
+        print(url!)
+        
     }
 
     /*

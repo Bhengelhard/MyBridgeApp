@@ -21,16 +21,18 @@ class ViewController: UIViewController {
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
-                    let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender"])
+                    let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email, user_friends"])
                     graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
                         if error != nil {
                             
                             print(error)
                             
                         } else if let result = result {
-                            
+                            // saves these to parse at every login
                             PFUser.currentUser()?["gender"] = result["gender"]!
                             PFUser.currentUser()?["name"] = result["name"]!
+                            PFUser.currentUser()?["email"] = result["email"]!
+                            PFUser.currentUser()?["user_friends"] = result["user_friends"]!
                             
                             PFUser.currentUser()?.saveInBackground()
                             
@@ -65,8 +67,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         
     }

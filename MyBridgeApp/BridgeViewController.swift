@@ -8,6 +8,7 @@ import FBSDKCoreKit
 class BridgeViewController: UIViewController {
 
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var secondUserImage: UIImageView!
     
     var displayedUserId = ""
     
@@ -100,7 +101,92 @@ class BridgeViewController: UIViewController {
                 
             }
         }
-
+        
+        //
+        //**add secondUserImage with query Here.**
+        //
+        var secondQuery: PFQuery = PFUser.query()!
+        
+        //Querying based on who is not in accepted or rejected arrays of the currentUser
+        
+        //making sure the currentUser doesn't show up more than once
+        
+        if currentUserAdded == 0 {
+            
+            if let user = PFUser.currentUser()?.objectId {
+                
+                ignoredUsers = ignoredUsers + [user]
+                currentUserAdded = 1
+                
+            }
+            
+        }
+        
+        if let acceptedUsers  = PFUser.currentUser()?["accepted"] as? [String] {
+            
+            ignoredUsers = ignoredUsers + acceptedUsers
+            
+        }
+        
+        if let rejectedUsers = PFUser.currentUser()?["rejected"] as? [String] {
+            
+            ignoredUsers = ignoredUsers + rejectedUsers
+            
+        }
+        
+        secondQuery.whereKey("objectId", notContainedIn: ignoredUsers)
+        
+        //Querying based on Geolocation boundary - Querying based on who's closest is shown in Uber Udemy tutorial
+        
+        if let latitude = PFUser.currentUser()?["location"]!.latitude {
+            
+            if let longitude = PFUser.currentUser()?["location"]!.longitude {
+                
+                secondQuery.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: latitude - 1, longitude: longitude - 1), toNortheast: PFGeoPoint(latitude: latitude + 1, longitude: longitude + 1))
+                
+            }
+            
+            
+        }
+        
+        
+        
+        secondQuery.limit = 1
+        
+        secondQuery.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error != nil {
+                
+                print(error)
+                
+            } else if let objects = objects {
+                
+                for object in objects {
+                    
+                    self.displayedUserId = object.objectId!
+                    
+                    let imageFile = object["fb_profile_picture"] as! PFFile
+                    
+                    imageFile.getDataInBackgroundWithBlock {
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        
+                        if error != nil {
+                            
+                            print(error)
+                            
+                        } else if let data = imageData {
+                            
+                            self.secondUserImage.image = UIImage(data: data)
+                            
+                        }
+                        
+                        
+                    }
+                    
+                }
+                
+            }
+        }
         
     }
     
