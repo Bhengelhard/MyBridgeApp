@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                             }
                         }
                     }
-                    self.performSegueWithIdentifier("showSigninScreen", sender: self)
+                    self.performSegueWithIdentifier("showBridgeViewController", sender: self)
                     print(user)
                 }
             }
@@ -77,7 +77,6 @@ class ViewController: UIViewController {
         //PFUser.logOut()
         
         if let username = PFUser.currentUser()?.username{
-            
             
             performSegueWithIdentifier("showBridgeViewController", sender: self)
             

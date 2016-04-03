@@ -89,30 +89,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
-                                <rect key="frame" x="67" y="371" width="240" height="199"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Gl-m4b">
-                                <rect key="frame" x="67" y="149" width="240" height="199"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Gl-m4b">
+                                <rect key="frame" x="62" y="142" width="253" height="194"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="EC3-xF-3PZ"/>
-                                    <constraint firstAttribute="height" constant="199" id="V3T-0i-kUz"/>
+                                    <constraint firstAttribute="height" constant="194" id="8j9-Am-Csq"/>
+                                    <constraint firstAttribute="width" constant="253" id="RAg-6R-AHs"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwI-nj-Dqo">
-                                <rect key="frame" x="101" y="98" width="173" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwI-nj-Dqo">
+                                <rect key="frame" x="102" y="98" width="173" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="173" id="BNa-fW-VJf"/>
-                                    <constraint firstAttribute="height" constant="21" id="u6O-wp-Oaa"/>
+                                    <constraint firstAttribute="width" constant="173" id="Ekb-gE-UGj"/>
+                                    <constraint firstAttribute="height" constant="21" id="ZCu-AL-j5y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Izu-XS-RmV">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Izu-XS-RmV">
+                                <rect key="frame" x="-4" y="20" width="383" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="fTe-ZS-49N"/>
+                                    <constraint firstAttribute="height" constant="44" id="ogc-52-Vgf"/>
                                 </constraints>
                                 <items>
                                     <navigationItem title="Bridge" id="lpk-RA-hXC">
@@ -129,16 +126,25 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
+                                <rect key="frame" x="62" y="376" width="253" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="194" id="Zus-X7-v5p"/>
+                                    <constraint firstAttribute="width" constant="253" id="jks-W6-uR1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Izu-XS-RmV" secondAttribute="trailing" constant="-20" id="Q0t-Uz-Fur"/>
-                            <constraint firstItem="Izu-XS-RmV" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" id="Q7O-Gg-bIq"/>
-                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="top" secondItem="Izu-XS-RmV" secondAttribute="bottom" constant="34" id="VaC-v4-pkf"/>
-                            <constraint firstItem="Izu-XS-RmV" firstAttribute="leading" secondItem="7HS-Z2-bfw" secondAttribute="leadingMargin" constant="-20" id="Yix-7b-g2M"/>
-                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="e7a-4v-ZiR"/>
-                            <constraint firstItem="zga-Gl-m4b" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="gFB-Ic-VYl"/>
-                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="lwI-nj-Dqo" secondAttribute="bottom" constant="30" id="hrZ-ZO-Gnx"/>
+                            <constraint firstItem="00Y-4j-rbW" firstAttribute="top" secondItem="zga-Gl-m4b" secondAttribute="bottom" constant="40" id="7XG-d4-U36"/>
+                            <constraint firstItem="Izu-XS-RmV" firstAttribute="leading" secondItem="7HS-Z2-bfw" secondAttribute="leadingMargin" constant="-20" id="CkH-8U-e4g"/>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="lwI-nj-Dqo" secondAttribute="bottom" constant="23" id="MoO-DH-kXk"/>
+                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="OFJ-0R-tYZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Izu-XS-RmV" secondAttribute="trailing" constant="-20" id="R2Y-9i-CE1"/>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="XHp-Ra-rQn"/>
+                            <constraint firstItem="Izu-XS-RmV" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" id="m5t-33-hZx"/>
+                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="top" secondItem="Izu-XS-RmV" secondAttribute="bottom" constant="34" id="qd7-LW-QhE"/>
+                            <constraint firstItem="00Y-4j-rbW" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="uJY-I8-Yxx"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -149,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbE-ka-aov" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903.5" y="289.5"/>
+            <point key="canvasLocation" x="903" y="289"/>
         </scene>
         <!--Messages View Controller-->
         <scene sceneID="yR7-m9-XyN">

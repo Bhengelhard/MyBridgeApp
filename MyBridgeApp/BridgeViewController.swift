@@ -1,9 +1,6 @@
 import UIKit
 import Parse
 import FBSDKCoreKit
-//import ParseFacebookUtilsV4
-//import ParseUI
-
 
 class BridgeViewController: UIViewController {
 
@@ -12,11 +9,119 @@ class BridgeViewController: UIViewController {
     
     var displayedUserId = ""
     
-    //**Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
-    var ignoredUsers = [String]()
+    //Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
+    /*var ignoredUsers = [String]()
     var currentUserAdded = 0
     
+    var ignoredPairings = [[String]]()
+    var friendCombinations = [[String]]()*/
+    
     func updateImage() {
+        
+        /*if let builtBridges = PFUser.currentUser()?["built_bridges"] {
+            
+            let builtBridges2 = builtBridges as! [[String]]
+            
+            ignoredPairings = ignoredPairings + builtBridges2
+            
+            print(builtBridges)
+            
+        }
+        
+        if let rejectedBridges = PFUser.currentUser()?["rejected_bridges"] {
+            
+            let rejectedBridges2 = rejectedBridges as! [[String]]
+            
+            ignoredPairings = ignoredPairings + rejectedBridges2
+            
+            print(rejectedBridges)
+            
+        }*/
+        var friendPairings = [[String]]()
+        
+        
+        if let friendList = PFUser.currentUser()?["friend_list"] as? [String] {
+            
+            //while friendpairings.count <4
+            
+            for friend1 in friendList {
+                
+                for friend2 in friendList {
+                    
+                    let pairingAlreadyAdded = friendPairings.contains {$0 == [friend2, friend1]}
+                    
+                    if friend1 != friend2 && pairingAlreadyAdded == false {
+                        
+                        friendPairings = friendPairings + [[friend1,friend2]]
+
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        var counter = 0
+        
+        var query: PFQuery = PFUser.query()!
+        
+        //problem with this containedIn query returing one object, when it should return 2
+        query.whereKey("objectId", containedIn: friendPairings[0])
+        
+        query.limit = 2
+        
+        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error != nil {
+                
+                print(error)
+                
+            } else if let objects = objects {
+                
+                print(objects.count)
+                
+                for object in objects {
+                    
+                    let imageFile = object["fb_profile_picture"] as! PFFile
+                    
+                    imageFile.getDataInBackgroundWithBlock {
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        
+                        if error != nil {
+                            
+                            print(error)
+                            
+                        } else if counter == 0 {
+                            
+                            if let data = imageData {
+                                
+                                self.userImage.image = UIImage(data: data)
+                                
+                            }
+                            
+                            counter = 1
+                        
+                        
+                        } else {
+                            
+                            if let data = imageData {
+                                
+                                self.secondUserImage.image = UIImage(data: data)
+                                
+                            }
+                            
+                        }
+                    
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        /*
         
         //Query for Image in BridgeViewController
         var query: PFQuery = PFUser.query()!
@@ -35,6 +140,7 @@ class BridgeViewController: UIViewController {
             }
             
         }
+        
         
         if let acceptedUsers  = PFUser.currentUser()?["accepted"] as? [String] {
             
@@ -62,134 +168,13 @@ class BridgeViewController: UIViewController {
             
             
         }
-
-
+ 
+ 
         
-        query.limit = 1
-        
-        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
-            
-            if error != nil {
-                
-                print(error)
-                
-            } else if let objects = objects {
-                
-                for object in objects {
-                    
-                    self.displayedUserId = object.objectId!
-                    
-                    let imageFile = object["fb_profile_picture"] as! PFFile
-                    
-                    imageFile.getDataInBackgroundWithBlock {
-                        (imageData: NSData?, error: NSError?) -> Void in
-                        
-                        if error != nil {
-                            
-                            print(error)
-                            
-                        } else if let data = imageData {
-                            
-                            self.userImage.image = UIImage(data: data)
-                            
-                        }
-                        
-                        
-                    }
-                    
-                }
-                
-            }
-        }
-        
-        //
-        //**add secondUserImage with query Here.**
-        //
-        var secondQuery: PFQuery = PFUser.query()!
-        
-        //Querying based on who is not in accepted or rejected arrays of the currentUser
-        
-        //making sure the currentUser doesn't show up more than once
-        
-        if currentUserAdded == 0 {
-            
-            if let user = PFUser.currentUser()?.objectId {
-                
-                ignoredUsers = ignoredUsers + [user]
-                currentUserAdded = 1
-                
-            }
-            
-        }
-        
-        if let acceptedUsers  = PFUser.currentUser()?["accepted"] as? [String] {
-            
-            ignoredUsers = ignoredUsers + acceptedUsers
-            
-        }
-        
-        if let rejectedUsers = PFUser.currentUser()?["rejected"] as? [String] {
-            
-            ignoredUsers = ignoredUsers + rejectedUsers
-            
-        }
-        
-        secondQuery.whereKey("objectId", notContainedIn: ignoredUsers)
-        
-        //Querying based on Geolocation boundary - Querying based on who's closest is shown in Uber Udemy tutorial
-        
-        if let latitude = PFUser.currentUser()?["location"]!.latitude {
-            
-            if let longitude = PFUser.currentUser()?["location"]!.longitude {
-                
-                secondQuery.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: latitude - 1, longitude: longitude - 1), toNortheast: PFGeoPoint(latitude: latitude + 1, longitude: longitude + 1))
-                
-            }
-            
-            
-        }
-        
-        
-        
-        secondQuery.limit = 1
-        
-        secondQuery.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
-            
-            if error != nil {
-                
-                print(error)
-                
-            } else if let objects = objects {
-                
-                for object in objects {
-                    
-                    self.displayedUserId = object.objectId!
-                    
-                    let imageFile = object["fb_profile_picture"] as! PFFile
-                    
-                    imageFile.getDataInBackgroundWithBlock {
-                        (imageData: NSData?, error: NSError?) -> Void in
-                        
-                        if error != nil {
-                            
-                            print(error)
-                            
-                        } else if let data = imageData {
-                            
-                            self.secondUserImage.image = UIImage(data: data)
-                            
-                        }
-                        
-                        
-                    }
-                    
-                }
-                
-            }
-        }
+*/
         
     }
-    
+ 
     func wasDragged(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translationInView(self.view)
         let label = gesture.view!
@@ -208,26 +193,26 @@ class BridgeViewController: UIViewController {
         
         if gesture.state == UIGestureRecognizerState.Ended {
             
-            var acceptedOrRejected = ""
+            //var acceptedOrRejected = ""
             
             if label.center.x < 100 {
                 
-                acceptedOrRejected = "rejected"
+                //acceptedOrRejected = "rejected"
                 
                 
             } else if label.center.x > self.view.bounds.width - 100 {
                 
-                acceptedOrRejected = "accepted"
+                //acceptedOrRejected = "accepted"
                 
             }
             
-            if acceptedOrRejected != "" {
+            /*if acceptedOrRejected != "" {
                 
                 PFUser.currentUser()?.addUniqueObjectsFromArray([displayedUserId], forKey: acceptedOrRejected)
                 
                 PFUser.currentUser()?.saveInBackground()
                 
-            }
+            }*/
             
             
             rotation = CGAffineTransformMakeRotation(0)
@@ -241,7 +226,7 @@ class BridgeViewController: UIViewController {
         
         
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -249,6 +234,9 @@ class BridgeViewController: UIViewController {
         let gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
         userImage.addGestureRecognizer(gesture)
         userImage.userInteractionEnabled = true
+        
+        secondUserImage.addGestureRecognizer(gesture)
+        secondUserImage.userInteractionEnabled = true
         
         //Accessing User locations
         PFGeoPoint.geoPointForCurrentLocationInBackground {
@@ -263,6 +251,8 @@ class BridgeViewController: UIViewController {
             }
             
         }
+        
+        PFUser.currentUser()?["friend_list"] = ["INN0TDBFYZ", "zuKhtqAHgj"]
         
         updateImage()
 
@@ -296,6 +286,7 @@ class BridgeViewController: UIViewController {
     */
 
 }
+
 
 
 
