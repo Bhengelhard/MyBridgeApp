@@ -13,18 +13,18 @@ class BridgeViewController: UIViewController {
     /*var ignoredUsers = [String]()
     var currentUserAdded = 0
     
-    var ignoredPairings = [[String]]()
+    
     var friendCombinations = [[String]]()*/
+    
+    var ignoredPairings = [[String]]()
     
     func updateImage() {
         
-        /*if let builtBridges = PFUser.currentUser()?["built_bridges"] {
+        if let builtBridges = PFUser.currentUser()?["built_bridges"] {
             
             let builtBridges2 = builtBridges as! [[String]]
             
             ignoredPairings = ignoredPairings + builtBridges2
-            
-            print(builtBridges)
             
         }
         
@@ -34,9 +34,10 @@ class BridgeViewController: UIViewController {
             
             ignoredPairings = ignoredPairings + rejectedBridges2
             
-            print(rejectedBridges)
-            
-        }*/
+        }
+        
+        print(ignoredPairings)
+        
         var friendPairings = [[String]]()
         
         
@@ -50,7 +51,9 @@ class BridgeViewController: UIViewController {
                     
                     let pairingAlreadyAdded = friendPairings.contains {$0 == [friend2, friend1]}
                     
-                    if friend1 != friend2 && pairingAlreadyAdded == false {
+                    let containedInIgnoredPairings = ignoredPairings.contains {$0 == [friend1, friend2]} || ignoredPairings.contains {$0 == [friend2, friend1]}
+                    
+                    if friend1 != friend2 && pairingAlreadyAdded == false && containedInIgnoredPairings == false {
                         
                         friendPairings = friendPairings + [[friend1,friend2]]
 
@@ -62,11 +65,12 @@ class BridgeViewController: UIViewController {
             
         }
         
+        print(friendPairings)
+        
         var counter = 0
         
         var query: PFQuery = PFUser.query()!
         
-        //problem with this containedIn query returing one object, when it should return 2
         query.whereKey("objectId", containedIn: friendPairings[0])
         
         query.limit = 2
@@ -251,8 +255,6 @@ class BridgeViewController: UIViewController {
             }
             
         }
-        
-        PFUser.currentUser()?["friend_list"] = ["INN0TDBFYZ", "zuKhtqAHgj"]
         
         updateImage()
 
