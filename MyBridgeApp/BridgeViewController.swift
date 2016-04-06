@@ -7,7 +7,8 @@ class BridgeViewController: UIViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var secondUserImage: UIImageView!
     
-    var displayedUserId = ""
+    var displayedUserId1 = ""
+    var displayedUserId2 = ""
     
     //Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
     /*var ignoredUsers = [String]()
@@ -16,9 +17,9 @@ class BridgeViewController: UIViewController {
     
     var friendCombinations = [[String]]()*/
     
-    var ignoredPairings = [[String]]()
-    
     func updateImage() {
+        
+        var ignoredPairings = [[String]]()
         
         if let builtBridges = PFUser.currentUser()?["built_bridges"] {
             
@@ -36,10 +37,7 @@ class BridgeViewController: UIViewController {
             
         }
         
-        print(ignoredPairings)
-        
-        var friendPairings = [[String]]()
-        
+        var friendPairings = [String]()
         
         if let friendList = PFUser.currentUser()?["friend_list"] as? [String] {
             
@@ -49,15 +47,28 @@ class BridgeViewController: UIViewController {
                 
                 for friend2 in friendList {
                     
-                    let pairingAlreadyAdded = friendPairings.contains {$0 == [friend2, friend1]}
+                    /*let pairingAlreadyAdded = friendPairings.contains {$0 == [friend2, friend1]}*/
                     
                     let containedInIgnoredPairings = ignoredPairings.contains {$0 == [friend1, friend2]} || ignoredPairings.contains {$0 == [friend2, friend1]}
                     
-                    if friend1 != friend2 && pairingAlreadyAdded == false && containedInIgnoredPairings == false {
+                    //add geographic vetting
+                    
+                    if friend1 != friend2 && /*pairingAlreadyAdded == false && */containedInIgnoredPairings == false /*&& friendPairings.count < 5*/ {
                         
-                        friendPairings = friendPairings + [[friend1,friend2]]
+                        friendPairings = [friend1,friend2]
+                        
+                        self.displayedUserId1 = friend1
+                        self.displayedUserId2 = friend2
+                        
+                        break
 
                     }
+                    
+                }
+                
+                if friendPairings.count != 0 {
+                    
+                    break
                     
                 }
                 
@@ -65,17 +76,13 @@ class BridgeViewController: UIViewController {
             
         }
         
-        print(friendPairings)
+        var isDisplayedUser1 = true
+        var query: PFQuery = PFQuery(className: "_User")
         
-        var counter = 0
-        
-        var query: PFQuery = PFUser.query()!
-        
-        query.whereKey("objectId", containedIn: friendPairings[0])
-        
+        query.whereKey("objectId", containedIn: friendPairings)
         query.limit = 2
         
-        query.findObjectsInBackgroundWithBlock {(objects: [PFObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             
             if error != nil {
                 
@@ -83,20 +90,17 @@ class BridgeViewController: UIViewController {
                 
             } else if let objects = objects {
                 
-                print(objects.count)
-                
                 for object in objects {
                     
                     let imageFile = object["fb_profile_picture"] as! PFFile
                     
-                    imageFile.getDataInBackgroundWithBlock {
-                        (imageData: NSData?, error: NSError?) -> Void in
+                    imageFile.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) in
                         
                         if error != nil {
                             
                             print(error)
                             
-                        } else if counter == 0 {
+                        } else if isDisplayedUser1 == true {
                             
                             if let data = imageData {
                                 
@@ -104,9 +108,8 @@ class BridgeViewController: UIViewController {
                                 
                             }
                             
-                            counter = 1
-                        
-                        
+                            isDisplayedUser1 = false
+                            
                         } else {
                             
                             if let data = imageData {
@@ -116,8 +119,8 @@ class BridgeViewController: UIViewController {
                             }
                             
                         }
-                    
-                    }
+                        
+                    })
                     
                 }
                 
@@ -125,39 +128,11 @@ class BridgeViewController: UIViewController {
             
         }
         
+        
+        
+        
         /*
-        
-        //Query for Image in BridgeViewController
-        var query: PFQuery = PFUser.query()!
-        
-        //Querying based on who is not in accepted or rejected arrays of the currentUser
-
-        //making sure the currentUser doesn't show up more than once
-        
-        if currentUserAdded == 0 {
-            
-            if let user = PFUser.currentUser()?.objectId {
-                
-                ignoredUsers = ignoredUsers + [user]
-                currentUserAdded = 1
-                
-            }
-            
-        }
-        
-        
-        if let acceptedUsers  = PFUser.currentUser()?["accepted"] as? [String] {
-            
-            ignoredUsers = ignoredUsers + acceptedUsers
-            
-        }
-        
-        if let rejectedUsers = PFUser.currentUser()?["rejected"] as? [String] {
-            
-            ignoredUsers = ignoredUsers + rejectedUsers
-            
-        }
-        
+         
         query.whereKey("objectId", notContainedIn: ignoredUsers)
         
         //Querying based on Geolocation boundary - Querying based on who's closest is shown in Uber Udemy tutorial
@@ -180,6 +155,7 @@ class BridgeViewController: UIViewController {
     }
  
     func wasDragged(gesture: UIPanGestureRecognizer) {
+        
         let translation = gesture.translationInView(self.view)
         let label = gesture.view!
         
@@ -197,27 +173,37 @@ class BridgeViewController: UIViewController {
         
         if gesture.state == UIGestureRecognizerState.Ended {
             
-            //var acceptedOrRejected = ""
+            var bridgeBuiltorRejected = ""
             
             if label.center.x < 100 {
                 
-                //acceptedOrRejected = "rejected"
+                bridgeBuiltorRejected = "rejected_bridges"
+                
+                print("rejected")
                 
                 
             } else if label.center.x > self.view.bounds.width - 100 {
                 
-                //acceptedOrRejected = "accepted"
+                bridgeBuiltorRejected = "built_bridges"
+                
+                print("built")
                 
             }
             
-            /*if acceptedOrRejected != "" {
+            if bridgeBuiltorRejected != "" {
                 
-                PFUser.currentUser()?.addUniqueObjectsFromArray([displayedUserId], forKey: acceptedOrRejected)
+                //error checking
+                //change or's and second users
                 
-                PFUser.currentUser()?.saveInBackground()
+                if let previousBridges = (PFUser.currentUser()?[bridgeBuiltorRejected]) as? [[String]] {
+                    
+                    let newBridges = previousBridges + [[displayedUserId1, displayedUserId2]]
+                    PFUser.currentUser()?[bridgeBuiltorRejected] = newBridges
+                    PFUser.currentUser()?.saveInBackground()
+                    
+                }
                 
-            }*/
-            
+            }
             
             rotation = CGAffineTransformMakeRotation(0)
             stretch = CGAffineTransformScale(rotation, 1, 1)
@@ -239,8 +225,8 @@ class BridgeViewController: UIViewController {
         userImage.addGestureRecognizer(gesture)
         userImage.userInteractionEnabled = true
         
-        secondUserImage.addGestureRecognizer(gesture)
-        secondUserImage.userInteractionEnabled = true
+        /*secondUserImage.addGestureRecognizer(gesture)
+        secondUserImage.userInteractionEnabled = true*/
         
         //Accessing User locations
         PFGeoPoint.geoPointForCurrentLocationInBackground {

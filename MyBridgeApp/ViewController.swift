@@ -32,7 +32,9 @@ class ViewController: UIViewController {
                             PFUser.currentUser()?["gender"] = result["gender"]!
                             PFUser.currentUser()?["name"] = result["name"]!
                             PFUser.currentUser()?["email"] = result["email"]!
-                            PFUser.currentUser()?["user_friends"] = result["user_friends"]!
+                            //have to check if the user has friends or else will get an error
+                            //PFUser.currentUser()?["user_friends"] = result["user_friends"]!
+                            
                             
                             PFUser.currentUser()?.saveInBackground()
                             
