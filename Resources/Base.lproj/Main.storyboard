@@ -151,6 +151,7 @@
                     <connections>
                         <outlet property="secondUserImage" destination="00Y-4j-rbW" id="c0l-fb-Igi"/>
                         <outlet property="userImage" destination="zga-Gl-m4b" id="9ec-xQ-GbD"/>
+                        <segue destination="ABc-Ef-uKn" kind="show" identifier="showSingleMessage" id="B19-eu-GHC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbE-ka-aov" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -189,18 +190,99 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="MtK-gn-56M" id="uM5-LG-Yzf"/>
-                            <outlet property="delegate" destination="MtK-gn-56M" id="8jZ-i1-ssE"/>
+                            <outlet property="dataSource" destination="MtK-gn-56M" id="ijH-K8-azk"/>
+                            <outlet property="delegate" destination="MtK-gn-56M" id="QDH-x2-b9I"/>
                         </connections>
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rA7-wX-q1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1364.5" y="289.5"/>
+            <point key="canvasLocation" x="1344.5" y="-162.5"/>
+        </scene>
+        <!--Single Message View Controller-->
+        <scene sceneID="57B-UR-Tv1">
+            <objects>
+                <viewController id="ABc-Ef-uKn" customClass="SingleMessageViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bIi-MF-hHI"/>
+                        <viewControllerLayoutGuide type="bottom" id="lbT-1o-j3w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rJH-9T-vc7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKE-yZ-VN0">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="nQ9-vy-5RW"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" id="1tn-Cx-My5">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Message" textAlignment="natural" minimumFontSize="17" id="V1P-PJ-3Kr">
+                                            <rect key="frame" x="16" y="7" width="267" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UR5-1T-J0D"/>
+                                    <barButtonItem title="Send" id="XEP-et-iGS"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zte-oc-csK">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="83" id="afo-dw-Hgf">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="83"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="afo-dw-Hgf" id="qh6-lG-Js9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ABc-Ef-uKn" id="vJc-07-71N"/>
+                                    <outlet property="delegate" destination="ABc-Ef-uKn" id="9O1-H2-zLz"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFy-6w-1sX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="nhS-hU-rqL"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Conversation" id="Ys7-jc-jfw">
+                                        <barButtonItem key="leftBarButtonItem" title="Messages" id="Zve-63-VJr"/>
+                                        <barButtonItem key="rightBarButtonItem" title="X" id="cLn-Yd-5Zf"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="jKE-yZ-VN0" secondAttribute="trailing" constant="-20" id="481-HT-1HY"/>
+                            <constraint firstItem="lbT-1o-j3w" firstAttribute="top" secondItem="jKE-yZ-VN0" secondAttribute="bottom" id="48K-t9-7pa"/>
+                            <constraint firstItem="zte-oc-csK" firstAttribute="top" secondItem="FFy-6w-1sX" secondAttribute="bottom" id="55t-yC-ev7"/>
+                            <constraint firstItem="FFy-6w-1sX" firstAttribute="leading" secondItem="rJH-9T-vc7" secondAttribute="leadingMargin" constant="-20" id="5uV-mu-B9D"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FFy-6w-1sX" secondAttribute="trailing" constant="-20" id="LCg-o4-QRF"/>
+                            <constraint firstItem="zte-oc-csK" firstAttribute="leading" secondItem="rJH-9T-vc7" secondAttribute="leadingMargin" constant="-20" id="Sd4-uC-wlr"/>
+                            <constraint firstItem="FFy-6w-1sX" firstAttribute="top" secondItem="bIi-MF-hHI" secondAttribute="bottom" id="eEQ-Ya-qZI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zte-oc-csK" secondAttribute="trailing" constant="-20" id="ilq-1g-K39"/>
+                            <constraint firstItem="jKE-yZ-VN0" firstAttribute="top" secondItem="zte-oc-csK" secondAttribute="bottom" id="wfP-Xs-nlv"/>
+                            <constraint firstItem="jKE-yZ-VN0" firstAttribute="leading" secondItem="rJH-9T-vc7" secondAttribute="leadingMargin" constant="-20" id="y5E-2O-81z"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5J-8h-7eI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1344.5" y="634.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TAV-gy-FO0"/>
+        <segue reference="7Zw-u1-iEd"/>
     </inferredMetricsTieBreakers>
 </document>

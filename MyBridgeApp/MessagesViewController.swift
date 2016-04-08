@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+//Change to MessagesTableViewController so other can be MessageViewController
 class MessagesViewController: UITableViewController {
 
     
@@ -20,8 +21,9 @@ class MessagesViewController: UITableViewController {
         super.viewDidLoad()
         
         
+        //messages users_in_message are displayed in box, when clicked, open message with SingleMessages MessageId = Messages ObjectId
         
-        var query = PFUser.query()
+        /*var query = PFUser.query()
         query!.whereKey("accepted", equalTo: PFUser.currentUser()!.objectId!)
         query!.whereKey("objectId", containedIn: PFUser.currentUser()?["accepted"] as! [String])
         
@@ -60,7 +62,7 @@ class MessagesViewController: UITableViewController {
                 
             }
             
-        })
+        })*/
         
 
         // Uncomment the following line to preserve selection between presentations

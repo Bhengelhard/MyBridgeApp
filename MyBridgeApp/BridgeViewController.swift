@@ -186,6 +186,21 @@ class BridgeViewController: UIViewController {
                 
                 bridgeBuiltorRejected = "built_bridges"
                 
+                let message = PFObject(className: "Messages")
+                
+                let currentUserId = PFUser.currentUser()?.objectId
+                
+                message["users_in_message"] = [displayedUserId1, displayedUserId2, currentUserId!]
+                message["bridge_builder"] = currentUserId
+                
+                message.saveInBackgroundWithBlock { (success, error) -> Void in
+                    
+                    print("Object has been saved.")
+                    
+                }
+                
+                performSegueWithIdentifier("showSingleMessage", sender: self)
+
                 print("built")
                 
             }

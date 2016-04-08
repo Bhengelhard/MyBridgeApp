@@ -57,8 +57,9 @@ class ViewController: UIViewController {
                             }
                         }
                     }
+                    
                     self.performSegueWithIdentifier("showBridgeViewController", sender: self)
-                    print(user)
+
                 }
             }
         }
@@ -83,7 +84,9 @@ class ViewController: UIViewController {
             performSegueWithIdentifier("showBridgeViewController", sender: self)
             
         } else {
+            
             print("not yet logged in")
+            
         }
         
     }
