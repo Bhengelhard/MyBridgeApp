@@ -7,8 +7,12 @@ class BridgeViewController: UIViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var secondUserImage: UIImageView!
     
+    //make arrays
     var displayedUserId1 = ""
     var displayedUserId2 = ""
+    var displayedUserName1 = ""
+    var displayedUserName2 = ""
+    var firstUpdatedImage = true
     
     //Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
     /*var ignoredUsers = [String]()
@@ -43,22 +47,29 @@ class BridgeViewController: UIViewController {
             
             //while friendpairings.count <4
             
+            //currentlyDisplayedUsers = [self.displayedUserId1, self.displayedUserId2]
+            
             for friend1 in friendList {
                 
                 for friend2 in friendList {
                     
-                    /*let pairingAlreadyAdded = friendPairings.contains {$0 == [friend2, friend1]}*/
-                    
                     let containedInIgnoredPairings = ignoredPairings.contains {$0 == [friend1, friend2]} || ignoredPairings.contains {$0 == [friend2, friend1]}
+                    
+                    let notPreviouslyDisplayedUser = friend1 != self.displayedUserId1 && friend2 != self.displayedUserId1 && friend1 != self.displayedUserId2 && friend2 != self.displayedUserId2
                     
                     //add geographic vetting
                     
-                    if friend1 != friend2 && /*pairingAlreadyAdded == false && */containedInIgnoredPairings == false /*&& friendPairings.count < 5*/ {
+                    print([friend1,friend2])
+                    print(ignoredPairings)
+                    
+                    if notPreviouslyDisplayedUser && friend1 != friend2 && containedInIgnoredPairings == false /*&& friendPairings.count < 5*/ {
+                        
                         
                         friendPairings = [friend1,friend2]
                         
                         self.displayedUserId1 = friend1
                         self.displayedUserId2 = friend2
+                        print(friendPairings)
                         
                         break
 
@@ -68,6 +79,8 @@ class BridgeViewController: UIViewController {
                 
                 if friendPairings.count != 0 {
                     
+                    print(friendPairings.count)
+                    
                     break
                     
                 }
@@ -75,6 +88,8 @@ class BridgeViewController: UIViewController {
             }
             
         }
+        
+        print(friendPairings)
         
         var isDisplayedUser1 = true
         var query: PFQuery = PFQuery(className: "_User")
@@ -104,6 +119,7 @@ class BridgeViewController: UIViewController {
                             
                             if let data = imageData {
                                 
+                                self.displayedUserName1 = object["name"] as! String
                                 self.userImage.image = UIImage(data: data)
                                 
                             }
@@ -114,7 +130,10 @@ class BridgeViewController: UIViewController {
                             
                             if let data = imageData {
                                 
+                                self.displayedUserName2 = object["name"] as! String
                                 self.secondUserImage.image = UIImage(data: data)
+                                //friendPairings = [String]()
+                                //print(friendPairings)
                                 
                             }
                             
@@ -184,13 +203,17 @@ class BridgeViewController: UIViewController {
                 
             } else if label.center.x > self.view.bounds.width - 100 {
                 
+                //add pop-up for if currentUser wants to be apart of message***
+                
                 bridgeBuiltorRejected = "built_bridges"
                 
                 let message = PFObject(className: "Messages")
                 
                 let currentUserId = PFUser.currentUser()?.objectId
+                let currentUserName = PFUser.currentUser()?["name"]
                 
-                message["users_in_message"] = [displayedUserId1, displayedUserId2, currentUserId!]
+                message["names_in_message"] = [displayedUserName1, displayedUserName2, currentUserName!]
+                message["ids_in_message"] = [displayedUserId1, displayedUserId2, currentUserId!]
                 message["bridge_builder"] = currentUserId
                 
                 message.saveInBackgroundWithBlock { (success, error) -> Void in
@@ -257,7 +280,14 @@ class BridgeViewController: UIViewController {
             
         }
         
-        updateImage()
+        if firstUpdatedImage {
+            
+            updateImage()
+            firstUpdatedImage = false
+            
+        }
+        
+        
 
         // Do any additional setup after loading the view.
     }

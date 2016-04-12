@@ -11,11 +11,38 @@ import Parse
 
 class SingleMessageViewController: UIViewController, UITableViewDelegate {
 
+    
+    @IBOutlet weak var messageText: UITextField!
+    
+    
+    @IBAction func sendMessage(sender: AnyObject) {
+        
+        if messageText.text != "" {
+            
+            let singleMessage = PFObject(className: "SingleMessages")
+            singleMessage["message_text"] = messageText.text!
+            singleMessage["sender"] = PFUser.currentUser()?.objectId
+            
+            singleMessage.saveInBackgroundWithBlock { (success, error) -> Void in
+              print("Object has been saved.")
+            }
+
+            
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField)
-        //messages users_in_message, usernames are displayed on title
+       
+        //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField), recievers (recievers - current user) are displayed on title
         
         /*var query: PFQuery = PFQuery(className: "Messages")
         

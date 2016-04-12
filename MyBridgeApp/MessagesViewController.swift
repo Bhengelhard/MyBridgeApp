@@ -14,47 +14,34 @@ class MessagesViewController: UITableViewController {
 
     
     var emails = [String]()
-    var names = [String]()
     var images = [UIImage]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    //need to combine these into a dictionary
+    var names = [[String]]()
+    var IDs = [[String]]()
+    var IDList = [String]()
+    
+    
+    func updateMessagesTable() {
         
         //messages users_in_message are displayed in box, when clicked, open message with SingleMessages MessageId = Messages ObjectId
         
-        /*var query = PFUser.query()
-        query!.whereKey("accepted", equalTo: PFUser.currentUser()!.objectId!)
-        query!.whereKey("objectId", containedIn: PFUser.currentUser()?["accepted"] as! [String])
+        var query: PFQuery = PFQuery(className: "Messages")
         
-        query?.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+        query.whereKey("ids_in_message", containsString: PFUser.currentUser()?.objectId)
+        
+        query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
             
-            if let results = results {
+            if let error = error {
                 
-                for result in results as! [PFUser]{
+                print(error)
+                
+            } else if let results = results {
+                
+                for result in results as! [PFObject]{
                     
-                    self.emails.append(result["email"] as! String)
-                    self.names.append(result["name"] as! String)
-                    
-                    let imageFile = result["fb_profile_picture"] as! PFFile
-                    
-                    imageFile.getDataInBackgroundWithBlock {
-                        (imageData: NSData?, error: NSError?) -> Void in
-                        
-                        if error != nil {
-                            
-                            print(error)
-                            
-                        } else if let data = imageData {
-                            
-                            self.images.append(UIImage(data: data)!)
-                            
-                            self.tableView.reloadData()
-                            
-                        }
-                        
-                        
-                    }
+                    self.names.append(result["names_in_message"] as! [String])
+                    self.IDs.append(result["ids_in_message"] as! [String])
                     
                 }
                 
@@ -62,9 +49,18 @@ class MessagesViewController: UITableViewController {
                 
             }
             
-        })*/
-        
+            
+        })
 
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //this should only update when a new message is created**
+        updateMessagesTable()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -92,25 +88,60 @@ class MessagesViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-
-        cell.textLabel?.text = names[indexPath.row]
         
-        if images.count > indexPath.row {
+        var stringOfNames = ""
+        
+        /*for (key, value) in users[indexPath.row] {
+            
+            stringOfNames = stringOfNames + value + " ,"
+            
+        }*/
+        
+        for name in names[indexPath.row] {
+            
+            //add & between last two users - currently adds & only when there are two users
+            
+            if names[indexPath.row].count == 3 {
+                
+                if name != PFUser.currentUser()?["name"] as? String {
+                    
+                    stringOfNames = stringOfNames + name + " & "
+                    
+                }
+                
+            } else if name != PFUser.currentUser()?["name"] as? String {
+                
+                stringOfNames = stringOfNames + name + ", "
+                
+            }
+            
+        }
+        
+        stringOfNames = String(stringOfNames.characters.dropLast())
+        stringOfNames = String(stringOfNames.characters.dropLast())
+        
+        cell.textLabel?.text = stringOfNames
+        
+        /*if images.count > indexPath.row {
             
             cell.imageView?.image = images[indexPath.row]
             
-        }
+        }*/
 
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let url = NSURL(string: "mailto:" + emails[indexPath.row])
+        performSegueWithIdentifier("showSingleMessageFromMessages", sender: self)
+
+        
+        //opening email to send mail
+        /*let url = NSURL(string: "mailto:" + emails[indexPath.row])
         
         UIApplication.sharedApplication().openURL(url!)
         
-        print(url!)
+        print(url!)*/
         
     }
 
