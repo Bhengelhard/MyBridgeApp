@@ -96,7 +96,7 @@
                                     <constraint firstAttribute="width" constant="253" id="RAg-6R-AHs"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwI-nj-Dqo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwI-nj-Dqo">
                                 <rect key="frame" x="102" y="98" width="173" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="173" id="Ekb-gE-UGj"/>
@@ -133,6 +133,12 @@
                                     <constraint firstAttribute="width" constant="253" id="jks-W6-uR1"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIC-t1-LcV">
+                                <rect key="frame" x="102" y="344" width="173" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -149,6 +155,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="displayedUserName1" destination="lwI-nj-Dqo" id="G9O-Q3-EY4"/>
+                        <outlet property="displayedUserName2" destination="iIC-t1-LcV" id="mZk-0I-wSe"/>
                         <outlet property="secondUserImage" destination="00Y-4j-rbW" id="c0l-fb-Igi"/>
                         <outlet property="userImage" destination="zga-Gl-m4b" id="9ec-xQ-GbD"/>
                         <segue destination="ABc-Ef-uKn" kind="show" identifier="showSingleMessage" id="B19-eu-GHC"/>
@@ -290,6 +298,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="messageText" destination="jIb-qM-yvl" id="AT8-Ic-Q8Z"/>
+                        <outlet property="navigationBar" destination="Ys7-jc-jfw" id="PiP-Eh-n2d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u5J-8h-7eI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,8 +307,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TAV-gy-FO0"/>
         <segue reference="pYm-ak-g8K"/>
-        <segue reference="zAH-GO-Yap"/>
+        <segue reference="B19-eu-GHC"/>
+        <segue reference="TAV-gy-FO0"/>
     </inferredMetricsTieBreakers>
 </document>

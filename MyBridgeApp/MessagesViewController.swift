@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+var singleMessageTitle = "Message"
 //Change to MessagesTableViewController so other can be MessageViewController
 class MessagesViewController: UITableViewController {
 
@@ -132,6 +133,19 @@ class MessagesViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
+        
+        singleMessageTitle = (currentCell.textLabel?.text)!
+        
+        //print(singleMessageTitle)
+        /*if let cellText = cell.textLabel?.text {
+            
+            print(cellText)
+            
+            singleMessageTitle = cellText
+            
+        }*/
         
         performSegueWithIdentifier("showSingleMessageFromMessages", sender: self)
 

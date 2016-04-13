@@ -13,7 +13,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
 
     
     @IBOutlet weak var messageText: UITextField!
-    
+    @IBOutlet weak var navigationBar: UINavigationItem!
     
     @IBAction func sendMessage(sender: AnyObject) {
         
@@ -40,8 +40,8 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+
+       navigationBar.title = singleMessageTitle
         //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField), recievers (recievers - current user) are displayed on title
         
         /*var query: PFQuery = PFQuery(className: "Messages")
