@@ -12,6 +12,7 @@ class BridgeViewController: UIViewController {
     var userId2 = ""
     var firstUpdatedImage = true
     
+    @IBOutlet weak var rejectOrBridgeLabel: UILabel!
     @IBOutlet weak var displayedUserName1: UILabel!
     @IBOutlet weak var displayedUserName2: UILabel!
     
@@ -23,6 +24,8 @@ class BridgeViewController: UIViewController {
     var friendCombinations = [[String]]()*/
     
     func updateImage() {
+        
+        userImage.userInteractionEnabled = false
         
         var ignoredPairings = [[String]]()
         
@@ -135,6 +138,9 @@ class BridgeViewController: UIViewController {
                                     self.displayedUserName2.text = object["name"] as! String
                                     self.secondUserImage.image = UIImage(data: data)
                                     
+                                    self.userImage.userInteractionEnabled = true
+                                    self.rejectOrBridgeLabel.text = ""
+                                    
                                 })
                                 
                                 //friendPairings = [String]()
@@ -195,6 +201,23 @@ class BridgeViewController: UIViewController {
         
         label.transform = stretch
         
+        if label.center.x < view.center.x - 5 {
+            
+            rejectOrBridgeLabel.text = "reject"
+            rejectOrBridgeLabel.textColor = UIColor.redColor()
+            print("label reject")
+            
+        } else if label.center.x > view.center.x + 5 {
+            
+            rejectOrBridgeLabel.text = "Bridge"
+            rejectOrBridgeLabel.textColor = UIColor.greenColor()
+            print("label Bridge")
+            
+        } else {
+            
+            rejectOrBridgeLabel.text = ""
+        }
+        
         if gesture.state == UIGestureRecognizerState.Ended {
             
             var bridgeBuiltorRejected = ""
@@ -229,6 +252,7 @@ class BridgeViewController: UIViewController {
                     
                 }
                 
+                idsInMessage = [userId1, userId2, currentUserId!]
                 performSegueWithIdentifier("showSingleMessage", sender: self)
 
                 print("built")
@@ -246,16 +270,16 @@ class BridgeViewController: UIViewController {
                     PFUser.currentUser()?[bridgeBuiltorRejected] = newBridges
                     PFUser.currentUser()?.saveInBackground()
                     
+                    updateImage()
+                    
                 }
-                
             }
             
             rotation = CGAffineTransformMakeRotation(0)
             stretch = CGAffineTransformScale(rotation, 1, 1)
             label.transform = stretch
             label.center = CGPoint(x: self.view.bounds.width / 2, y: self.view.bounds.height / 2)
-            
-            updateImage()
+            rejectOrBridgeLabel.text = ""
             
         }
         
@@ -267,6 +291,9 @@ class BridgeViewController: UIViewController {
         
         //Creating gesture recognizer
         let gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+        displayedUserName1.addGestureRecognizer(gesture)
+        displayedUserName1.userInteractionEnabled = true
+        
         userImage.addGestureRecognizer(gesture)
         userImage.userInteractionEnabled = true
         

@@ -18,44 +18,74 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     var messageTextArray = [String]()
     
     @IBOutlet weak var singleMessageTableView: UITableView!
+    @IBOutlet weak var sendButton: UIBarButtonItem!
     
-    @IBAction func sendMessage(sender: AnyObject) {
+    @IBAction func sendMessage(sender: UIButton) {
+        
+        //call the end editing method for the text field
+        messageText.endEditing(true)
+        
+        //disable the  textfield and sendButton
+
+        messageText.enabled = false
+        sendButton.enabled = false
         
         if messageText.text != "" {
             
-            messageTextArray.append(messageText.text!)
-            singleMessageTableView.reloadData()
+            /*messageTextArray.append(messageText.text!)
+            singleMessageTableView.reloadData()*/
             
             
             let singleMessage = PFObject(className: "SingleMessages")
             singleMessage["message_text"] = messageText.text!
             singleMessage["sender"] = PFUser.currentUser()?.objectId
+            //save users_in_message to singleMessage
+            singleMessage["ids_in_message"] = idsInMessage
             
             singleMessage.saveInBackgroundWithBlock { (success, error) -> Void in
                 
-              print("Object has been saved.")
+                if (success) {
+                    self.updateMessages()
+                    print("Object has been saved.")
+                    
+                } else {
+                    
+                    print(error)
+                    
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    //enable the textfield and sendButton
+                    self.messageText.enabled = true
+                    self.sendButton.enabled = true
+                    self.messageText.text = ""
+                    
+                })
                 
             }
-            
-            
-            
-            messageText.text = ""
-            
-            
 
         }
         
     }
+    
+    
     
     func updateMessages() {
         
         //querying for messages
         var query: PFQuery = PFQuery(className: "SingleMessages")
         
-        query.whereKey("sender", equalTo: (PFUser.currentUser()?.objectId)!)
+        query.whereKey("ids_in_message", containsAllObjectsInArray: idsInMessage as [AnyObject])
+        
+        //query.whereKey("ids_in_message", equalTo: idsInMessage)
         
         query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
             
+            //Clear the messagesArray
+            self.messageTextArray = [String]()
+            
+            //retrive messages and update messageTextArray
             if let error = error {
                 
                 print(error)
@@ -64,7 +94,13 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                 
                 for result in results {
                     
-                    self.messageTextArray.append(result["message_text"] as! String)
+                    let singleMessageText:String? = (result as PFObject)["message_text"] as? String
+                    
+                    if singleMessageText != nil {
+                        
+                        self.messageTextArray.append(singleMessageText!)
+                        
+                    }
                     
                 }
                 
@@ -76,12 +112,29 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                 
             }
             
-            print(self.messageTextArray)
-            
         })
         
     }
     
+    /*@IBAction func exitMessage(sender: AnyObject) {
+        
+        var alert = UIAlertController(title: "Exiting the Message", message: "Are you sure you want to leave this conversation?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+            
+            //take user out of the current ids_in_message
+            var messages = PFObject(className: "Messages")
+            messages.saveInBackground()
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+        }))
+        
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +179,6 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        print(messageTextArray.count)
         return messageTextArray.count
         
     }
@@ -135,8 +187,9 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         
-        print(messageTextArray[indexPath.row])
         cell.textLabel?.text = messageTextArray[indexPath.row]
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
         

@@ -10,6 +10,8 @@ import UIKit
 import Parse
 
 var singleMessageTitle = "Message"
+var idsInMessage = [String]()
+
 //Change to MessagesTableViewController so other can be MessageViewController
 class MessagesViewController: UITableViewController {
 
@@ -30,6 +32,7 @@ class MessagesViewController: UITableViewController {
         var query: PFQuery = PFQuery(className: "Messages")
         
         query.whereKey("ids_in_message", containsString: PFUser.currentUser()?.objectId)
+        query.orderByDescending("updatedAt")
         
         query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
             
@@ -141,6 +144,7 @@ class MessagesViewController: UITableViewController {
         let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
         
         singleMessageTitle = (currentCell.textLabel?.text)!
+        idsInMessage = IDs[indexPath.row]
         
         //print(singleMessageTitle)
         /*if let cellText = cell.textLabel?.text {
