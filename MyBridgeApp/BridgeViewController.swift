@@ -112,8 +112,15 @@ class BridgeViewController: UIViewController {
                             
                             if let data = imageData {
                                 
-                                self.displayedUserName1.text = object["name"] as! String
-                                self.userImage.image = UIImage(data: data)
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    
+                                    self.displayedUserName1.text = object["name"] as! String
+                                    self.userImage.image = UIImage(data: data)
+                                    
+                                })
+
+                                
+                                
                                 
                             }
                             
@@ -123,8 +130,13 @@ class BridgeViewController: UIViewController {
                             
                             if let data = imageData {
                                 
-                                self.displayedUserName2.text = object["name"] as! String
-                                self.secondUserImage.image = UIImage(data: data)
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    
+                                    self.displayedUserName2.text = object["name"] as! String
+                                    self.secondUserImage.image = UIImage(data: data)
+                                    
+                                })
+                                
                                 //friendPairings = [String]()
                                 //print(friendPairings)
                                 
