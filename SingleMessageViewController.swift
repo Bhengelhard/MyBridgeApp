@@ -22,19 +22,15 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     
     @IBAction func sendMessage(sender: UIButton) {
         
-        //call the end editing method for the text field
-        messageText.endEditing(true)
-        
-        //disable the  textfield and sendButton
-
-        messageText.enabled = false
-        sendButton.enabled = false
-        
         if messageText.text != "" {
             
-            /*messageTextArray.append(messageText.text!)
-            singleMessageTableView.reloadData()*/
+            //call the end editing method for the text field
+            messageText.endEditing(true)
             
+            //disable the  textfield and sendButton
+            
+            messageText.enabled = false
+            sendButton.enabled = false
             
             let singleMessage = PFObject(className: "SingleMessages")
             singleMessage["message_text"] = messageText.text!
@@ -124,8 +120,19 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
             
-            //take user out of the current ids_in_message
+            //take currentUser out of the current ids_in_message
+            var newIdsInMessage = [String]()
+            for ID in idsInMessage {
+                
+                if ID != PFUser.currentUser()?.objectId {
+                    
+                    newIdsInMessage.append(ID)
+                    
+                }
+                
+            }
             var messages = PFObject(className: "Messages")
+            //messages.
             messages.saveInBackground()
             
             self.dismissViewControllerAnimated(true, completion: nil)

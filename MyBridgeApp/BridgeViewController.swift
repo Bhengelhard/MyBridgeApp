@@ -227,6 +227,7 @@ class BridgeViewController: UIViewController {
                 bridgeBuiltorRejected = "rejected_bridges"
                 
                 print("rejected")
+                updateImage()
                 
                 
             } else if label.center.x > self.view.bounds.width - 100 {
@@ -270,9 +271,8 @@ class BridgeViewController: UIViewController {
                     PFUser.currentUser()?[bridgeBuiltorRejected] = newBridges
                     PFUser.currentUser()?.saveInBackground()
                     
-                    updateImage()
-                    
                 }
+                
             }
             
             rotation = CGAffineTransformMakeRotation(0)
