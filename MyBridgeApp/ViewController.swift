@@ -21,22 +21,47 @@ class ViewController: UIViewController {
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
-                    let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email, user_friends"])
+                    let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email, friends"])
                     graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
                         if error != nil {
                             
                             print(error)
-                            
+                    
                         } else if let result = result {
                             // saves these to parse at every login
                             PFUser.currentUser()?["gender"] = result["gender"]!
                             PFUser.currentUser()?["name"] = result["name"]!
                             PFUser.currentUser()?["email"] = result["email"]!
-                            //have to check if the user has friends or else will get an error
-                            //PFUser.currentUser()?["user_friends"] = result["user_friends"]!
+                            PFUser.currentUser()?["fb_id"] = result["id"]!
                             
+                            //adding facebook friend data to parse - returns name and id
+                            var friends = result["friends"]! as! NSDictionary
+                            
+                            var friendsData : NSArray = friends.objectForKey("data") as! NSArray
+                            
+                            var fbFriendIds = [String]()
+                            
+                            for friend in friendsData {
+                                
+                                let valueDict : NSDictionary = friend as! NSDictionary
+                                fbFriendIds.append(valueDict.objectForKey("id") as! String)
+                                
+                            }
+                            
+                            
+                            PFUser.currentUser()?["fb_friends"] = fbFriendIds
                             
                             PFUser.currentUser()?.saveInBackground()
+                        
+                            //search through users for where fb id matches and then add object id to both users friend_list
+                            //have to check if the user has friends or else will get an error
+                            //print(result["friends"]!)
+                            /*if let userFriends = result["friends"]! {
+                                
+                                PFUser.currentUser()?["fb_friends"] = userFriends
+                                
+                            }*/
+                            
                             
                             let userId = result["id"]! as! String
                             
@@ -58,6 +83,7 @@ class ViewController: UIViewController {
                         }
                     }
                     
+                    self.updateFriendList()
                     self.performSegueWithIdentifier("showBridgeViewController", sender: self)
 
                 }
@@ -66,11 +92,102 @@ class ViewController: UIViewController {
         
     }
 
+    //right now just updates users Friends
+    func updateUser() {
+        
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"])
+        graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
+            if error != nil {
+                
+                print(error)
+                
+            } else if let result = result {
+                
+                var friends = result["friends"]! as! NSDictionary
+                
+                var friendsData : NSArray = friends.objectForKey("data") as! NSArray
+                
+                var fbFriendIds = [String]()
+                
+                for friend in friendsData {
+                    
+                    let valueDict : NSDictionary = friend as! NSDictionary
+                    fbFriendIds.append(valueDict.objectForKey("id") as! String)
+                    
+                }
+                
+                
+                PFUser.currentUser()?["fb_friends"] = fbFriendIds
+                
+                PFUser.currentUser()?.saveInBackground()
+                
+            }
+        
+        }
+        
+    }
     
+    func updateFriendList() {
+        
+        //add graph request to update users fb_friends
+        //query to find and save fb_friends
+        
+        var currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
+        
+        var query: PFQuery = PFQuery(className: "_User")
+        
+        query.whereKey("fb_id", containedIn: currentUserFbFriends as [AnyObject])
+        
+        query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+            
+            if error != nil {
+                
+                print(error)
+                
+            } else if let objects = objects {
+                
+                print("objects")
+                
+                for object in objects {
+                    
+                    var containedInFriendList = false
+                    
+                    if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as! NSArray {
+                        
+                        print(friendList)
+                        
+                        containedInFriendList = friendList.contains {$0 as! String == object.objectId!}
+                        
+                    }
+                    print(object.objectId)
+                    print(containedInFriendList)
+                    
+                    if containedInFriendList == false {
+                        
+                        if PFUser.currentUser()!["friend_list"] != nil {
+                            
+                            let currentFriendList = PFUser.currentUser()!["friend_list"]
+                            PFUser.currentUser()!["friend_list"] = currentFriendList as! Array + [object.objectId!]
+
+                        } else {
+                            
+                            PFUser.currentUser()!["friend_list"] = [object.objectId!]
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                PFUser.currentUser()?.saveInBackground()
+            }
+            
+        })
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     
@@ -81,11 +198,13 @@ class ViewController: UIViewController {
         
         if let username = PFUser.currentUser()?.username{
             
+            updateFriendList()
+            //updateUser()
             performSegueWithIdentifier("showBridgeViewController", sender: self)
             
         } else {
             
-            print("not yet logged in")
+            //not yet logged in
             
         }
         

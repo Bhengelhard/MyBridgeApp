@@ -87,6 +87,15 @@ class BridgeViewController: UIViewController {
             
         }
         
+        /*if last pairing in database {
+            //disable swipe
+            //show missing image images
+            rejectOrBridgeLabel.textColor = UIColor.blackColor()
+            rejectOrBridgeLabel.text = "Sorry, there are more bridges to be built at this time. Try again later!"
+            print("no more pairings")
+            
+        }*/
+        
         var isDisplayedUser1 = true
         var query: PFQuery = PFQuery(className: "_User")
         
@@ -205,13 +214,11 @@ class BridgeViewController: UIViewController {
             
             rejectOrBridgeLabel.text = "reject"
             rejectOrBridgeLabel.textColor = UIColor.redColor()
-            print("label reject")
             
         } else if label.center.x > view.center.x + 5 {
             
             rejectOrBridgeLabel.text = "Bridge"
             rejectOrBridgeLabel.textColor = UIColor.greenColor()
-            print("label Bridge")
             
         } else {
             
@@ -285,7 +292,8 @@ class BridgeViewController: UIViewController {
         
         
     }
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

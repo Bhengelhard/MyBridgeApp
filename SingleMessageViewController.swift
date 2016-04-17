@@ -112,16 +112,22 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         
     }
     
-    /*@IBAction func exitMessage(sender: AnyObject) {
+    @IBAction func exitMessage(sender: AnyObject) {
         
+        //create the alert controller
         var alert = UIAlertController(title: "Exiting the Message", message: "Are you sure you want to leave this conversation?", preferredStyle: UIAlertControllerStyle.Alert)
         
+        //Create the actions
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) in
+            
+            
+            
+        }))
         
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action) in
             
             //take currentUser out of the current ids_in_message
-            var newIdsInMessage = [String]()
+            /*var newIdsInMessage = [String]()
             for ID in idsInMessage {
                 
                 if ID != PFUser.currentUser()?.objectId {
@@ -129,19 +135,24 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                     newIdsInMessage.append(ID)
                     
                 }
-                
+            
             }
-            var messages = PFObject(className: "Messages")
+            
+            //var message = PFObject(outDataWithClassName: "Messages", objectId: "ids")
+            /*var messages = PFObject(className: "Messages")
             //messages.
-            messages.saveInBackground()
+            messages.saveInBackground()*/*/
+            print("this does not yet let you leave the message")
             
             self.dismissViewControllerAnimated(true, completion: nil)
             
+            
+            
         }))
         
-            self.presentViewController(alert, animated: true, completion: nil)
+        self.presentViewController(alert, animated: true, completion: nil)
         
-    }*/
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

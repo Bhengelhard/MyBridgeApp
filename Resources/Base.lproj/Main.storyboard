@@ -90,14 +90,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Gl-m4b">
-                                <rect key="frame" x="61" y="139" width="253" height="194"/>
+                                <rect key="frame" x="107" y="131" width="160" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="194" id="8j9-Am-Csq"/>
-                                    <constraint firstAttribute="width" constant="253" id="RAg-6R-AHs"/>
+                                    <constraint firstAttribute="height" constant="160" id="8j9-Am-Csq"/>
+                                    <constraint firstAttribute="width" priority="160" constant="160" id="RAg-6R-AHs"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwI-nj-Dqo">
-                                <rect key="frame" x="101" y="98" width="173" height="21"/>
+                                <rect key="frame" x="101" y="94" width="173" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="173" id="Ekb-gE-UGj"/>
                                     <constraint firstAttribute="height" constant="21" id="ZCu-AL-j5y"/>
@@ -126,15 +126,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
-                                <rect key="frame" x="61" y="385" width="253" height="194"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="194" id="Zus-X7-v5p"/>
-                                    <constraint firstAttribute="width" constant="253" id="jks-W6-uR1"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIC-t1-LcV">
-                                <rect key="frame" x="101" y="344" width="173" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIC-t1-LcV">
+                                <rect key="frame" x="101" y="297" width="173" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9Cy-Lx-bST"/>
                                     <constraint firstAttribute="width" constant="173" id="gZM-Uz-mxH"/>
@@ -143,31 +136,37 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFI-yk-egX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFI-yk-egX">
                                 <rect key="frame" x="101" y="64" width="173" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="173" id="dbb-E7-BSr"/>
                                     <constraint firstAttribute="height" constant="34" id="ee2-XS-UqC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="00Y-4j-rbW">
+                                <rect key="frame" x="107" y="334" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="Zus-X7-v5p"/>
+                                    <constraint firstAttribute="width" constant="160" id="jks-W6-uR1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iIC-t1-LcV" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="88P-62-Efs"/>
                             <constraint firstItem="Izu-XS-RmV" firstAttribute="leading" secondItem="7HS-Z2-bfw" secondAttribute="leadingMargin" constant="-20" id="CkH-8U-e4g"/>
-                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="lwI-nj-Dqo" secondAttribute="bottom" constant="20" id="MoO-DH-kXk"/>
+                            <constraint firstItem="zga-Gl-m4b" firstAttribute="top" secondItem="lwI-nj-Dqo" secondAttribute="bottom" constant="16" id="MoO-DH-kXk"/>
                             <constraint firstItem="lwI-nj-Dqo" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="OFJ-0R-tYZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Izu-XS-RmV" secondAttribute="trailing" constant="-20" id="R2Y-9i-CE1"/>
                             <constraint firstItem="zga-Gl-m4b" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="XHp-Ra-rQn"/>
-                            <constraint firstItem="iIC-t1-LcV" firstAttribute="top" secondItem="zga-Gl-m4b" secondAttribute="bottom" constant="8" id="XRg-m1-F1Y"/>
+                            <constraint firstItem="iIC-t1-LcV" firstAttribute="top" secondItem="zga-Gl-m4b" secondAttribute="bottom" constant="6" id="XRg-m1-F1Y"/>
                             <constraint firstItem="Izu-XS-RmV" firstAttribute="top" secondItem="Wc8-na-Rlz" secondAttribute="bottom" id="m5t-33-hZx"/>
-                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="top" secondItem="Izu-XS-RmV" secondAttribute="bottom" constant="34" id="qd7-LW-QhE"/>
+                            <constraint firstItem="lwI-nj-Dqo" firstAttribute="top" secondItem="Izu-XS-RmV" secondAttribute="bottom" constant="30" id="qd7-LW-QhE"/>
                             <constraint firstItem="EFI-yk-egX" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="tP8-M8-KYk"/>
                             <constraint firstItem="00Y-4j-rbW" firstAttribute="centerX" secondItem="7HS-Z2-bfw" secondAttribute="centerX" id="uJY-I8-Yxx"/>
-                            <constraint firstItem="00Y-4j-rbW" firstAttribute="top" secondItem="iIC-t1-LcV" secondAttribute="bottom" constant="20" id="xv9-2R-ATa"/>
+                            <constraint firstItem="00Y-4j-rbW" firstAttribute="top" secondItem="iIC-t1-LcV" secondAttribute="bottom" constant="16" id="xv9-2R-ATa"/>
                             <constraint firstItem="EFI-yk-egX" firstAttribute="top" secondItem="Izu-XS-RmV" secondAttribute="bottom" id="yvV-DV-aaZ"/>
                         </constraints>
                     </view>
@@ -286,7 +285,7 @@
                                     <constraint firstAttribute="height" constant="44" id="nhS-hU-rqL"/>
                                 </constraints>
                                 <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="0.0"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Conversation" id="Ys7-jc-jfw">
@@ -333,8 +332,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="B19-eu-GHC"/>
         <segue reference="TAV-gy-FO0"/>
         <segue reference="qLK-f2-K3f"/>
-        <segue reference="B19-eu-GHC"/>
     </inferredMetricsTieBreakers>
 </document>

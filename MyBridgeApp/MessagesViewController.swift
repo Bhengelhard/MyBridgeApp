@@ -11,6 +11,7 @@ import Parse
 
 var singleMessageTitle = "Message"
 var idsInMessage = [String]()
+//var messageID =
 
 //Change to MessagesTableViewController so other can be MessageViewController
 class MessagesViewController: UITableViewController {
