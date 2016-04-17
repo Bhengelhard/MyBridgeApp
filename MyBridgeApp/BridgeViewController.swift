@@ -2,6 +2,8 @@ import UIKit
 import Parse
 import FBSDKCoreKit
 
+var previousViewController = String()
+
 class BridgeViewController: UIViewController {
 
     @IBOutlet weak var userImage: UIImageView!
@@ -241,6 +243,8 @@ class BridgeViewController: UIViewController {
                 
                 //add pop-up for if currentUser wants to be apart of message***
                 
+                previousViewController = "BridgeViewController"
+                
                 bridgeBuiltorRejected = "built_bridges"
                 
                 let message = PFObject(className: "Messages")
@@ -252,21 +256,33 @@ class BridgeViewController: UIViewController {
                 message["ids_in_message"] = [userId1, userId2, currentUserId!]
                 message["bridge_builder"] = currentUserId
                 
+                message.saveInBackgroundWithBlock({ (success, error) in
+                    
+                    print("message saved")
+                    messageId = message.objectId!
+                    
+                })
+                
+                //messageId = message.objectId!
+                
                 singleMessageTitle = "\(displayedUserName1.text!) & \(displayedUserName2.text!)"
                 
-                message.saveInBackgroundWithBlock { (success, error) -> Void in
+                //message.save
+                
+                print("built")
+                performSegueWithIdentifier("showSingleMessage", sender: self)
+                
+                
+            }
+                /*
+                message.saveInBackgroundWithBlock{ (success, error) -> Void in
                     
                     print("Object has been saved.")
                     
-                }
-                
-                idsInMessage = [userId1, userId2, currentUserId!]
-                performSegueWithIdentifier("showSingleMessage", sender: self)
+                }*/
 
-                print("built")
-                
-            }
             
+        
             if bridgeBuiltorRejected != "" {
                 
                 //error checking

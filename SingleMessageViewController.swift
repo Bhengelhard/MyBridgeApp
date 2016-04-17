@@ -36,7 +36,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
             singleMessage["message_text"] = messageText.text!
             singleMessage["sender"] = PFUser.currentUser()?.objectId
             //save users_in_message to singleMessage
-            singleMessage["ids_in_message"] = idsInMessage
+            singleMessage["message_id"] = messageId
             
             singleMessage.saveInBackgroundWithBlock { (success, error) -> Void in
                 
@@ -72,7 +72,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         //querying for messages
         var query: PFQuery = PFQuery(className: "SingleMessages")
         
-        query.whereKey("ids_in_message", containsAllObjectsInArray: idsInMessage as [AnyObject])
+        query.whereKey("message_id", equalTo: messageId)
         
         //query.whereKey("ids_in_message", equalTo: idsInMessage)
         
@@ -127,6 +127,49 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action) in
             
             //take currentUser out of the current ids_in_message
+            
+            var messageQuery = PFQuery(className: "Messages")
+            messageQuery.getObjectInBackgroundWithId(messageId, block: { (object, error) in
+                
+                if error != nil {
+                    
+                    print(error)
+                    
+                } else {
+                    
+                    var CurrentIdsInMessage: NSArray = object!["ids_in_message"] as! NSArray
+                    var CurrentNamesInMessage: NSArray = object!["names_in_message"] as! NSArray
+                    
+                    var updatedIdsInMessage = [String]()
+                    var updatedNamesInMessage = [String]()
+                    
+                    for i in 0...(CurrentIdsInMessage.count - 1) {
+                        
+                        if CurrentIdsInMessage[i] as! String != PFUser.currentUser()?.objectId {
+                            
+                            updatedIdsInMessage.append(CurrentIdsInMessage[i] as! String)
+                            updatedNamesInMessage.append(CurrentNamesInMessage[i] as! String)
+                            
+                        }
+                        
+                    }
+                    
+                     print(updatedNamesInMessage)
+                    
+                    object!["ids_in_message"] = updatedIdsInMessage
+                    object!["names_in_message"] = updatedNamesInMessage
+                    
+                    object!.saveInBackgroundWithBlock({ (success, error) in
+                        
+                        print("message updated for exited user")
+                        
+                    })
+                    
+                }
+                
+                
+                
+            })
             /*var newIdsInMessage = [String]()
             for ID in idsInMessage {
                 
@@ -158,8 +201,13 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         navigationBar.title = singleMessageTitle
+        if previousViewController == "MessagesViewController" {
+            
+            updateMessages()
+            
+        }
         
-        updateMessages()
+        print(messageId)
         
         //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField), recievers (recievers - current user) are displayed on title
         

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 var singleMessageTitle = "Message"
-var idsInMessage = [String]()
+var messageId = String()
 //var messageID =
 
 //Change to MessagesTableViewController so other can be MessageViewController
@@ -22,9 +22,7 @@ class MessagesViewController: UITableViewController {
     
     //need to combine these into a dictionary
     var names = [[String]]()
-    var IDs = [[String]]()
-    var IDList = [String]()
-    
+    var IDsOfMessages = [String]()
     
     func updateMessagesTable() {
         
@@ -46,7 +44,7 @@ class MessagesViewController: UITableViewController {
                 for result in results as! [PFObject]{
                     
                     self.names.append(result["names_in_message"] as! [String])
-                    self.IDs.append(result["ids_in_message"] as! [String])
+                    self.IDsOfMessages.append(result.objectId!)
                     
                 }
                 
@@ -91,7 +89,7 @@ class MessagesViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return names.count
+        return IDsOfMessages.count
     }
 
     
@@ -145,7 +143,10 @@ class MessagesViewController: UITableViewController {
         let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
         
         singleMessageTitle = (currentCell.textLabel?.text)!
-        idsInMessage = IDs[indexPath.row]
+        messageId = IDsOfMessages[indexPath.row]
+        
+        previousViewController = "MessagesViewController"
+        //messageId =
         
         //print(singleMessageTitle)
         /*if let cellText = cell.textLabel?.text {
@@ -157,6 +158,7 @@ class MessagesViewController: UITableViewController {
         }*/
         
         performSegueWithIdentifier("showSingleMessageFromMessages", sender: self)
+    
 
         
         //opening email to send mail
