@@ -49,6 +49,7 @@ class BridgeViewController: UIViewController {
         
         var friendPairings = [String]()
         
+        
         if let friendList = PFUser.currentUser()?["friend_list"] as? [String] {
             
             //while friendpairings.count <4

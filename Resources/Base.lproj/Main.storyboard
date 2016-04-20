@@ -228,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rA7-wX-q1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1344.5" y="-136.5"/>
+            <point key="canvasLocation" x="1656.5" y="-152.5"/>
         </scene>
         <!--Single Message View Controller-->
         <scene sceneID="57B-UR-Tv1">
@@ -291,7 +291,7 @@
                                     <navigationItem title="Conversation" id="Ys7-jc-jfw">
                                         <barButtonItem key="leftBarButtonItem" title="&lt; Messages" id="Zve-63-VJr">
                                             <connections>
-                                                <segue destination="MtK-gn-56M" kind="show" id="pYm-ak-g8K"/>
+                                                <segue destination="MtK-gn-56M" kind="show" identifier="showMessagesFromSingleMessage" id="pYm-ak-g8K"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="X" id="cLn-Yd-5Zf">
@@ -324,6 +324,7 @@
                         <outlet property="navigationBar" destination="Ys7-jc-jfw" id="PiP-Eh-n2d"/>
                         <outlet property="sendButton" destination="XEP-et-iGS" id="iGa-Ne-VRm"/>
                         <outlet property="singleMessageTableView" destination="zte-oc-csK" id="Rgv-VQ-8w3"/>
+                        <segue destination="cMo-Jt-lEF" kind="show" identifier="showBridgeFromSingleMessage" id="00U-Jg-Jap"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u5J-8h-7eI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -332,8 +333,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="B19-eu-GHC"/>
-        <segue reference="TAV-gy-FO0"/>
-        <segue reference="qLK-f2-K3f"/>
+        <segue reference="00U-Jg-Jap"/>
+        <segue reference="zAH-GO-Yap"/>
+        <segue reference="pYm-ak-g8K"/>
     </inferredMetricsTieBreakers>
 </document>

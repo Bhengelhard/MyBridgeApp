@@ -35,7 +35,7 @@ class ViewController: UIViewController {
                             PFUser.currentUser()?["fb_id"] = result["id"]!
                             
                             //adding facebook friend data to parse - returns name and id
-                            var friends = result["friends"]! as! NSDictionary
+                            /*var friends = result["friends"]! as! NSDictionary
                             
                             var friendsData : NSArray = friends.objectForKey("data") as! NSArray
                             
@@ -50,19 +50,11 @@ class ViewController: UIViewController {
                             
                             
                             PFUser.currentUser()?["fb_friends"] = fbFriendIds
+ */
                             
                             PFUser.currentUser()?.saveInBackground()
-                        
-                            //search through users for where fb id matches and then add object id to both users friend_list
-                            //have to check if the user has friends or else will get an error
-                            //print(result["friends"]!)
-                            /*if let userFriends = result["friends"]! {
-                                
-                                PFUser.currentUser()?["fb_friends"] = userFriends
-                                
-                            }*/
                             
-                            
+                            //get facebook profile picture
                             let userId = result["id"]! as! String
                             
                             let facebookProfilePictureUrl = "https://graph.facebook.com/" + userId + "/picture?type=large"
@@ -83,7 +75,7 @@ class ViewController: UIViewController {
                         }
                     }
                     
-                    self.updateFriendList()
+                    self.updateUser()
                     self.performSegueWithIdentifier("showBridgeViewController", sender: self)
 
                 }
@@ -119,7 +111,19 @@ class ViewController: UIViewController {
                 
                 PFUser.currentUser()?["fb_friends"] = fbFriendIds
                 
-                PFUser.currentUser()?.saveInBackground()
+                PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
+                    
+                    if error != nil {
+                        
+                        print(error)
+                        
+                    } else {
+                        
+                        self.updateFriendList()
+                        
+                    }
+                    
+                })
                 
             }
         
@@ -146,40 +150,39 @@ class ViewController: UIViewController {
                 
             } else if let objects = objects {
                 
-                print("objects")
+                PFUser.currentUser()?.fetchInBackgroundWithBlock({ (success, error) in
                 
-                for object in objects {
+                    for object in objects {
                     
-                    var containedInFriendList = false
-                    
-                    if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as! NSArray {
+                        var containedInFriendList = false
                         
-                        print(friendList)
-                        
-                        containedInFriendList = friendList.contains {$0 as! String == object.objectId!}
-                        
-                    }
-                    print(object.objectId)
-                    print(containedInFriendList)
-                    
-                    if containedInFriendList == false {
-                        
-                        if PFUser.currentUser()!["friend_list"] != nil {
+                        if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as! NSArray {
                             
-                            let currentFriendList = PFUser.currentUser()!["friend_list"]
-                            PFUser.currentUser()!["friend_list"] = currentFriendList as! Array + [object.objectId!]
-
-                        } else {
-                            
-                            PFUser.currentUser()!["friend_list"] = [object.objectId!]
+                            containedInFriendList = friendList.contains {$0 as! String == object.objectId!}
                             
                         }
                         
+                        if containedInFriendList == false {
+                            
+                            if PFUser.currentUser()!["friend_list"] != nil {
+                                
+                                let currentFriendList = PFUser.currentUser()!["friend_list"]
+                                PFUser.currentUser()!["friend_list"] = currentFriendList as! Array + [object.objectId!]
+                                
+                            } else {
+                                
+                                PFUser.currentUser()!["friend_list"] = [object.objectId!]
+                                
+                            }
+                            
+                        }
+                        
+                        PFUser.currentUser()?.saveInBackground()
+                        
                     }
                     
-                }
+                })
                 
-                PFUser.currentUser()?.saveInBackground()
             }
             
         })
@@ -198,8 +201,8 @@ class ViewController: UIViewController {
         
         if let username = PFUser.currentUser()?.username{
             
-            updateFriendList()
-            //updateUser()
+            //updateFriendList()
+            updateUser()
             performSegueWithIdentifier("showBridgeViewController", sender: self)
             
         } else {

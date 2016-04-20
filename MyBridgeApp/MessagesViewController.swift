@@ -66,13 +66,37 @@ class MessagesViewController: UITableViewController {
         super.viewDidLoad()
         
         //this should only update when a new message is created**
-        updateMessagesTable()
+        //shouldn't be reloading the table more than once per viewDidLoad
+        
+        self.updateMessagesTable()
+        
+        /*if segueFromExitedMessage == true {
+            
+            IDsOfMessages.removeFirst()
+            names.removeFirst()
+            
+            print("ids")
+            print(IDsOfMessages)
+            print("names")
+            print(names)
+            
+            segueFromExitedMessage = false
+            
+            tableView.reloadData()
+            
+            
+            
+        }*/
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,7 +113,9 @@ class MessagesViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        
         return IDsOfMessages.count
+        
     }
 
     
@@ -104,31 +130,33 @@ class MessagesViewController: UITableViewController {
             
         }*/
         
-        for name in names[indexPath.row] {
+        //take out 0th object if exitedMessage is true and turn it to false at the end
             
+        for name in names[indexPath.row] {
+        
             //add & between last two users - currently adds & only when there are two users
             
             if names[indexPath.row].count == 3 {
-                
+                    
                 if name != PFUser.currentUser()?["name"] as? String {
-                    
+                        
                     stringOfNames = stringOfNames + name + " & "
-                    
+                        
                 }
-                
+                    
             } else if name != PFUser.currentUser()?["name"] as? String {
-                
+                    
                 stringOfNames = stringOfNames + name + ", "
-                
+                    
             }
-            
+                
         }
         
         stringOfNames = String(stringOfNames.characters.dropLast())
         stringOfNames = String(stringOfNames.characters.dropLast())
         
         cell.textLabel?.text = stringOfNames
-        
+
         /*if images.count > indexPath.row {
             
             cell.imageView?.image = images[indexPath.row]
@@ -136,6 +164,7 @@ class MessagesViewController: UITableViewController {
         }*/
 
         return cell
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

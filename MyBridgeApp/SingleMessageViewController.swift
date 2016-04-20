@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+//var segueFromExitedMessage = false
+
 class SingleMessageViewController: UIViewController, UITableViewDelegate {
 
     
@@ -137,6 +139,12 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                     
                 } else {
                     
+                    /*dispatch_async(dispatch_get_main_queue(), {
+                        
+                        segueFromExitedMessage = true
+                        
+                    })*/
+                    
                     var CurrentIdsInMessage: NSArray = object!["ids_in_message"] as! NSArray
                     var CurrentNamesInMessage: NSArray = object!["names_in_message"] as! NSArray
                     
@@ -153,8 +161,6 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                         }
                         
                     }
-                    
-                     print(updatedNamesInMessage)
                     
                     object!["ids_in_message"] = updatedIdsInMessage
                     object!["names_in_message"] = updatedNamesInMessage
@@ -185,9 +191,20 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
             /*var messages = PFObject(className: "Messages")
             //messages.
             messages.saveInBackground()*/*/
-            print("this does not yet let you leave the message")
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            //self.dismissViewControllerAnimated(true, completion: nil)
+            
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                //pop-up/drop-down segue for BridgeViewController Message creations
+                self.performSegueWithIdentifier("showBridgeFromSingleMessage", sender: self)
+                
+                //slide in and slide back segue from Messages message access.
+                
+                //self.performSegueWithIdentifier("showMessagesFromSingleMessage", sender: self)
+                
+            })
             
             
             
@@ -206,8 +223,6 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
             updateMessages()
             
         }
-        
-        print(messageId)
         
         //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField), recievers (recievers - current user) are displayed on title
         
