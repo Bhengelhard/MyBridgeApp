@@ -19,11 +19,13 @@
 		CB5829491CAA26D900DC86C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5829461CAA26D900DC86C9 /* ViewController.swift */; };
 		CB6A32991CC483CD00FADB13 /* SingleMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */; };
 		CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */; };
+		CB6A329D1CE2461800FADB13 /* LoadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */; };
+		CB6A329F1CE260CB00FADB13 /* login_with_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */; };
+		CB6A32A51CE28E3200FADB13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6A32A41CE28E3200FADB13 /* Main.storyboard */; };
 		CB7A11DA1CA88B6300252CB6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11D81CA88B6300252CB6 /* FBSDKCoreKit.framework */; };
 		CB7A11DB1CA88B6300252CB6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11D91CA88B6300252CB6 /* FBSDKLoginKit.framework */; };
 		CB7A11DD1CA88B7100252CB6 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */; };
 		CB7A11DF1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */; };
-		CB9C20E81CAA333800C03FF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9C20E61CAA333800C03FF2 /* Main.storyboard */; };
 		CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,11 +44,13 @@
 		CB5829461CAA26D900DC86C9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = MyBridgeApp/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleMessageViewController.swift; path = MyBridgeApp/SingleMessageViewController.swift; sourceTree = SOURCE_ROOT; };
 		CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BentonSans-Light copy.otf"; sourceTree = "<group>"; };
+		CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadPageViewController.swift; path = MyBridgeApp/LoadPageViewController.swift; sourceTree = SOURCE_ROOT; };
+		CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_with_facebook.png; path = Images.xcassets/login_with_facebook.png; sourceTree = "<group>"; };
+		CB6A32A41CE28E3200FADB13 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = SOURCE_ROOT; };
 		CB7A11D81CA88B6300252CB6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Desktop/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CB7A11D91CA88B6300252CB6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Desktop/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ../../Desktop/ParseSDK/ParseUI.framework; sourceTree = "<group>"; };
 		CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = ../../Desktop/ParseSDK/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
-		CB9C20E71CAA333800C03FF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesViewController.swift; path = MyBridgeApp/MessagesViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */,
+				CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */,
 				814C3AC81B69877600E307BB /* Images.xcassets */,
 				814C3AC91B69877600E307BB /* Info.plist */,
 			);
@@ -103,11 +108,12 @@
 			isa = PBXGroup;
 			children = (
 				CB5829441CAA26D900DC86C9 /* AppDelegate.swift */,
+				CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */,
 				CB5829461CAA26D900DC86C9 /* ViewController.swift */,
 				CB5829451CAA26D900DC86C9 /* BridgeViewController.swift */,
 				CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */,
 				CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */,
-				CB9C20E61CAA333800C03FF2 /* Main.storyboard */,
+				CB6A32A41CE28E3200FADB13 /* Main.storyboard */,
 			);
 			name = MyBridgeApp;
 			path = ParseStarterProject;
@@ -196,9 +202,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB6A32A51CE28E3200FADB13 /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
-				CB9C20E81CAA333800C03FF2 /* Main.storyboard in Resources */,
 				CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */,
+				CB6A329F1CE260CB00FADB13 /* login_with_facebook.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB6A32991CC483CD00FADB13 /* SingleMessageViewController.swift in Sources */,
+				CB6A329D1CE2461800FADB13 /* LoadPageViewController.swift in Sources */,
 				CB5829491CAA26D900DC86C9 /* ViewController.swift in Sources */,
 				CB5829471CAA26D900DC86C9 /* AppDelegate.swift in Sources */,
 				CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */,
@@ -218,17 +226,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CB9C20E61CAA333800C03FF2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CB9C20E71CAA333800C03FF2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		81BA81621A49DA1800E65899 /* Debug */ = {

@@ -10,6 +10,7 @@ import FBSDKLoginKit
 class ViewController: UIViewController {
 
     @IBAction func fbLogin(sender: AnyObject) {
+        print("pressed")
         
         //Log user in with permissions public_profile, email and user_friends
         let permissions = ["public_profile", "email", "user_friends"]
@@ -21,63 +22,162 @@ class ViewController: UIViewController {
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
-                    let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email, friends"])
-                    graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
-                        if error != nil {
-                            
-                            print(error)
                     
-                        } else if let result = result {
-                            // saves these to parse at every login
-                            PFUser.currentUser()?["gender"] = result["gender"]!
-                            PFUser.currentUser()?["name"] = result["name"]!
-                            PFUser.currentUser()?["email"] = result["email"]!
-                            PFUser.currentUser()?["fb_id"] = result["id"]!
-                            
-                            //adding facebook friend data to parse - returns name and id
-                            /*var friends = result["friends"]! as! NSDictionary
-                            
-                            var friendsData : NSArray = friends.objectForKey("data") as! NSArray
-                            
-                            var fbFriendIds = [String]()
-                            
-                            for friend in friendsData {
+                    if user.isNew {
+                        
+                        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, interested_in, name, gender, email, friends, birthday, location"])
+                        graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
+                            if error != nil {
                                 
-                                let valueDict : NSDictionary = friend as! NSDictionary
-                                fbFriendIds.append(valueDict.objectForKey("id") as! String)
+                                print(error)
                                 
-                            }
-                            
-                            
-                            PFUser.currentUser()?["fb_friends"] = fbFriendIds
- */
-                            
-                            PFUser.currentUser()?.saveInBackground()
-                            
-                            //get facebook profile picture
-                            let userId = result["id"]! as! String
-                            
-                            let facebookProfilePictureUrl = "https://graph.facebook.com/" + userId + "/picture?type=large"
-                            
-                            if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
+                            } else if let result = result {
+                                // saves these to parse at every login
                                 
-                                if let data = NSData(contentsOfURL: fbpicUrl) {
+                                if let interested_in = result["interested_in"]! {
                                     
-                                    let imageFile: PFFile = PFFile(data: data)!
-                                    
-                                    PFUser.currentUser()?["fb_profile_picture"] = imageFile
-                                    
-                                    PFUser.currentUser()?.saveInBackground()
+                                    PFUser.currentUser()?["interested_in"] = interested_in
+                                    print("interested_in")
                                     
                                 }
                                 
+                                if let gender: String = result["gender"]! as! String {
+                                    
+                                    PFUser.currentUser()?["gender"] = gender
+                                    
+                                    //saves a guess at the gender the current user is interested in if it doesn't already exist
+                                    if result["interested_in"]! == nil {
+                                        
+                                        if gender == "male" {
+                                            
+                                            PFUser.currentUser()?["interested_in"] = "female"
+                                            
+                                        } else if gender == "female" {
+                                            
+                                            PFUser.currentUser()?["interested_in"] = "male"
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                                //setting main name and names for Bridge Types to Facebook name
+                                if let name = result["name"]! {
+                                    
+                                    PFUser.currentUser()?["fb_name"] = name
+                                    PFUser.currentUser()?["business_name"] = name
+                                    PFUser.currentUser()?["love_name"] = name
+                                    PFUser.currentUser()?["friendship_name"] = name
+                                    
+                                }
+                                
+                                if let email = result["email"]! {
+                                    
+                                    PFUser.currentUser()?["email"] = email
+                                    
+                                }
+                                
+                                if let id = result["id"]! {
+                                    
+                                    PFUser.currentUser()?["fb_id"] =  id
+                                    
+                                }
+                                
+                                if let birthday = result["birthday"]! {
+                                    
+                                    print(result["birthday"]!)
+                                    print("birthday")
+                                    //getting birthday from Facebook and calculating age
+                                    PFUser.currentUser()?["fb_birthday"] = birthday
+                                    let NSbirthday: NSDate = birthday as! NSDate
+                                    let calendar: NSCalendar = NSCalendar.currentCalendar()
+                                    let now = NSDate()
+                                    let age = calendar.components(.Year, fromDate: NSbirthday, toDate: now, options: [])
+                                    
+                                    print(age)
+                                    
+                                    PFUser.currentUser()?["age"] = age
+                                    
+                                }
+                                
+                                if let location = result["location"]! {
+                                    print("location")
+                                    PFUser.currentUser()?["fb_location"] = location
+                                    
+                                }
+                                
+                                PFUser.currentUser()?["distance_interest"] = 100
+                                PFUser.currentUser()?["new_message_push_notifications"] = true
+                                PFUser.currentUser()?["new_bridge_push_notifications"] = true
+                                
+                                
+                                //adding facebook friend data to parse - returns name and id
+                                /*var friends = result["friends"]! as! NSDictionary
+                                 
+                                 var friendsData : NSArray = friends.objectForKey("data") as! NSArray
+                                 
+                                 var fbFriendIds = [String]()
+                                 
+                                 for friend in friendsData {
+                                 
+                                 let valueDict : NSDictionary = friend as! NSDictionary
+                                 fbFriendIds.append(valueDict.objectForKey("id") as! String)
+                                 
+                                 }
+                                 
+                                 
+                                 PFUser.currentUser()?["fb_friends"] = fbFriendIds
+                                 */
+                                
+                                PFUser.currentUser()?.saveInBackground()
+                                
+                                //get facebook profile picture
+                                let userId = result["id"]! as! String
+                                
+                                let facebookProfilePictureUrl = "https://graph.facebook.com/" + userId + "/picture?type=large"
+                                
+                                if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
+                                    
+                                    if let data = NSData(contentsOfURL: fbpicUrl) {
+                                        
+                                        let imageFile: PFFile = PFFile(data: data)!
+                                        
+                                        //setting main profile pictures
+                                        PFUser.currentUser()?["fb_profile_picture"] = imageFile
+                                        PFUser.currentUser()?["main_business_profile_picture"] = imageFile
+                                        PFUser.currentUser()?["main_love_profile_picture"] = imageFile
+                                        PFUser.currentUser()?["main_friendship_profile_picture"] = imageFile
+                                        
+                                        //setting profile pictures as facebook pictures to true
+                                        PFUser.currentUser()?["fb_profile_picture_for_business"] = true
+                                        PFUser.currentUser()?["fb_profile_picture_for_love"] = true
+                                        PFUser.currentUser()?["fb_profile_picture_for_friendship"] = true
+                                        
+                                        
+                                        PFUser.currentUser()?.saveInBackground()
+                                        
+                                    }
+                                    
+                                }
                             }
                         }
+                        
+                        self.updateUser()
+                        
+                        //should this only segue if the user had never signed in before
+                        self.performSegueWithIdentifier("showSignUp", sender: self)
+                        
+                        print("new")
+                        
+                    } else {
+                        
+                        print("not new")
+                        self.performSegueWithIdentifier("showBridgeViewController", sender: self)
+                        
                     }
                     
-                    self.updateUser()
-                    self.performSegueWithIdentifier("showBridgeViewController", sender: self)
-
                 }
             }
         }
@@ -95,35 +195,37 @@ class ViewController: UIViewController {
                 
             } else if let result = result {
                 
-                var friends = result["friends"]! as! NSDictionary
-                
-                var friendsData : NSArray = friends.objectForKey("data") as! NSArray
-                
-                var fbFriendIds = [String]()
-                
-                for friend in friendsData {
+                if let friends = result["friends"]! as? NSDictionary {
                     
-                    let valueDict : NSDictionary = friend as! NSDictionary
-                    fbFriendIds.append(valueDict.objectForKey("id") as! String)
+                    let friendsData : NSArray = friends.objectForKey("data") as! NSArray
                     
-                }
-                
-                
-                PFUser.currentUser()?["fb_friends"] = fbFriendIds
-                
-                PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
+                    var fbFriendIds = [String]()
                     
-                    if error != nil {
+                    for friend in friendsData {
                         
-                        print(error)
-                        
-                    } else {
-                        
-                        self.updateFriendList()
+                        let valueDict : NSDictionary = friend as! NSDictionary
+                        fbFriendIds.append(valueDict.objectForKey("id") as! String)
                         
                     }
                     
-                })
+                    
+                    PFUser.currentUser()?["fb_friends"] = fbFriendIds
+                    
+                    PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
+                        
+                        if error != nil {
+                            
+                            print(error)
+                            
+                        } else {
+                            
+                            self.updateFriendList()
+                            
+                        }
+                        
+                    })
+                    
+                }
                 
             }
         
@@ -203,7 +305,7 @@ class ViewController: UIViewController {
             
             //updateFriendList()
             updateUser()
-            performSegueWithIdentifier("showBridgeViewController", sender: self)
+            //performSegueWithIdentifier("showBridgeViewController", sender: self)
             
         } else {
             
