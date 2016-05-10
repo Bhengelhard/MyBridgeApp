@@ -117,7 +117,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     @IBAction func exitMessage(sender: AnyObject) {
         
         //create the alert controller
-        var alert = UIAlertController(title: "Exiting the Message", message: "Are you sure you want to leave this conversation?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Exiting the Message", message: "Are you sure you want to leave this conversation?", preferredStyle: UIAlertControllerStyle.Alert)
         
         //Create the actions
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) in
@@ -130,7 +130,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
             
             //take currentUser out of the current ids_in_message
             
-            var messageQuery = PFQuery(className: "Messages")
+            let messageQuery = PFQuery(className: "Messages")
             messageQuery.getObjectInBackgroundWithId(messageId, block: { (object, error) in
                 
                 if error != nil {
@@ -145,8 +145,8 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                         
                     })*/
                     
-                    var CurrentIdsInMessage: NSArray = object!["ids_in_message"] as! NSArray
-                    var CurrentNamesInMessage: NSArray = object!["names_in_message"] as! NSArray
+                    let CurrentIdsInMessage: NSArray = object!["ids_in_message"] as! NSArray
+                    let CurrentNamesInMessage: NSArray = object!["names_in_message"] as! NSArray
                     
                     var updatedIdsInMessage = [String]()
                     var updatedNamesInMessage = [String]()

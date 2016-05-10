@@ -18,6 +18,7 @@
 		CB5829481CAA26D900DC86C9 /* BridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5829451CAA26D900DC86C9 /* BridgeViewController.swift */; };
 		CB5829491CAA26D900DC86C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5829461CAA26D900DC86C9 /* ViewController.swift */; };
 		CB6A32991CC483CD00FADB13 /* SingleMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */; };
+		CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */; };
 		CB7A11DA1CA88B6300252CB6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11D81CA88B6300252CB6 /* FBSDKCoreKit.framework */; };
 		CB7A11DB1CA88B6300252CB6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11D91CA88B6300252CB6 /* FBSDKLoginKit.framework */; };
 		CB7A11DD1CA88B7100252CB6 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */; };
@@ -40,6 +41,7 @@
 		CB5829451CAA26D900DC86C9 /* BridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BridgeViewController.swift; path = MyBridgeApp/BridgeViewController.swift; sourceTree = SOURCE_ROOT; };
 		CB5829461CAA26D900DC86C9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = MyBridgeApp/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleMessageViewController.swift; path = MyBridgeApp/SingleMessageViewController.swift; sourceTree = SOURCE_ROOT; };
+		CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BentonSans-Light copy.otf"; sourceTree = "<group>"; };
 		CB7A11D81CA88B6300252CB6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Desktop/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CB7A11D91CA88B6300252CB6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Desktop/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ../../Desktop/ParseSDK/ParseUI.framework; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */,
 				814C3AC81B69877600E307BB /* Images.xcassets */,
 				814C3AC91B69877600E307BB /* Info.plist */,
 			);
@@ -195,6 +198,7 @@
 			files = (
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				CB9C20E81CAA333800C03FF2 /* Main.storyboard in Resources */,
+				CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

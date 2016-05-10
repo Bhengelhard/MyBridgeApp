@@ -15,7 +15,6 @@ var messageId = String()
 
 //Change to MessagesTableViewController so other can be MessageViewController
 class MessagesViewController: UITableViewController {
-
     
     var emails = [String]()
     var images = [UIImage]()
@@ -28,7 +27,7 @@ class MessagesViewController: UITableViewController {
         
         //messages users_in_message are displayed in box, when clicked, open message with SingleMessages MessageId = Messages ObjectId
         
-        var query: PFQuery = PFQuery(className: "Messages")
+        let query: PFQuery = PFQuery(className: "Messages")
         
         query.whereKey("ids_in_message", containsString: PFUser.currentUser()?.objectId)
         query.orderByDescending("updatedAt")
@@ -41,7 +40,7 @@ class MessagesViewController: UITableViewController {
                 
             } else if let results = results {
                 
-                for result in results as! [PFObject]{
+                for result in results{
                     
                     self.names.append(result["names_in_message"] as! [String])
                     self.IDsOfMessages.append(result.objectId!)
@@ -156,6 +155,10 @@ class MessagesViewController: UITableViewController {
         stringOfNames = String(stringOfNames.characters.dropLast())
         
         cell.textLabel?.text = stringOfNames
+        //set message cell labels to names of other users in message, timestamp of last sent message or otherwise of creation, and preview of text of last sent message
+        //namesLabel.text = stringOfNames
+        //timestampLabel.text = 
+        //messagePreviewLabel.text =
 
         /*if images.count > indexPath.row {
             
