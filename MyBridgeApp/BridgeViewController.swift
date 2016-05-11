@@ -251,7 +251,11 @@ class BridgeViewController: UIViewController {
                 let message = PFObject(className: "Messages")
                 
                 let currentUserId = PFUser.currentUser()?.objectId
-                let currentUserName = PFUser.currentUser()?["name"]
+                
+                //Need to check for Bridge type to assign name
+                
+                //**if BridgeType = love {} else if BridgeType = business {} else if bridgeType = friendship {}
+                let currentUserName = PFUser.currentUser()?["love_name"]
                 
                 message["names_in_message"] = [displayedUserName1.text!, displayedUserName2.text!, currentUserName!]
                 message["ids_in_message"] = [userId1, userId2, currentUserId!]
@@ -354,16 +358,6 @@ class BridgeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "logOut" {
-            
-            PFUser.logOut()
-            
-        }
-        
     }
     
 
