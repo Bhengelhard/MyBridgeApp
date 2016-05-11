@@ -238,9 +238,9 @@ class ViewController: UIViewController {
         //add graph request to update users fb_friends
         //query to find and save fb_friends
         
-        var currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
+        let currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
         
-        var query: PFQuery = PFQuery(className: "_User")
+        let query: PFQuery = PFQuery(className: "_User")
         
         query.whereKey("fb_id", containedIn: currentUserFbFriends as [AnyObject])
         
@@ -258,7 +258,7 @@ class ViewController: UIViewController {
                     
                         var containedInFriendList = false
                         
-                        if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as! NSArray {
+                        if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as? NSArray {
                             
                             containedInFriendList = friendList.contains {$0 as! String == object.objectId!}
                             

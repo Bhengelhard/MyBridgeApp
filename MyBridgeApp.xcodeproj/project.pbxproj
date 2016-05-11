@@ -27,6 +27,7 @@
 		CB7A11DD1CA88B7100252CB6 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */; };
 		CB7A11DF1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */; };
 		CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */; };
+		CBEFCD671CE35DB900695B15 /* suzy's profile picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CBEFCD661CE35DB900695B15 /* suzy's profile picture.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ../../Desktop/ParseSDK/ParseUI.framework; sourceTree = "<group>"; };
 		CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = ../../Desktop/ParseSDK/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesViewController.swift; path = MyBridgeApp/MessagesViewController.swift; sourceTree = SOURCE_ROOT; };
+		CBEFCD661CE35DB900695B15 /* suzy's profile picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "suzy's profile picture.jpg"; path = "Images.xcassets/suzy's profile picture.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */,
+				CBEFCD661CE35DB900695B15 /* suzy's profile picture.jpg */,
 				CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */,
 				814C3AC81B69877600E307BB /* Images.xcassets */,
 				814C3AC91B69877600E307BB /* Info.plist */,
@@ -205,6 +208,7 @@
 				CB6A32A51CE28E3200FADB13 /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */,
+				CBEFCD671CE35DB900695B15 /* suzy's profile picture.jpg in Resources */,
 				CB6A329F1CE260CB00FADB13 /* login_with_facebook.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
