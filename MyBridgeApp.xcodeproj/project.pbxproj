@@ -21,15 +21,14 @@
 		CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */; };
 		CB6A329D1CE2461800FADB13 /* LoadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */; };
 		CB6A329F1CE260CB00FADB13 /* login_with_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */; };
-		CB6A32A51CE28E3200FADB13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6A32A41CE28E3200FADB13 /* Main.storyboard */; };
 		CB7A11DA1CA88B6300252CB6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11D81CA88B6300252CB6 /* FBSDKCoreKit.framework */; };
 		CB7A11DB1CA88B6300252CB6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11D91CA88B6300252CB6 /* FBSDKLoginKit.framework */; };
 		CB7A11DD1CA88B7100252CB6 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */; };
 		CB7A11DF1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */; };
 		CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */; };
 		CBEFCD671CE35DB900695B15 /* suzy's profile picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CBEFCD661CE35DB900695B15 /* suzy's profile picture.jpg */; };
-		CBEFCD691CE3EAB300695B15 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEFCD681CE3EAB300695B15 /* AccountSettingsViewController.swift */; };
 		CBEFCD6B1CE53F0200695B15 /* AccountSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEFCD6A1CE53F0200695B15 /* AccountSettingsTableViewController.swift */; };
+		CBEFCD771CEDED9600695B15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBEFCD761CEDED9600695B15 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,15 +48,14 @@
 		CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BentonSans-Light copy.otf"; sourceTree = "<group>"; };
 		CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadPageViewController.swift; path = MyBridgeApp/LoadPageViewController.swift; sourceTree = SOURCE_ROOT; };
 		CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_with_facebook.png; path = Images.xcassets/login_with_facebook.png; sourceTree = "<group>"; };
-		CB6A32A41CE28E3200FADB13 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = SOURCE_ROOT; };
 		CB7A11D81CA88B6300252CB6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Desktop/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CB7A11D91CA88B6300252CB6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Desktop/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CB7A11DC1CA88B7100252CB6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ../../Desktop/ParseSDK/ParseUI.framework; sourceTree = "<group>"; };
 		CB7A11DE1CA88B7700252CB6 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = ../../Desktop/ParseSDK/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesViewController.swift; path = MyBridgeApp/MessagesViewController.swift; sourceTree = SOURCE_ROOT; };
 		CBEFCD661CE35DB900695B15 /* suzy's profile picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "suzy's profile picture.jpg"; path = "Images.xcassets/suzy's profile picture.jpg"; sourceTree = "<group>"; };
-		CBEFCD681CE3EAB300695B15 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountSettingsViewController.swift; path = MyBridgeApp/AccountSettingsViewController.swift; sourceTree = SOURCE_ROOT; };
 		CBEFCD6A1CE53F0200695B15 /* AccountSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountSettingsTableViewController.swift; path = MyBridgeApp/AccountSettingsTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		CBEFCD761CEDED9600695B15 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = MyBridgeApp/Main.storyboard; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +119,7 @@
 				CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */,
 				CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */,
 				CBEFCD6A1CE53F0200695B15 /* AccountSettingsTableViewController.swift */,
-				CBEFCD681CE3EAB300695B15 /* AccountSettingsViewController.swift */,
-				CB6A32A41CE28E3200FADB13 /* Main.storyboard */,
+				CBEFCD761CEDED9600695B15 /* Main.storyboard */,
 			);
 			name = MyBridgeApp;
 			path = ParseStarterProject;
@@ -211,7 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB6A32A51CE28E3200FADB13 /* Main.storyboard in Resources */,
+				CBEFCD771CEDED9600695B15 /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */,
 				CBEFCD671CE35DB900695B15 /* suzy's profile picture.jpg in Resources */,
@@ -232,7 +229,6 @@
 				CB5829491CAA26D900DC86C9 /* ViewController.swift in Sources */,
 				CB5829471CAA26D900DC86C9 /* AppDelegate.swift in Sources */,
 				CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */,
-				CBEFCD691CE3EAB300695B15 /* AccountSettingsViewController.swift in Sources */,
 				CB5829481CAA26D900DC86C9 /* BridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

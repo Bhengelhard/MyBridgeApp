@@ -15,25 +15,31 @@ class ViewController: UIViewController {
         //Log user in with permissions public_profile, email and user_friends
         let permissions = ["public_profile", "email", "user_friends"]
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) in
+            
+            print("got past permissions")
             if let error = error {
                 print(error)
+                print("got to error")
             } else {
                 if let user = user {
+                    print("got user") 
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
                     
                     if user.isNew {
-                        
+                        print("got to new user")
                         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, interested_in, name, gender, email, friends, birthday, location"])
                         graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
+                            print("got into graph request")
                             if error != nil {
                                 
                                 print(error)
+                                print("got error")
                                 
                             } else if let result = result {
                                 // saves these to parse at every login
-                                
+                                print("got result")
                                 if let interested_in = result["interested_in"]! {
                                     
                                     PFUser.currentUser()?["interested_in"] = interested_in
@@ -41,7 +47,7 @@ class ViewController: UIViewController {
                                     
                                 }
                                 
-                                if let gender: String = result["gender"]! as! String {
+                                if let gender: String = result["gender"]! as? String {
                                     
                                     PFUser.currentUser()?["gender"] = gender
                                     
@@ -112,6 +118,10 @@ class ViewController: UIViewController {
                                 PFUser.currentUser()?["new_message_push_notifications"] = true
                                 PFUser.currentUser()?["new_bridge_push_notifications"] = true
                                 
+                                //initializing built_bridges and rejected_bridges
+                                PFUser.currentUser()?["built_bridges"] = []
+                                PFUser.currentUser()?["rejected_bridges"] = []
+                                
                                 
                                 //adding facebook friend data to parse - returns name and id
                                 /*var friends = result["friends"]! as! NSDictionary
@@ -137,13 +147,15 @@ class ViewController: UIViewController {
                                 let userId = result["id"]! as! String
                                 
                                 let facebookProfilePictureUrl = "https://graph.facebook.com/" + userId + "/picture?type=large"
-                                
+                                print(facebookProfilePictureUrl)
                                 if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
+                                    print("go into URL")
                                     
                                     if let data = NSData(contentsOfURL: fbpicUrl) {
                                         
+                                        print("got into Data")
                                         let imageFile: PFFile = PFFile(data: data)!
-                                        
+                                        print(imageFile)
                                         //setting main profile pictures
                                         PFUser.currentUser()?["fb_profile_picture"] = imageFile
                                         PFUser.currentUser()?["main_business_profile_picture"] = imageFile
@@ -154,20 +166,36 @@ class ViewController: UIViewController {
                                         PFUser.currentUser()?["fb_profile_picture_for_business"] = true
                                         PFUser.currentUser()?["fb_profile_picture_for_love"] = true
                                         PFUser.currentUser()?["fb_profile_picture_for_friendship"] = true
+ 
                                         
-                                        
-                                        PFUser.currentUser()?.saveInBackground()
+                                        PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
+                                            
+                                            if success == true {
+                                                
+                                                self.performSegueWithIdentifier("showSignUp", sender: self)
+                                                
+                                            } else {
+                                                
+                                                print(error)
+                                                
+                                            }
+                                            
+                                        })
                                         
                                     }
-                                    
+                                    print("past bracket 1")
                                 }
+                                print("past bracket 2")
+                                
+                                
                             }
+                            
+                            
                         }
                         
-                        self.updateUser()
                         
-                        //should this only segue if the user had never signed in before
-                        self.performSegueWithIdentifier("showSignUp", sender: self)
+                        
+                        //self.updateUser()
                         
                         print("new")
                         
@@ -177,6 +205,8 @@ class ViewController: UIViewController {
                         self.performSegueWithIdentifier("showBridgeViewController", sender: self)
                         
                     }
+                    
+                    
                     
                 }
             }
@@ -301,7 +331,23 @@ class ViewController: UIViewController {
         
         //PFUser.logOut()
         
-        if let username = PFUser.currentUser()?.username{
+        /*PFUser.currentUser()?.fetchInBackgroundWithBlock({ (object, error) in
+            
+            if object != nil {
+                
+                //updateFriendList()
+                //self.updateUser()
+                performSegueWithIdentifier("showBridgeViewController", sender: self)
+                
+            } else {
+                
+                //not yet logged in
+                
+            }
+            
+        })*/
+        
+        /*if let username = PFUser.currentUser()?.username{
             
             //updateFriendList()
             updateUser()
@@ -311,7 +357,7 @@ class ViewController: UIViewController {
             
             //not yet logged in
             
-        }
+        }*/
         
     }
     

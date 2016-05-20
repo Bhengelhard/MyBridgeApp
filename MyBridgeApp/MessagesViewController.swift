@@ -23,6 +23,11 @@ class MessagesViewController: UITableViewController {
     var names = [[String]]()
     var IDsOfMessages = [String]()
     
+    @IBAction func segueToBridgeViewController(sender: AnyObject) {
+        
+        navigationController?.popViewControllerAnimated(true)
+        
+    }
     func updateMessagesTable() {
         
         //messages users_in_message are displayed in box, when clicked, open message with SingleMessages MessageId = Messages ObjectId

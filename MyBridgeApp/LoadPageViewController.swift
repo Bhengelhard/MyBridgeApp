@@ -25,9 +25,9 @@ class LoadPageViewController: UIViewController {
                 
             } else if let result = result {
                 
-                var friends = result["friends"]! as! NSDictionary
+                let friends = result["friends"]! as! NSDictionary
                 
-                var friendsData : NSArray = friends.objectForKey("data") as! NSArray
+                let friendsData : NSArray = friends.objectForKey("data") as! NSArray
                 
                 var fbFriendIds = [String]()
                 
@@ -66,9 +66,9 @@ class LoadPageViewController: UIViewController {
         //add graph request to update users fb_friends
         //query to find and save fb_friends
         
-        var currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
+        let currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
         
-        var query: PFQuery = PFQuery(className: "_User")
+        let query: PFQuery = PFQuery(className: "_User")
         
         query.whereKey("fb_id", containedIn: currentUserFbFriends as [AnyObject])
         
@@ -86,7 +86,7 @@ class LoadPageViewController: UIViewController {
                         
                         var containedInFriendList = false
                         
-                        if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as! NSArray {
+                        if let friendList: NSArray = PFUser.currentUser()!["friend_list"] as? NSArray {
                             
                             containedInFriendList = friendList.contains {$0 as! String == object.objectId!}
                             
@@ -122,19 +122,102 @@ class LoadPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Hello World")
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         
-        //PFUser.logOut()
-        
-        if let username = PFUser.currentUser()?.username{
+        /*PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) in
             
+            if user != nil {
+                
+                print("user exists")
+                
+            } else {
+                
+                print("user does not exist")
+                
+            }
+        })*/
+        
+        
+        PFUser.currentUser()?.fetchInBackgroundWithBlock({ (object, error) in
+            
+            if object != nil {
+                
+                print("user exists")
+                //updateFriendList()
+                self.updateUser()
+                self.performSegueWithIdentifier("showBridgeFromLoadPage", sender: self)
+                
+            } else {
+                
+                print("user does not exist")
+                PFUser.logOut()
+                //not yet logged in
+                self.performSegueWithIdentifier("showLoginFromLoadPage", sender: self)
+                
+            }
+            //print(error)
+            
+            
+        })
+        
+        /*PFUser.currentUser()?.fetchInBackgroundWithBlock({ (success, error) in
+            currentUser = PFUser.currentUser()?.username
+            print(currentUser)
+            
+            if let username = PFUser.currentUser()?.username {
+                
+                print("user exists")
+                
+            } else {
+                
+                print("user does not exist")
+                
+            }
+            
+        })*/
+        
+        
+        //Check if User exists and if not then segue to login page
+        
+        /*let accessToken = PFUser.currentUser()!["authData/Facebook/accessToken"]
+        
+        PFFacebookUtils.logInInBackgroundWithAccessToken(accessToken, block: {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                print("User logged in through Facebook!")
+            } else {
+                print("Uh oh. There was an error logging in.")
+            }
+        })*/
+        
+        
+       /* //PFUser.logOut()
+        PFUser.logInWithUsernameInBackground((PFUser.currentUser()?.username)!, password: (PFUser.currentUser()?.password)!) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                // Do stuff after successful login.
+                //updateFriendList()
+                updateUser()
+                performSegueWithIdentifier("showBridgeFromLoadPage", sender: self)
+
+            } else {
+                
+                performSegueWithIdentifier("showLoginFromLoadPage", sender: self)
+                
+            }
+        }*/
+
+        
+        
+       /* if PFUser.currentUser()?.username != nil {
+            print(PFUser.currentUser()?.username)
             //updateFriendList()
             updateUser()
             performSegueWithIdentifier("showBridgeFromLoadPage", sender: self)
+            print("Went to bridge from Load Page")
             
         } else {
             
@@ -143,7 +226,7 @@ class LoadPageViewController: UIViewController {
             
             
             
-        }
+        }*/
         
     }
 

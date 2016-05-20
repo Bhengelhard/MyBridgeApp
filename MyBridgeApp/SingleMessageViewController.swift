@@ -72,7 +72,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     func updateMessages() {
         
         //querying for messages
-        var query: PFQuery = PFQuery(className: "SingleMessages")
+        let query: PFQuery = PFQuery(className: "SingleMessages")
         
         query.whereKey("message_id", equalTo: messageId)
         
@@ -153,7 +153,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
                     
                     for i in 0...(CurrentIdsInMessage.count - 1) {
                         
-                        if CurrentIdsInMessage[i] as! String != PFUser.currentUser()?.objectId {
+                        if CurrentIdsInMessage[i] as? String != PFUser.currentUser()?.objectId {
                             
                             updatedIdsInMessage.append(CurrentIdsInMessage[i] as! String)
                             updatedNamesInMessage.append(CurrentNamesInMessage[i] as! String)

@@ -5,7 +5,8 @@ import FBSDKCoreKit
 var previousViewController = String()
 
 class BridgeViewController: UIViewController {
-
+    
+    var timer = NSTimer()
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var secondUserImage: UIImageView!
     
@@ -21,11 +22,127 @@ class BridgeViewController: UIViewController {
     //Need to fix ignoredUsers to not reiterate through different users and to add the correct people**
     /*var ignoredUsers = [String]()
     var currentUserAdded = 0
-    
-    
+     
     var friendCombinations = [[String]]()*/
     
+    @IBAction func bridgeButton(sender: AnyObject) {
+        
+        previousViewController = "BridgeViewController"
+        
+        let bridgeBuiltorRejected = "built_bridges"
+        
+        let message = PFObject(className: "Messages")
+        
+        let currentUserId = PFUser.currentUser()?.objectId
+        
+        //Need to check for Bridge type to assign name
+        
+        //**if BridgeType = love {} else if BridgeType = business {} else if bridgeType = friendship {}
+        let currentUserName = PFUser.currentUser()?["love_name"]
+        
+        message["names_in_message"] = [displayedUserName1.text!, displayedUserName2.text!, currentUserName!]
+        message["ids_in_message"] = [userId1, userId2, currentUserId!]
+        message["bridge_builder"] = currentUserId
+        
+        message.saveInBackgroundWithBlock({ (success, error) in
+            
+            print("message saved")
+            messageId = message.objectId!
+            
+        })
+        
+        //messageId = message.objectId!
+        
+        singleMessageTitle = "\(displayedUserName1.text!) & \(displayedUserName2.text!)"
+        
+        //message.save
+        
+        print("built")
+        
+        //animation when bridge is built
+        UIView.animateWithDuration(1) {
+        
+            self.userImage.center = CGPointMake(self.userImage.center.x + 400, self.userImage.center.y*2)
+            self.secondUserImage.center = CGPointMake(self.secondUserImage.center.x + 400, self.secondUserImage.center.y/2)
+            //self.displayedUserName1.center = CGPointMake(self.userImage.center.x + 400, self.userImage.center.y*2)
+            //self.displayedUserName2.center = CGPointMake(self.userImage.center.x + 400, self.userImage.center.y/2)
+            
+
+        }
+        
+        if bridgeBuiltorRejected != "" {
+            
+            //error checking
+            //change or's and second users
+            
+            if let previousBridges = (PFUser.currentUser()?[bridgeBuiltorRejected]) as? [[String]] {
+                
+                let newBridges = previousBridges + [[userId1, userId2]]
+                PFUser.currentUser()?[bridgeBuiltorRejected] = newBridges
+                PFUser.currentUser()?.saveInBackground()
+                
+            }
+            
+        }
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: Selector("segueToSingleMessage"), userInfo: nil, repeats: false)
+        
+        
+        
+    }
+    
+    func segueToSingleMessage() {
+        
+        self.performSegueWithIdentifier("showSingleMessage", sender: self)
+
+        
+    }
+    @IBAction func rejectButton(sender: AnyObject) {
+        
+        let bridgeBuiltorRejected = "rejected_bridges"
+        
+        print("rejected")
+        
+        //animation when bridge is rejected
+        UIView.animateWithDuration(1) { 
+            
+            self.userImage.center = CGPointMake(self.userImage.center.x - 400, self.userImage.center.y)
+            self.secondUserImage.center = CGPointMake(self.secondUserImage.center.x - 400, self.secondUserImage.center.y)
+            //self.displayedUserName1.center = CGPointMake(self.userImage.center.x - 400, self.userImage.center.y)
+            //self.displayedUserName2.center = CGPointMake(self.userImage.center.x - 400, self.userImage.center.y)
+
+        }
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("updateImage"), userInfo: nil, repeats: false)
+        //updateImage()
+        
+        if bridgeBuiltorRejected != "" {
+            
+            //error checking
+            //change or's and second users
+            
+            if let previousBridges = (PFUser.currentUser()?[bridgeBuiltorRejected]) as? [[String]] {
+                
+                let newBridges = previousBridges + [[userId1, userId2]]
+                PFUser.currentUser()?[bridgeBuiltorRejected] = newBridges
+                PFUser.currentUser()?.saveInBackground()
+                
+            }
+            
+        }
+        
+    }
+    @IBAction func segueToProfile(sender: AnyObject) {
+        
+        navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
     func updateImage() {
+        
+        //making the images appear back in the center
+       // self.userImage.center = CGPointMake(self.userImage.center.x - 400, self.userImage.center.y)
+        //self.secondUserImage.center = CGPointMake(self.secondUserImage.center.x - 400, self.secondUserImage.center.y)
         
         userImage.userInteractionEnabled = false
         
@@ -100,7 +217,7 @@ class BridgeViewController: UIViewController {
         }*/
         
         var isDisplayedUser1 = true
-        var query: PFQuery = PFQuery(className: "_User")
+        let query: PFQuery = PFQuery(className: "_User")
         
         query.whereKey("objectId", containedIn: friendPairings)
         query.limit = 2
@@ -133,9 +250,6 @@ class BridgeViewController: UIViewController {
                                     self.userImage.image = UIImage(data: data)
                                     
                                 })
-
-                                
-                                
                                 
                             }
                             
