@@ -11,6 +11,7 @@ import Parse
 import FBSDKCoreKit
 import ParseFacebookUtilsV4
 import FBSDKLoginKit
+import CoreData
 
 class LoadPageViewController: UIViewController {
     
@@ -24,6 +25,8 @@ class LoadPageViewController: UIViewController {
                 print(error)
                 
             } else if let result = result {
+                
+                
                 
                 let friends = result["friends"]! as! NSDictionary
                 
@@ -123,6 +126,10 @@ class LoadPageViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -246,5 +253,75 @@ class LoadPageViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    //Saving and retrieving Core Data
+    /*
+ let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+ let context: NSManagedObjectContext = appDel.managedObjectContext
+ 
+ var newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context)
+ 
+ newUser.setValue("Rob", forKey: "username")
+ newUser.setValue("pass123", forKey: "password")
+ 
+ do {
+ 
+ try context.save()
+ 
+ } catch {
+ 
+ print("There was a problem saving the Core Data")
+ 
+ }
+ 
+ let request = NSFetchRequest(entityName: "User")
+ 
+ //returns core data where username = Rob
+ request.predicate = NSPredicate(format: "username = %@", "Rob")
+ 
+ request.returnsObjectsAsFaults = false
+ 
+ do {
+ 
+ let results = try context.executeFetchRequest(request)
+ 
+ if results.count > 0 {
+ 
+ for result in results as! [NSManagedObject] {
+ 
+ //changing a value in Core Data
+ result.setValue("Ralphie", forKey: "username")
+ 
+ //deleting an object
+ //context.deleteObject(result)
+ 
+ do {
+ 
+ try context.save()
+ 
+ } catch {
+ 
+ print("There was a problem saving the updated values")
+ 
+ }
+ 
+ if let username = result.valueForKey("username") as? String {
+ 
+ print(username)
+ 
+ }
+ 
+ }
+ 
+ }
+ print(results)
+ 
+ } catch {
+ 
+ print("There was a problem retrieving the Core Data")
+ 
+ }
+*/
 
 }

@@ -109,7 +109,7 @@
         <!--Suzy Engelhard's Profile-->
         <scene sceneID="lr8-W0-wg8">
             <objects>
-                <tableViewController id="PCt-eI-5af" sceneMemberID="viewController">
+                <tableViewController id="PCt-eI-5af" customClass="ProfileTableViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="YIq-j3-iN5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +139,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's profile picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TF9-HV-vwy">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's_profile_picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TF9-HV-vwy">
                                                     <rect key="frame" x="127" y="10" width="120" height="120"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="120" id="IaR-wD-PMh"/>
@@ -162,6 +162,9 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="" id="KqC-Wp-hZb">
+                                <cells/>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="" id="Yt5-6S-tQS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="o1k-Se-mXA">
                                         <rect key="frame" x="0.0" y="185" width="375" height="80"/>
@@ -170,7 +173,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's profile picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JjV-0v-Nea">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's_profile_picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JjV-0v-Nea">
                                                     <rect key="frame" x="241" y="8" width="64" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="87Q-si-pYc"/>
@@ -196,10 +199,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="" id="Yt5-6S-tQS">
-                                <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="wAB-Dp-4qg">
                                         <rect key="frame" x="0.0" y="265" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -207,13 +206,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's profile picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wVy-8E-b61">
-                                                    <rect key="frame" x="241" y="8" width="64" height="64"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="64" id="Oma-1S-DpL"/>
-                                                        <constraint firstAttribute="height" constant="64" id="tH4-RG-CIS"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bridge for Love Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx5-vv-SxV">
                                                     <rect key="frame" x="16" y="8" width="204" height="64"/>
                                                     <constraints>
@@ -224,6 +216,13 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's_profile_picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wVy-8E-b61">
+                                                    <rect key="frame" x="241" y="8" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="Oma-1S-DpL"/>
+                                                        <constraint firstAttribute="height" constant="64" id="tH4-RG-CIS"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="wVy-8E-b61" firstAttribute="leading" secondItem="vx5-vv-SxV" secondAttribute="trailing" constant="21" id="KVX-BU-BeZ"/>
@@ -244,7 +243,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's profile picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="nqc-rt-wvW">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suzy's_profile_picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="nqc-rt-wvW">
                                                     <rect key="frame" x="241" y="8" width="64" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="JOx-XP-obk"/>
@@ -367,6 +366,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Suzy Engelhard's Profile" id="S8L-R9-E1k"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mainBusinessProfilePicture" destination="JjV-0v-Nea" id="fRj-sT-Yb7"/>
+                        <outlet property="mainFriendshipProfilePicture" destination="nqc-rt-wvW" id="sOl-zv-XXR"/>
+                        <outlet property="mainLoveProfilePicture" destination="wVy-8E-b61" id="e1V-PR-W7n"/>
+                        <outlet property="mainProfilePicture" destination="TF9-HV-vwy" id="GzS-zA-eB6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w05-Pb-hIc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -889,12 +894,14 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kn8-5g-Tdp">
-                                <rect key="frame" x="80" y="318" width="43" height="30"/>
+                                <rect key="frame" x="80" y="318" width="86" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="86" id="TdK-Wd-Jdk"/>
                                     <constraint firstAttribute="height" constant="30" id="fKg-Qc-uty"/>
-                                    <constraint firstAttribute="width" constant="43" id="mcI-QY-Xhm"/>
                                 </constraints>
-                                <state key="normal" title="Reject"/>
+                                <state key="normal" title="Don't Bridge">
+                                    <color key="titleColor" red="1" green="0.13785154920000001" blue="0.098169101090000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="rejectButton:" destination="cMo-Jt-lEF" eventType="touchUpInside" id="GiU-PL-uQv"/>
                                 </connections>
@@ -905,7 +912,9 @@
                                     <constraint firstAttribute="width" constant="45" id="7nx-Sy-8oh"/>
                                     <constraint firstAttribute="height" constant="30" id="cBU-33-ydV"/>
                                 </constraints>
-                                <state key="normal" title="Bridge"/>
+                                <state key="normal" title="Bridge">
+                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="bridgeButton:" destination="cMo-Jt-lEF" eventType="touchUpInside" id="mXL-rc-ky8"/>
                                 </connections>
@@ -1466,11 +1475,12 @@
     <resources>
         <image name="login_with_facebook.png" width="732" height="100"/>
         <image name="suzy's profile picture.jpg" width="960" height="960"/>
+        <image name="suzy's_profile_picture.jpg" width="960" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iOe-MZ-Y2n"/>
         <segue reference="R3c-8L-9g2"/>
-        <segue reference="PXK-vJ-JTU"/>
+        <segue reference="4nc-Ht-hfk"/>
         <segue reference="qLK-f2-K3f"/>
         <segue reference="B19-eu-GHC"/>
         <segue reference="J4p-cH-pG4"/>
