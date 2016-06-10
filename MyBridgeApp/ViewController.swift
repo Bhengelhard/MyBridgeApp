@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                 print("got to error")
             } else {
                 if let user = user {
-                    print("got user") 
+                    print("got user")
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
@@ -88,24 +88,18 @@ class ViewController: UIViewController {
                                     PFUser.currentUser()?["business_name"] = name
                                     PFUser.currentUser()?["love_name"] = name
                                     PFUser.currentUser()?["friendship_name"] = name
-                                    /*newUser.setValue(name, forKey: "fb_name")
-                                    newUser.setValue(name, forKey: "business_name")
-                                    newUser.setValue(name, forKey: "love_name")
-                                    newUser.setValue(name, forKey: "friendship_name")*/
                                     
                                 }
                                 
                                 if let email = result["email"]! {
                                     
                                     PFUser.currentUser()?["email"] = email
-                                    //newUser.setValue(email, forKey: "email")
                                     
                                 }
                                 
                                 if let id = result["id"]! {
                                     
                                     PFUser.currentUser()?["fb_id"] =  id
-                                    //newUser.setValue(id, forKey: "fb_id")
                                     
                                 }
                                 
@@ -124,65 +118,40 @@ class ViewController: UIViewController {
                                     print(age)
                                     
                                     PFUser.currentUser()?["age"] = age
-                                    //newUser.setValue(age, forKey: "age")
                                     
                                 }
                                 
                                 if let location = result["location"]! {
                                     print("location")
                                     PFUser.currentUser()?["fb_location"] = location
-                                    //newUser.setValue(location[0], forKey: "longitude")
-                                    //newUser.setValue(location[1], forKey: "latitude")
                                     
                                 }
                                 
                                 PFUser.currentUser()?["distance_interest"] = 100
                                 PFUser.currentUser()?["new_message_push_notifications"] = true
                                 PFUser.currentUser()?["new_bridge_push_notifications"] = true
-                                /*newUser.setValue(100, forKey: "distance_interest")
-                                newUser.setValue(true, forKey: "new_message_push_notifications")
-                                newUser.setValue(true, forKey: "new_message_push_notifications")*/
                                 
                                 //initializing built_bridges and rejected_bridges
                                 PFUser.currentUser()?["built_bridges"] = []
                                 PFUser.currentUser()?["rejected_bridges"] = []
-                                /*newUser.setValue([], forKey: "built_bridges")
-                                newUser.setValue([], forKey: "rejected_bridges")*/
                                 
                                 //adding facebook friend data to parse - returns name and id
-                                /*var friends = result["friends"]! as! NSDictionary
-                                 
-                                 var friendsData : NSArray = friends.objectForKey("data") as! NSArray
-                                 
-                                 var fbFriendIds = [String]()
-                                 
-                                 for friend in friendsData {
-                                 
-                                 let valueDict : NSDictionary = friend as! NSDictionary
-                                 fbFriendIds.append(valueDict.objectForKey("id") as! String)
-                                 
-                                 }
-                                 
-                                 
-                                 PFUser.currentUser()?["fb_friends"] = fbFriendIds
-                                 */
+                                let friends = result["friends"]! as! NSDictionary
                                 
-                                //saving PFUser details
-                                /*newUser.setValue(PFUser.currentUser()?.objectId, forKey: "objectId")
-                                newUser.setValue(PFUser.currentUser()?.username, forKey: "username")
-                                newUser.setValue(PFUser.currentUser()?.password, forKey: "password")*/
-                               
-                                //saves Core Data
-                                /*do {
+                                let friendsData : NSArray = friends.objectForKey("data") as! NSArray
+                                
+                                var fbFriendIds = [String]()
+                                
+                                for friend in friendsData {
                                     
-                                    try context.save()
+                                    let valueDict : NSDictionary = friend as! NSDictionary
+                                    fbFriendIds.append(valueDict.objectForKey("id") as! String)
                                     
-                                } catch {
-                                    
-                                    print("There was a problem saving the Core Data")
-                                    
-                                }*/
-
+                                }
+                                
+                                
+                                PFUser.currentUser()?["fb_friends"] = fbFriendIds
+                                
                                 
                                 PFUser.currentUser()?.saveInBackground()
                                 
@@ -209,7 +178,7 @@ class ViewController: UIViewController {
                                         PFUser.currentUser()?["fb_profile_picture_for_business"] = true
                                         PFUser.currentUser()?["fb_profile_picture_for_love"] = true
                                         PFUser.currentUser()?["fb_profile_picture_for_friendship"] = true
- 
+                                        
                                         
                                         PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
                                             
@@ -245,10 +214,17 @@ class ViewController: UIViewController {
                     } else {
                         
                         print("not new")
-                        self.performSegueWithIdentifier("showBridgeViewController", sender: self)
+                        //spinner
+                        //update user and friends
+                        
+                        //use while access token is nil instead of delay
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                            
+                            self.performSegueWithIdentifier("showBridgeViewController", sender: self)
+                            
+                        })
                         
                     }
-                    
                     
                     
                 }
