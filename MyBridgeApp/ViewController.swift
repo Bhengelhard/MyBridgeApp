@@ -384,7 +384,6 @@ class ViewController: UIViewController {
         //query to find and save fb_friends
         
         let currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
-        
         let query: PFQuery = PFQuery(className: "_User")
         
         query.whereKey("fb_id", containedIn: currentUserFbFriends as [AnyObject])
