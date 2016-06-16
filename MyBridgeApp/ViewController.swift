@@ -380,7 +380,6 @@ class ViewController: UIViewController {
     }
     
     func updateFriendList() {
-        
         //add graph request to update users fb_friends
         //query to find and save fb_friends
         
