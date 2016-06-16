@@ -152,7 +152,7 @@ class LoadPageViewController: UIViewController {
             
             if object != nil {
                 
-                print("user exists")
+                print("user exists LoadePageViewController")
                 //updateFriendList()
                 self.updateUser()
                 self.performSegueWithIdentifier("showBridgeFromLoadPage", sender: self)
@@ -161,6 +161,7 @@ class LoadPageViewController: UIViewController {
                 
                 print("user does not exist")
                 PFUser.logOut()
+                //clear all cached
                 //not yet logged in
                 self.performSegueWithIdentifier("showLoginFromLoadPage", sender: self)
                 

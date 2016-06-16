@@ -246,7 +246,7 @@ class BridgeViewController: UIViewController {
                                 
                                 dispatch_async(dispatch_get_main_queue(), {
                                     
-                                    self.displayedUserName1.text = object["name"] as! String
+                                    self.displayedUserName1.text = "Yahoo"// object["name"] as! String
                                     self.userImage.image = UIImage(data: data)
                                     
                                 })
@@ -261,7 +261,7 @@ class BridgeViewController: UIViewController {
                                 
                                 dispatch_async(dispatch_get_main_queue(), {
                                     
-                                    self.displayedUserName2.text = object["name"] as! String
+                                    self.displayedUserName2.text = "Google"//object["name"] as! String
                                     self.secondUserImage.image = UIImage(data: data)
                                     
                                     self.userImage.userInteractionEnabled = true

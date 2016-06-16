@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BA782271D11FE47000B0B3C /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA782261D11FE47000B0B3C /* LocalData.swift */; };
 		1BE5C1EB1D06010600D6AA81 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1EA1D06010600D6AA81 /* ParseUI.framework */; };
 		1BE5C1EF1D06016F00D6AA81 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1ED1D06016F00D6AA81 /* ParseFacebookUtilsV4.framework */; };
 		1BE5C1F21D06024400D6AA81 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1F01D06024400D6AA81 /* FBSDKCoreKit.framework */; };
@@ -17,6 +18,9 @@
 		1BF692D31D09E1950030B6D0 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */; };
 		1BF692D41D09E1950030B6D0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D21D09E1950030B6D0 /* Users.swift */; };
 		1BF692D81D09E32B0030B6D0 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D71D09E32B0030B6D0 /* DataController.swift */; };
+		1BF998DB1D0B13E400F79E00 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF998DA1D0B13E400F79E00 /* UserInfo.swift */; };
+		1BF998DD1D0B158E00F79E00 /* PairInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF998DC1D0B158E00F79E00 /* PairInfo.swift */; };
+		1BF998DF1D0B315F00F79E00 /* UserInfoPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF998DE1D0B315F00F79E00 /* UserInfoPair.swift */; };
 		814C3ACB1B69877600E307BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC81B69877600E307BB /* Images.xcassets */; };
 		81BA81771A49E0D500E65899 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81761A49E0D500E65899 /* libsqlite3.dylib */; };
 		81BA81791A49E0DB00E65899 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81781A49E0DB00E65899 /* AudioToolbox.framework */; };
@@ -37,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BA782261D11FE47000B0B3C /* LocalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		1BE5C1EA1D06010600D6AA81 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		1BE5C1ED1D06016F00D6AA81 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		1BE5C1F01D06024400D6AA81 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -47,6 +52,9 @@
 		1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BF692D21D09E1950030B6D0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		1BF692D71D09E32B0030B6D0 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = MyBridgeApp/DataController.swift; sourceTree = SOURCE_ROOT; };
+		1BF998DA1D0B13E400F79E00 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		1BF998DC1D0B158E00F79E00 /* PairInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairInfo.swift; sourceTree = "<group>"; };
+		1BF998DE1D0B315F00F79E00 /* UserInfoPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoPair.swift; sourceTree = "<group>"; };
 		814C3AC81B69877600E307BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		814C3AC91B69877600E307BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* MyBridgeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBridgeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +112,10 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				1BA782261D11FE47000B0B3C /* LocalData.swift */,
+				1BF998DA1D0B13E400F79E00 /* UserInfo.swift */,
+				1BF998DC1D0B158E00F79E00 /* PairInfo.swift */,
+				1BF998DE1D0B315F00F79E00 /* UserInfoPair.swift */,
 				1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */,
 				1BF692D21D09E1950030B6D0 /* Users.swift */,
 				1BF692C81D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld */,
@@ -240,6 +252,7 @@
 			files = (
 				CBEFCD7D1CEF93BA00695B15 /* ProfileTableViewController.swift in Sources */,
 				1BF692D81D09E32B0030B6D0 /* DataController.swift in Sources */,
+				1BF998DB1D0B13E400F79E00 /* UserInfo.swift in Sources */,
 				CBEFCD6B1CE53F0200695B15 /* AccountSettingsTableViewController.swift in Sources */,
 				CB6A32991CC483CD00FADB13 /* SingleMessageViewController.swift in Sources */,
 				CB6A329D1CE2461800FADB13 /* LoadPageViewController.swift in Sources */,
@@ -250,6 +263,9 @@
 				CB9C20F01CAC887800C03FF2 /* MessagesViewController.swift in Sources */,
 				CB5829481CAA26D900DC86C9 /* BridgeViewController.swift in Sources */,
 				1BF692D41D09E1950030B6D0 /* Users.swift in Sources */,
+				1BF998DD1D0B158E00F79E00 /* PairInfo.swift in Sources */,
+				1BF998DF1D0B315F00F79E00 /* UserInfoPair.swift in Sources */,
+				1BA782271D11FE47000B0B3C /* LocalData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
