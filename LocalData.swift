@@ -13,7 +13,8 @@ class LocalData {
     var friendlist: [String]? = nil
     var mainProfilePicture: NSData? = nil
     var pairings:[UserInfoPair]? = nil
-    
+    var interested_in:String? = nil
+
     init(){
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let decoded = userDefaults.objectForKey("userInfo") {
@@ -35,6 +36,16 @@ class LocalData {
         return userInfo.username
     }
     
+    func setInterestedIN(interested_in:String){
+        self.interested_in = interested_in
+    }
+    func getInterestedIN()-> String?{
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let decoded  = userDefaults.objectForKey("userInfo") as! NSData
+        let userInfo = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as! UserInfo
+        return userInfo.interested_in
+    }
+
     func setFriendList(friendlist: [String]){
         self.friendlist = friendlist
     }
@@ -78,7 +89,7 @@ class LocalData {
     
     func synchronize(){
         let userInfo:UserInfo = UserInfo(username: username, friendlist: friendlist,
-                                         mainProfilePicture: mainProfilePicture, pairings: pairings)
+                                         mainProfilePicture: mainProfilePicture, pairings: pairings, interested_in: interested_in)
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let encodedData = NSKeyedArchiver.archivedDataWithRootObject(userInfo)
         userDefaults.setObject(encodedData, forKey: "userInfo")

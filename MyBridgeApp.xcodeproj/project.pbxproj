@@ -14,6 +14,7 @@
 		1BE5C1F31D06024400D6AA81 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1F11D06024400D6AA81 /* FBSDKLoginKit.framework */; };
 		1BE5C1F61D060CAF00D6AA81 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1F41D060CAF00D6AA81 /* Bolts.framework */; };
 		1BE5C1F71D060CAF00D6AA81 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1F51D060CAF00D6AA81 /* Parse.framework */; };
+		1BE888D31D1300BF00EA6DA4 /* LocalStorageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */; };
 		1BF692CA1D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692C81D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld */; };
 		1BF692D31D09E1950030B6D0 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */; };
 		1BF692D41D09E1950030B6D0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D21D09E1950030B6D0 /* Users.swift */; };
@@ -48,6 +49,7 @@
 		1BE5C1F11D06024400D6AA81 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1BE5C1F41D060CAF00D6AA81 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		1BE5C1F51D060CAF00D6AA81 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageUtility.swift; sourceTree = "<group>"; };
 		1BF692C91D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyBridgeAppDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BF692D21D09E1950030B6D0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */,
 				1BA782261D11FE47000B0B3C /* LocalData.swift */,
 				1BF998DA1D0B13E400F79E00 /* UserInfo.swift */,
 				1BF998DC1D0B158E00F79E00 /* PairInfo.swift */,
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBEFCD7D1CEF93BA00695B15 /* ProfileTableViewController.swift in Sources */,
+				1BE888D31D1300BF00EA6DA4 /* LocalStorageUtility.swift in Sources */,
 				1BF692D81D09E32B0030B6D0 /* DataController.swift in Sources */,
 				1BF998DB1D0B13E400F79E00 /* UserInfo.swift in Sources */,
 				CBEFCD6B1CE53F0200695B15 /* AccountSettingsTableViewController.swift in Sources */,

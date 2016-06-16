@@ -9,16 +9,18 @@
 import Foundation
 class PairInfo:NSObject, NSCoding {
     var name:String? = ""
+    var objectId:String? = nil
     var mainProfilePicture:NSData? = nil
     var profilePictures: [NSData]? = nil
     var location:String? = ""
     var bridgeStatus:String? = ""
-    init( name:String?, mainProfilePicture: NSData?, profilePictures: [NSData]?, location:String?, bridgeStatus:String?) {
+    init( name:String?, mainProfilePicture: NSData?, profilePictures: [NSData]?, location:String?, bridgeStatus:String?, objectId:String?) {
         self.name = name
         self.mainProfilePicture = mainProfilePicture
         self.profilePictures = profilePictures
         self.location = location
         self.bridgeStatus = bridgeStatus
+        self.objectId = objectId
         
     }
     
@@ -28,8 +30,9 @@ class PairInfo:NSObject, NSCoding {
         let profilePictures = aDecoder.decodeObjectForKey("profilePictures") as! [NSData]?
         let location = aDecoder.decodeObjectForKey("location") as! String?
         let bridgeStatus = aDecoder.decodeObjectForKey("bridgeStatus") as! String?
+        let objectId = aDecoder.decodeObjectForKey("objectId") as! String?
         self.init(name: name, mainProfilePicture: mainProfilePicture, profilePictures: profilePictures,
-                  location: location, bridgeStatus: bridgeStatus)
+                  location: location, bridgeStatus: bridgeStatus, objectId:objectId)
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -38,6 +41,7 @@ class PairInfo:NSObject, NSCoding {
         aCoder.encodeObject(profilePictures, forKey: "profilePictures")
         aCoder.encodeObject(location, forKey: "location")
         aCoder.encodeObject(bridgeStatus, forKey: "bridgeStatus")
+        aCoder.encodeObject(objectId, forKey: "objectId")
         
     }
     
