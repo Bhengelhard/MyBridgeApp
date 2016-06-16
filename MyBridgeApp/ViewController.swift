@@ -10,7 +10,7 @@ import CoreData
 
 class ViewController: UIViewController {
    
-<<<<<<< HEAD
+
     
     func getUserPhotos(){
         // Need to be worked upon after we get permission 
@@ -113,11 +113,6 @@ class ViewController: UIViewController {
             }
         }
     }
-=======
- 
->>>>>>> origin/master
-
-
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     @IBAction func fbLogin(sender: AnyObject) {
         print("pressed")
