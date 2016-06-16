@@ -49,7 +49,6 @@ class ViewController: UIViewController {
     }
     
     func getUserFriends(){
-        
         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"])
         graphRequest.startWithCompletionHandler{ (connection, result, error) -> Void in
             if error != nil {
