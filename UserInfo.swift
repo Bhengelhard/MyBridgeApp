@@ -9,14 +9,16 @@
 import Foundation
 class UserInfo:NSObject, NSCoding  {
     var username: String? = ""
+    var interested_in: String? = nil
     var friendlist: [String]? = []
     var mainProfilePicture: NSData? = nil
     var pairings:[UserInfoPair]? = []
-    init( username:String?, friendlist: [String]?, mainProfilePicture: NSData? ,pairings:[UserInfoPair]? ) {
+    init( username:String?, friendlist: [String]?, mainProfilePicture: NSData? ,pairings:[UserInfoPair]?, interested_in: String? ) {
         self.username = username
         self.friendlist = friendlist
         self.mainProfilePicture = mainProfilePicture
         self.pairings = pairings
+        self.interested_in = interested_in
         
     }
     
@@ -25,7 +27,8 @@ class UserInfo:NSObject, NSCoding  {
         let friendlist = aDecoder.decodeObjectForKey("friendlist") as! [String]?
         let mainProfilePicture = aDecoder.decodeObjectForKey("shortname") as! NSData?
         let pairings = aDecoder.decodeObjectForKey("pairings") as! [UserInfoPair]?
-        self.init(username: username, friendlist: friendlist, mainProfilePicture: mainProfilePicture, pairings: pairings )
+        let interested_in = aDecoder.decodeObjectForKey("interested_in") as! String?
+        self.init(username: username, friendlist: friendlist, mainProfilePicture: mainProfilePicture, pairings: pairings, interested_in: interested_in )
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -33,6 +36,7 @@ class UserInfo:NSObject, NSCoding  {
         aCoder.encodeObject(friendlist, forKey: "friendlist")
         aCoder.encodeObject(mainProfilePicture, forKey: "mainProfilePicture")
         aCoder.encodeObject(pairings, forKey: "pairings")
+        aCoder.encodeObject(interested_in, forKey: "interested_in")
     }
     
 }
