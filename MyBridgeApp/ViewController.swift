@@ -9,9 +9,124 @@ import CoreData
 //var currentUser = PFUser.currentUser()
 
 class ViewController: UIViewController {
+   
 
+    
+    func getUserPhotos(){
+        // Need to be worked upon after we get permission 
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"])
+        graphRequest.startWithCompletionHandler{ (connection, result, error) -> Void in
+            print(" graph request")
+            if error != nil {
+                
+                print(error)
+                print("got error")
+                
+            } else if let result = result {
+                print("got result")
+                let userId = result["id"]! as! String
+                let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
+                
+                let facebookProfilePictureUrl = "https://graph.facebook.com/\(userId)/albums?access_token=\(accessToken)"
+                if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
+                    print(fbpicUrl)
+                    if let data = NSData(contentsOfURL: fbpicUrl) {
+                        var error: NSError?
+                        do{
+                        var albumsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                        print(albumsDictionary["data"]!)
+                        }
+                        catch{
+                            print(error)
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+            
+        }
+    }
+    
+    func getUserFriends(){
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"])
+        graphRequest.startWithCompletionHandler{ (connection, result, error) -> Void in
+            if error != nil {
+                print(print("Error: \(error!) \(error!.userInfo)"))
+            }
+            else if let result = result {
+                let userId = result["id"]! as! String
+                let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
+                let facebookFriendsUrl = "https://graph.facebook.com/\(userId)/friends?access_token=\(accessToken)"
+                
+                if let fbfriendsUrl = NSURL(string: facebookFriendsUrl) {
+                    
+                    if let data = NSData(contentsOfURL: fbfriendsUrl) {
+                    //background thread to parse the JSON data
+                        
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                        do{
+                            let friendList: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                            
+                            if let data = friendList["data"] as? [[String: AnyObject]] {
+                                var friendsArray:[String] = []
+                                for item in data {
+                                    if let name = item["name"] as? String {
+                                        if let id = item["id"] as? String {
+                                            
+                                            print("\(name)'s id is \(id)")
+                                            let query = PFQuery(className:"_User")
+                                            query.whereKey("fb_id", equalTo:id)
+                                            let objects = try query.findObjects()
+                                            for object in objects {
+                                                friendsArray.append(object.objectId!)
+                                            }
+                                                
+                                        }
+                                        else {
+                                            print("Error: \(error!) \(error!.userInfo)")
+                                        }
+                                        
+                                    }
+                                }
+                                //Update Parse DB to store the friendlist
+                                
+                                PFUser.currentUser()?["fb_friends"] = friendsArray
+                                PFUser.currentUser()?["friend_list"] = friendsArray
+                                
+                                //Update Iphone's local storage to store the friendlist
+                                let localData = LocalData()
+                                localData.setFriendList(friendsArray)
+                                localData.synchronize()
+                                print("friends array -\(friendsArray)")
+                            }
+                          
+                        }
+                        catch  {
+                            print(error)
+                        }
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     @IBAction func fbLogin(sender: AnyObject) {
         print("pressed")
+        // Spinner sparts animating before the segue can be accesses
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0,0,50,50))
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        
+        var global_name:String = ""
+        //fetchUsers()
         
         /*let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context: NSManagedObjectContext = appDel.managedObjectContext
@@ -30,16 +145,26 @@ class ViewController: UIViewController {
                 print("got to error")
             } else {
                 if let user = user {
-                    print("got user") 
+                    print("got user")
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
+                
+                    LocalStorageUtility().getUserFriends()
                     
+                    // Testing the localData
+                   /* let localData = LocalData()
+                    let pairings = localData.getPairings()
+                    print("\(pairings![0].user1?.name) and \(pairings![0].user2?.name)")*/
                     if user.isNew {
+                        
                         print("got to new user")
+                        
+                        
                         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, interested_in, name, gender, email, friends, birthday, location"])
                         graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
                             print("got into graph request")
+                            
                             if error != nil {
                                 
                                 print(error)
@@ -59,32 +184,37 @@ class ViewController: UIViewController {
                                 if let gender: String = result["gender"]! as? String {
                                     
                                     PFUser.currentUser()?["gender"] = gender
+                                    PFUser.currentUser()?["fb_gender"] = gender
                                     //newUser.setValue(gender, forKey: "gender")
                                     
                                     //saves a guess at the gender the current user is interested in if it doesn't already exist
-                                    if result["interested_in"]! == nil {
+                                if result["interested_in"]! == nil {
+                                    
+                                    if gender == "male" {
                                         
-                                        if gender == "male" {
+                                        PFUser.currentUser()?["interested_in"] = "female"
+                                        //newUser.setValue("female", forKey: "interested_in")
                                             
-                                            PFUser.currentUser()?["interested_in"] = "female"
-                                            //newUser.setValue("female", forKey: "interested_in")
+                                    } else if gender == "female" {
                                             
-                                        } else if gender == "female" {
+                                        PFUser.currentUser()?["interested_in"] = "male"
+                                        //newUser.setValue("Male", forKey: "interested_in")
                                             
-                                            PFUser.currentUser()?["interested_in"] = "male"
-                                            //newUser.setValue("Male", forKey: "interested_in")
-                                            
-                                        }
-                                        
                                     }
+                                        
+                                }
                                     
                                     
                                 }
                                 
                                 //setting main name and names for Bridge Types to Facebook name
                                 if let name = result["name"]! {
+                                    // Store the name in core data 06/09
                                     
+                                    global_name = name as! String
+                    
                                     PFUser.currentUser()?["fb_name"] = name
+                                    PFUser.currentUser()?["name"] = name
                                     PFUser.currentUser()?["business_name"] = name
                                     PFUser.currentUser()?["love_name"] = name
                                     PFUser.currentUser()?["friendship_name"] = name
@@ -135,6 +265,8 @@ class ViewController: UIViewController {
                                     //newUser.setValue(location[1], forKey: "latitude")
                                     
                                 }
+                                
+
                                 
                                 PFUser.currentUser()?["distance_interest"] = 100
                                 PFUser.currentUser()?["new_message_push_notifications"] = true
@@ -195,8 +327,7 @@ class ViewController: UIViewController {
                                     print("go into URL")
                                     
                                     if let data = NSData(contentsOfURL: fbpicUrl) {
-                                        
-                                        print("got into Data")
+                                                                                print("got into Data")
                                         let imageFile: PFFile = PFFile(data: data)!
                                         print(imageFile)
                                         //setting main profile pictures
@@ -231,6 +362,8 @@ class ViewController: UIViewController {
                                 print("past bracket 2")
                                 
                                 
+                                
+                                
                             }
                             
                             
@@ -241,12 +374,24 @@ class ViewController: UIViewController {
                         //self.updateUser()
                         
                         print("new")
+                        LocalStorageUtility().getBridgePairings()
+                         //self.getUserPhotos()
                         
                     } else {
+                        //spinner
+                        //update user and friends
                         
-                        print("not new")
-                        self.performSegueWithIdentifier("showBridgeViewController", sender: self)
-                        
+                        //use while access token is nil instead of delay
+                         print("not new")
+                        LocalStorageUtility().getBridgePairings()
+                         //self.getUserPhotos()
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                            //stop the spinner animation and reactivate the interaction with user
+                            self.activityIndicator.stopAnimating()
+                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                            
+                            self.performSegueWithIdentifier("showBridgeViewController", sender: self)
+                         })
                     }
                     
                     
@@ -255,6 +400,34 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    func seedUsers(){
+        print("seedUsers method called")
+        let moc = DataController().managedObjectContext
+        let entity = NSEntityDescription.insertNewObjectForEntityForName("Users", inManagedObjectContext: moc) as! Users
+        entity.setValue("Udta Punjab", forKey: "name")
+        entity.setValue("/home/picture", forKey: "profilePicture")
+        do{
+            try moc.save()
+        }
+        catch {
+            fatalError("failure to save context:\(error)")
+            
+        }
+    }
+    func fetchUsers(){
+        print("fetchUsers method called")
+        let moc = DataController().managedObjectContext
+        let userFetch = NSFetchRequest(entityName: "Users")
+        do {
+            let fetchUser = try moc.executeFetchRequest(userFetch) as! [Users]
+            print(fetchUser.first!.name)
+            
+        }
+        catch{
+            fatalError("failure to fetch user: \(error)")
+        }
     }
 
     //right now just updates users Friends
@@ -307,12 +480,10 @@ class ViewController: UIViewController {
     }
     
     func updateFriendList() {
-        
         //add graph request to update users fb_friends
         //query to find and save fb_friends
         
         let currentUserFbFriends = PFUser.currentUser()!["fb_friends"] as! NSArray
-        
         let query: PFQuery = PFQuery(className: "_User")
         
         query.whereKey("fb_id", containedIn: currentUserFbFriends as [AnyObject])
@@ -366,8 +537,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
     }
     

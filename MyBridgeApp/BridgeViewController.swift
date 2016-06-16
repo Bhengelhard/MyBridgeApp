@@ -246,7 +246,7 @@ class BridgeViewController: UIViewController {
                                 
                                 dispatch_async(dispatch_get_main_queue(), {
                                     
-                                    self.displayedUserName1.text = object["name"] as! String
+                                    self.displayedUserName1.text =  object["name"] as! String
                                     self.userImage.image = UIImage(data: data)
                                     
                                 })
