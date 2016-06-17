@@ -696,13 +696,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErP-fN-6ni">
-                                <rect key="frame" x="92" y="72" width="104" height="60"/>
+                                <rect key="frame" x="76" y="72" width="120" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="'s interests" lineBreakMode="wordWrap" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hc-He-Qmi">
+                                <rect key="frame" x="196" y="72" width="154" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="A man has no name" borderStyle="roundedRect" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LLM-vU-zqu">
-                                <rect key="frame" x="92" y="91" width="104" height="30"/>
+                                <rect key="frame" x="76" y="91" width="120" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -748,8 +754,9 @@
                                     <constraint firstAttribute="height" constant="30" id="1XP-FJ-xwf"/>
                                     <constraint firstAttribute="width" constant="191" id="bIy-bU-nQ1"/>
                                 </constraints>
-                                <state key="normal" title="Begin Bridging Your Friends"/>
+                                <state key="normal" title="Begin Bridging"/>
                                 <connections>
+                                    <action selector="beginBridgingTouched:" destination="nIP-ev-yX8" eventType="touchUpInside" id="KbV-sh-Wu4"/>
                                     <segue destination="cMo-Jt-lEF" kind="show" id="ZMu-OO-A5m"/>
                                 </connections>
                             </button>
@@ -759,6 +766,11 @@
                                     <constraint firstAttribute="width" constant="49" id="LN7-1c-ZZC"/>
                                     <constraint firstAttribute="height" constant="31" id="QF6-kv-4XF"/>
                                 </constraints>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="onTintColor" red="1" green="0.50588235294117645" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="loveSwitchTapped:" destination="nIP-ev-yX8" eventType="valueChanged" id="zas-bp-xwO"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RLW-6N-Wmp">
                                 <rect key="frame" x="270" y="444" width="51" height="31"/>
@@ -766,6 +778,11 @@
                                     <constraint firstAttribute="width" constant="49" id="j2Q-bh-WwX"/>
                                     <constraint firstAttribute="height" constant="31" id="o6R-Nc-8Nv"/>
                                 </constraints>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="onTintColor" red="0.56470588235294117" green="0.81176470588235294" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="friendshipSwitchTapped:" destination="nIP-ev-yX8" eventType="valueChanged" id="NfH-Ic-jEc"/>
+                                </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2X-bU-uVG">
                                 <rect key="frame" x="625" y="272" width="42" height="30"/>
@@ -780,16 +797,19 @@
                                     <constraint firstAttribute="height" constant="31" id="7fy-aB-zAf"/>
                                     <constraint firstAttribute="width" constant="49" id="dKf-Fv-7cR"/>
                                 </constraints>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="onTintColor" red="0.54509803921568623" green="0.85098039215686272" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="businessSwitchTapped:" destination="nIP-ev-yX8" eventType="valueChanged" id="4mv-k4-tnu"/>
+                                </connections>
                             </switch>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="suzy's_profile_picture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="awN-sF-PXe">
                                 <rect key="frame" x="99" y="135" width="90" height="90"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="'s interests" lineBreakMode="wordWrap" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hc-He-Qmi">
-                                <rect key="frame" x="196" y="72" width="154" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVI-zC-w4v">
+                                <rect key="frame" x="169" y="210" width="10" height="10"/>
+                                <state key="normal" title="Button" image="Editing-Rectangle-Stroked-icon.png"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -817,6 +837,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="businessLabel" destination="4d3-SK-io1" id="Zbg-2p-0XC"/>
+                        <outlet property="businessSwitch" destination="diD-LT-SEq" id="O6a-6v-ONA"/>
+                        <outlet property="friendshipLabel" destination="SYW-Fw-7XN" id="xGB-wv-Mt6"/>
+                        <outlet property="friendshipSwitch" destination="RLW-6N-Wmp" id="Uhz-QS-LmP"/>
+                        <outlet property="loveLable" destination="ubP-oB-DcF" id="n22-YI-Fjf"/>
+                        <outlet property="loveSwitch" destination="fco-Wt-tFB" id="4Yd-U5-edg"/>
                         <outlet property="main_title" destination="ErP-fN-6ni" id="MFX-fe-5fS"/>
                         <outlet property="nameTextField" destination="LLM-vU-zqu" id="vqf-jX-js1"/>
                         <outlet property="profilePicture" destination="awN-sF-PXe" id="HpO-KN-YVw"/>
@@ -824,7 +850,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Av-h3-KLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754.5" y="-1080.5"/>
+            <point key="canvasLocation" x="783.5" y="-1092.5"/>
         </scene>
         <!--New Bridge Status-->
         <scene sceneID="6dS-e7-LSj">
@@ -1474,6 +1500,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Editing-Rectangle-Stroked-icon.png" width="32" height="32"/>
         <image name="login_with_facebook.png" width="732" height="100"/>
         <image name="suzy's_profile_picture.jpg" width="960" height="960"/>
     </resources>

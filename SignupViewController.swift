@@ -15,12 +15,55 @@ import CoreData
 
 class SignupViewController:UIViewController, UITextFieldDelegate{
     @IBOutlet weak var main_title: UILabel!
+    @IBOutlet weak var businessSwitch: UISwitch!
+    
+    @IBOutlet weak var friendshipLabel: UILabel!
+    @IBOutlet weak var loveLable: UILabel!
+    @IBOutlet weak var businessLabel: UILabel!
+    @IBOutlet weak var friendshipSwitch: UISwitch!
+    @IBOutlet weak var loveSwitch: UISwitch!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
+    
+    
+    @IBAction func beginBridgingTouched(sender: AnyObject) {
+        if let _ = PFUser.currentUser() {
+         PFUser.currentUser()?["name"] = main_title.text
+         PFUser.currentUser()?["interested_in_business"] = businessSwitch.on
+         PFUser.currentUser()?["interested_in_love"] = loveSwitch.on
+         PFUser.currentUser()?["interested_in_friendship"] = friendshipSwitch.on
+        }
+        
+    }
+    @IBAction func friendshipSwitchTapped(sender: AnyObject) {
+        if friendshipSwitch.on{
+            friendshipLabel.textColor = UIColor.blackColor()
+        }
+        else{
+            friendshipLabel.textColor = UIColor.grayColor()
+        }
+    }
+    @IBAction func loveSwitchTapped(sender: AnyObject) {
+        if loveSwitch.on{
+            loveLable.textColor = UIColor.blackColor()
+        }
+        else{
+          
+            loveLable.textColor = UIColor.grayColor()
+        }
+    }
+    
+    @IBAction func businessSwitchTapped(sender: AnyObject) {
+        if businessSwitch.on{
+            businessLabel.textColor = UIColor.blackColor()
+        }
+        else{
+            businessLabel.textColor = UIColor.grayColor()
+        }
+    }
 
     override func viewDidLoad() {
-        
-        super.viewDidLoad()
+                super.viewDidLoad()
         let username = LocalData().getUsername()
         if let username = username {
                 main_title.text = username
@@ -37,7 +80,6 @@ class SignupViewController:UIViewController, UITextFieldDelegate{
         main_title.addGestureRecognizer(tapGesture)
         let mainProfilePicture = LocalData().getMainProfilePicture()
         if let mainProfilePicture = mainProfilePicture {
-            print("YO YO")
             let image = UIImage(data:mainProfilePicture,scale:1.0)
             profilePicture.image = image
         }
@@ -55,6 +97,12 @@ class SignupViewController:UIViewController, UITextFieldDelegate{
         nameTextField.hidden = true
         main_title.hidden = false
         main_title.text = nameTextField.text
+        let updatedText = nameTextField.text
+        if let updatedText = updatedText {
+            let localData = LocalData()
+            localData.setUsername(updatedText)
+            localData.synchronize()
+        }
         return true
     }
 
