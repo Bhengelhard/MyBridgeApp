@@ -14,8 +14,8 @@ import FBSDKLoginKit
 import CoreData
 
 class SignupViewController:UIViewController, UITextFieldDelegate{
-
-       @IBOutlet weak var main_title: UILabel!
+    @IBOutlet weak var main_title: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
 
     override func viewDidLoad() {
@@ -35,7 +35,15 @@ class SignupViewController:UIViewController, UITextFieldDelegate{
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
         main_title.addGestureRecognizer(tapGesture)
-
+        let mainProfilePicture = LocalData().getMainProfilePicture()
+        if let mainProfilePicture = mainProfilePicture {
+            print("YO YO")
+            let image = UIImage(data:mainProfilePicture,scale:1.0)
+            profilePicture.image = image
+        }
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width/2
+        profilePicture.clipsToBounds = true
+        
     }
     func lblTapped(){
         main_title.hidden = true

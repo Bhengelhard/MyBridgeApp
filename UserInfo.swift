@@ -25,7 +25,7 @@ class UserInfo:NSObject, NSCoding  {
     required convenience init(coder aDecoder: NSCoder) {
         let username = aDecoder.decodeObjectForKey("username") as! String?
         let friendlist = aDecoder.decodeObjectForKey("friendlist") as! [String]?
-        let mainProfilePicture = aDecoder.decodeObjectForKey("shortname") as! NSData?
+        let mainProfilePicture = aDecoder.decodeObjectForKey("mainProfilePicture") as! NSData?
         let pairings = aDecoder.decodeObjectForKey("pairings") as! [UserInfoPair]?
         let interested_in = aDecoder.decodeObjectForKey("interested_in") as! String?
         self.init(username: username, friendlist: friendlist, mainProfilePicture: mainProfilePicture, pairings: pairings, interested_in: interested_in )
