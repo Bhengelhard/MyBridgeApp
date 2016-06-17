@@ -12,107 +12,7 @@ class ViewController: UIViewController {
    
 
     
-    func getUserPhotos(){
-        // Need to be worked upon after we get permission 
-        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"])
-        graphRequest.startWithCompletionHandler{ (connection, result, error) -> Void in
-            print(" graph request")
-            if error != nil {
-                
-                print(error)
-                print("got error")
-                
-            } else if let result = result {
-                print("got result")
-                let userId = result["id"]! as! String
-                let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
-                
-                let facebookProfilePictureUrl = "https://graph.facebook.com/\(userId)/albums?access_token=\(accessToken)"
-                if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
-                    print(fbpicUrl)
-                    if let data = NSData(contentsOfURL: fbpicUrl) {
-                        var error: NSError?
-                        do{
-                        var albumsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                        print(albumsDictionary["data"]!)
-                        }
-                        catch{
-                            print(error)
-                        }
-                    }
-                    
-                }
-                
-            }
-            
-            
-        }
-    }
     
-    func getUserFriends(){
-        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"])
-        graphRequest.startWithCompletionHandler{ (connection, result, error) -> Void in
-            if error != nil {
-                print(print("Error: \(error!) \(error!.userInfo)"))
-            }
-            else if let result = result {
-                let userId = result["id"]! as! String
-                let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
-                let facebookFriendsUrl = "https://graph.facebook.com/\(userId)/friends?access_token=\(accessToken)"
-                
-                if let fbfriendsUrl = NSURL(string: facebookFriendsUrl) {
-                    
-                    if let data = NSData(contentsOfURL: fbfriendsUrl) {
-                    //background thread to parse the JSON data
-                        
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                        do{
-                            let friendList: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                            
-                            if let data = friendList["data"] as? [[String: AnyObject]] {
-                                var friendsArray:[String] = []
-                                for item in data {
-                                    if let name = item["name"] as? String {
-                                        if let id = item["id"] as? String {
-                                            
-                                            print("\(name)'s id is \(id)")
-                                            let query = PFQuery(className:"_User")
-                                            query.whereKey("fb_id", equalTo:id)
-                                            let objects = try query.findObjects()
-                                            for object in objects {
-                                                friendsArray.append(object.objectId!)
-                                            }
-                                                
-                                        }
-                                        else {
-                                            print("Error: \(error!) \(error!.userInfo)")
-                                        }
-                                        
-                                    }
-                                }
-                                //Update Parse DB to store the friendlist
-                                
-                                PFUser.currentUser()?["fb_friends"] = friendsArray
-                                PFUser.currentUser()?["friend_list"] = friendsArray
-                                
-                                //Update Iphone's local storage to store the friendlist
-                                let localData = LocalData()
-                                localData.setFriendList(friendsArray)
-                                localData.synchronize()
-                                print("friends array -\(friendsArray)")
-                            }
-                          
-                        }
-                        catch  {
-                            print(error)
-                        }
-                        }
-                        
-                    }
-                }
-            }
-        }
-    }
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     @IBAction func fbLogin(sender: AnyObject) {
         print("pressed")
@@ -149,8 +49,10 @@ class ViewController: UIViewController {
                     //getting user information from Facebook and saving to Parse
                     //Current Fields Saved: name, gender, fb_profile_picture
                     //**Need to add check for if fields exist**
-                
+                    // Common to new and old user
+                    
                     LocalStorageUtility().getUserFriends()
+                    LocalStorageUtility().getMainProfilePicture()
                     
                     // Testing the localData
                    /* let localData = LocalData()
@@ -159,7 +61,7 @@ class ViewController: UIViewController {
                     if user.isNew {
                         
                         print("got to new user")
-                        
+                        var localData = LocalData()
                         
                         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, interested_in, name, gender, email, friends, birthday, location"])
                         graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
@@ -175,6 +77,7 @@ class ViewController: UIViewController {
                                 print("got result")
                                 if let interested_in = result["interested_in"]! {
                                     
+                                    localData.setInterestedIN(interested_in as! String)
                                     PFUser.currentUser()?["interested_in"] = interested_in
                                     //newUser.setValue(interested_in, forKey: "interested_in")
                                     print("interested_in")
@@ -212,7 +115,7 @@ class ViewController: UIViewController {
                                     // Store the name in core data 06/09
                                     
                                     global_name = name as! String
-                    
+                                    localData.setUsername(global_name)
                                     PFUser.currentUser()?["fb_name"] = name
                                     PFUser.currentUser()?["name"] = name
                                     PFUser.currentUser()?["business_name"] = name
@@ -228,6 +131,7 @@ class ViewController: UIViewController {
                                 if let email = result["email"]! {
                                     
                                     PFUser.currentUser()?["email"] = email
+                                    
                                     //newUser.setValue(email, forKey: "email")
                                     
                                 }
@@ -315,7 +219,6 @@ class ViewController: UIViewController {
                                     
                                 }*/
 
-                                
                                 PFUser.currentUser()?.saveInBackground()
                                 
                                 //get facebook profile picture
@@ -328,6 +231,7 @@ class ViewController: UIViewController {
                                     
                                     if let data = NSData(contentsOfURL: fbpicUrl) {
                                                                                 print("got into Data")
+                                        localData.setMainProfilePicture(data)
                                         let imageFile: PFFile = PFFile(data: data)!
                                         print(imageFile)
                                         //setting main profile pictures
@@ -342,26 +246,29 @@ class ViewController: UIViewController {
                                         PFUser.currentUser()?["fb_profile_picture_for_friendship"] = true
  
                                         
-                                        PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
-                                            
-                                            if success == true {
-                                                
-                                                self.performSegueWithIdentifier("showSignUp", sender: self)
-                                                
-                                            } else {
-                                                
-                                                print(error)
-                                                
-                                            }
-                                            
-                                        })
-                                        
                                     }
                                     print("past bracket 1")
                                 }
                                 print("past bracket 2")
+                                LocalStorageUtility().getBridgePairings()
+                                localData.synchronize()
                                 
                                 
+                                PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) in
+                                    
+                                    if success == true {
+                                        self.activityIndicator.stopAnimating()
+                                        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                                        self.performSegueWithIdentifier("showSignUp", sender: self)
+                                        
+                                    } else {
+                                        
+                                        print(error)
+                                        
+                                    }
+                                    
+                                })
+
                                 
                                 
                             }
@@ -373,9 +280,8 @@ class ViewController: UIViewController {
                         
                         //self.updateUser()
                         
-                        print("new")
-                        LocalStorageUtility().getBridgePairings()
-                         //self.getUserPhotos()
+                        //print("new")
+                        //self.getUserPhotos()
                         
                     } else {
                         //spinner

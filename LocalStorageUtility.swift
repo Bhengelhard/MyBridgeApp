@@ -50,6 +50,26 @@ class LocalStorageUtility{
             
         }
     }
+    func getMainProfilePicture(){
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
+        graphRequest.startWithCompletionHandler{ (connection, result, error) -> Void in
+                if error != nil {
+                print(error)
+                }
+                else if let result = result {
+                let userId = result["id"]! as! String
+                let facebookProfilePictureUrl = "https://graph.facebook.com/" + userId + "/picture?type=large"
+                if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
+                    if let data = NSData(contentsOfURL: fbpicUrl) {
+                        let localData = LocalData()
+                        localData.setMainProfilePicture(data)
+                        localData.synchronize()
+                    }
+                }
+        
+            }
+        }
+    }
     func getUserDetails(id:String)->PairInfo?{
         var user:PairInfo? = nil
         let query = PFQuery(className:"_User")
