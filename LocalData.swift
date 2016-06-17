@@ -88,6 +88,7 @@ class LocalData {
     }
     
     func synchronize(){
+        //print("Setting mainProfilePicture to \(mainProfilePicture)")
         let userInfo:UserInfo = UserInfo(username: username, friendlist: friendlist,
                                          mainProfilePicture: mainProfilePicture, pairings: pairings, interested_in: interested_in)
         let userDefaults = NSUserDefaults.standardUserDefaults()

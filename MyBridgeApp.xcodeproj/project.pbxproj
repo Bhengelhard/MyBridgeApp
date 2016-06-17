@@ -15,6 +15,8 @@
 		1BE5C1F61D060CAF00D6AA81 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1F41D060CAF00D6AA81 /* Bolts.framework */; };
 		1BE5C1F71D060CAF00D6AA81 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1F51D060CAF00D6AA81 /* Parse.framework */; };
 		1BE888D31D1300BF00EA6DA4 /* LocalStorageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */; };
+		1BE888D51D135A5800EA6DA4 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE888D41D135A5800EA6DA4 /* SignupViewController.swift */; };
+		1BE888D71D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BE888D61D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png */; };
 		1BF692CA1D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692C81D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld */; };
 		1BF692D31D09E1950030B6D0 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */; };
 		1BF692D41D09E1950030B6D0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D21D09E1950030B6D0 /* Users.swift */; };
@@ -50,6 +52,8 @@
 		1BE5C1F41D060CAF00D6AA81 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		1BE5C1F51D060CAF00D6AA81 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageUtility.swift; sourceTree = "<group>"; };
+		1BE888D41D135A5800EA6DA4 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = SOURCE_ROOT; };
+		1BE888D61D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Editing-Rectangle-Stroked-icon.png"; sourceTree = "<group>"; };
 		1BF692C91D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyBridgeAppDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BF692D21D09E1950030B6D0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1BE888D61D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png */,
 				CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */,
 				CBEFCD661CE35DB900695B15 /* suzy's_profile_picture.jpg */,
 				CB6A329E1CE260CB00FADB13 /* login_with_facebook.png */,
@@ -144,6 +149,7 @@
 				CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */,
 				CB5829461CAA26D900DC86C9 /* ViewController.swift */,
 				CB5829451CAA26D900DC86C9 /* BridgeViewController.swift */,
+				1BE888D41D135A5800EA6DA4 /* SignupViewController.swift */,
 				CB9C20EF1CAC887800C03FF2 /* MessagesViewController.swift */,
 				CBEFCD7C1CEF93BA00695B15 /* ProfileTableViewController.swift */,
 				CB6A32981CC483CC00FADB13 /* SingleMessageViewController.swift */,
@@ -240,6 +246,7 @@
 			files = (
 				CBEFCD771CEDED9600695B15 /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
+				1BE888D71D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png in Resources */,
 				CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */,
 				CBEFCD671CE35DB900695B15 /* suzy's_profile_picture.jpg in Resources */,
 				CB6A329F1CE260CB00FADB13 /* login_with_facebook.png in Resources */,
@@ -253,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE888D51D135A5800EA6DA4 /* SignupViewController.swift in Sources */,
 				CBEFCD7D1CEF93BA00695B15 /* ProfileTableViewController.swift in Sources */,
 				1BE888D31D1300BF00EA6DA4 /* LocalStorageUtility.swift in Sources */,
 				1BF692D81D09E32B0030B6D0 /* DataController.swift in Sources */,
