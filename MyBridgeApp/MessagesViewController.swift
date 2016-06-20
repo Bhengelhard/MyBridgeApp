@@ -118,12 +118,17 @@ class MessagesViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        return IDsOfMessages.count
+        return IDsOfMessages.count + 1
         
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print("Row is \(indexPath.row)")
+        if indexPath.row == 0{
+            let cell = tableView.dequeueReusableCellWithIdentifier("SearchCell", forIndexPath: indexPath)
+            return cell
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         var stringOfNames = ""
@@ -136,11 +141,11 @@ class MessagesViewController: UITableViewController {
         
         //take out 0th object if exitedMessage is true and turn it to false at the end
             
-        for name in names[indexPath.row] {
+        for name in names[indexPath.row - 1] {
         
             //add & between last two users - currently adds & only when there are two users
             
-            if names[indexPath.row].count == 3 {
+            if names[indexPath.row - 1].count == 3 {
                     
                 if name != PFUser.currentUser()?["name"] as? String {
                         
@@ -180,7 +185,7 @@ class MessagesViewController: UITableViewController {
         let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
         
         singleMessageTitle = (currentCell.textLabel?.text)!
-        messageId = IDsOfMessages[indexPath.row]
+        messageId = IDsOfMessages[indexPath.row - 1]
         
         previousViewController = "MessagesViewController"
         //messageId =

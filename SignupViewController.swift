@@ -155,6 +155,17 @@ class SignupViewController:UIViewController, UITextFieldDelegate, UIImagePickerC
         main_title.hidden = false
         nameTextField.hidden = true
         interestLabel.hidden = true
+        if let editableNameTemp = nameTextField.text{
+            main_title.attributedText = twoColoredString(editableNameTemp+"'s interests")
+            editableName = editableNameTemp
+        }
+        let updatedText = nameTextField.text
+        if let updatedText = updatedText {
+            let localData = LocalData()
+            localData.setUsername(updatedText)
+            localData.synchronize()
+        }
+
     }
     // User returns after editing
     func textFieldShouldReturn(userText: UITextField) -> Bool {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B82A0841D18752A000B6AFE /* screen-shot-2012-04-26-at-10-40-51-am.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B82A0831D18752A000B6AFE /* screen-shot-2012-04-26-at-10-40-51-am.png */; };
 		1BA782271D11FE47000B0B3C /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA782261D11FE47000B0B3C /* LocalData.swift */; };
 		1BE5C1EB1D06010600D6AA81 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1EA1D06010600D6AA81 /* ParseUI.framework */; };
 		1BE5C1EF1D06016F00D6AA81 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE5C1ED1D06016F00D6AA81 /* ParseFacebookUtilsV4.framework */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B82A0831D18752A000B6AFE /* screen-shot-2012-04-26-at-10-40-51-am.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen-shot-2012-04-26-at-10-40-51-am.png"; sourceTree = "<group>"; };
 		1BA782261D11FE47000B0B3C /* LocalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		1BE5C1EA1D06010600D6AA81 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		1BE5C1ED1D06016F00D6AA81 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1B82A0831D18752A000B6AFE /* screen-shot-2012-04-26-at-10-40-51-am.png */,
 				1BFDE4E21D174E1300D91C6F /* bridgeVector.jpg */,
 				1BE888D61D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png */,
 				CB6A329A1CC996F400FADB13 /* BentonSans-Light copy.otf */,
@@ -253,6 +256,7 @@
 				1BE888D71D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png in Resources */,
 				CB6A329B1CC996F400FADB13 /* BentonSans-Light copy.otf in Resources */,
 				CBEFCD671CE35DB900695B15 /* suzy's_profile_picture.jpg in Resources */,
+				1B82A0841D18752A000B6AFE /* screen-shot-2012-04-26-at-10-40-51-am.png in Resources */,
 				CB6A329F1CE260CB00FADB13 /* login_with_facebook.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
