@@ -149,9 +149,19 @@ class LoadPageViewController: UIViewController {
         
         
         PFUser.currentUser()?.fetchInBackgroundWithBlock({ (object, error) in
-            
-            if object != nil {
-                
+            let localData = LocalData()
+            if let username = localData.getUsername(){
+                LocalStorageUtility().getUserFriends()
+                LocalStorageUtility().getMainProfilePicture()
+                LocalStorageUtility().getBridgePairings()
+                self.performSegueWithIdentifier("showBridgeFromLoadPage", sender: self)
+            }
+            else{
+                self.performSegueWithIdentifier("showLoginFromLoadPage", sender: self)
+
+            }
+            /*if object?.objectId != "new" {
+                print(object)
                 print("user exists LoadePageViewController")
                 //updateFriendList()
                 self.updateUser()
@@ -165,7 +175,7 @@ class LoadPageViewController: UIViewController {
                 //not yet logged in
                 self.performSegueWithIdentifier("showLoginFromLoadPage", sender: self)
                 
-            }
+            }*/
             //print(error)
             
             

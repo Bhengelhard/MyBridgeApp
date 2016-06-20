@@ -9,16 +9,23 @@
 import Foundation
 class UserInfo:NSObject, NSCoding  {
     var username: String? = ""
-    var interested_in: String? = nil
+    var interestedIn: String? = nil
     var friendlist: [String]? = []
     var mainProfilePicture: NSData? = nil
     var pairings:[UserInfoPair]? = []
-    init( username:String?, friendlist: [String]?, mainProfilePicture: NSData? ,pairings:[UserInfoPair]?, interested_in: String? ) {
+    var profilePictureFromFb:Bool? = nil
+    var newMessagesPushNotifications:Bool? = nil
+    var newBridgesPushNotifications:Bool? = nil
+    init( username:String?, friendlist: [String]?, mainProfilePicture: NSData? ,pairings:[UserInfoPair]?,
+          interestedIn: String?, profilePictureFromFb:Bool?, newMessagesPushNotifications:Bool?, newBridgesPushNotifications:Bool? ) {
         self.username = username
         self.friendlist = friendlist
         self.mainProfilePicture = mainProfilePicture
         self.pairings = pairings
-        self.interested_in = interested_in
+        self.interestedIn = interestedIn
+        self.profilePictureFromFb = profilePictureFromFb
+        self.newMessagesPushNotifications = newMessagesPushNotifications
+        self.newBridgesPushNotifications = newBridgesPushNotifications
         
     }
     
@@ -27,8 +34,13 @@ class UserInfo:NSObject, NSCoding  {
         let friendlist = aDecoder.decodeObjectForKey("friendlist") as! [String]?
         let mainProfilePicture = aDecoder.decodeObjectForKey("mainProfilePicture") as! NSData?
         let pairings = aDecoder.decodeObjectForKey("pairings") as! [UserInfoPair]?
-        let interested_in = aDecoder.decodeObjectForKey("interested_in") as! String?
-        self.init(username: username, friendlist: friendlist, mainProfilePicture: mainProfilePicture, pairings: pairings, interested_in: interested_in )
+        let interestedIn = aDecoder.decodeObjectForKey("interestedIn") as! String?
+        let profilePictureFromFb = aDecoder.decodeObjectForKey("profilePictureFromFb") as! Bool?
+        let newMessagesPushNotifications = aDecoder.decodeObjectForKey("newMessagesPushNotifications") as! Bool?
+        let newBridgesPushNotifications = aDecoder.decodeObjectForKey("newBridgesPushNotifications") as! Bool?
+        
+        self.init(username: username, friendlist: friendlist, mainProfilePicture: mainProfilePicture, pairings: pairings, interestedIn: interestedIn, profilePictureFromFb: profilePictureFromFb, newMessagesPushNotifications:newMessagesPushNotifications,
+                  newBridgesPushNotifications:newBridgesPushNotifications)
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -36,7 +48,10 @@ class UserInfo:NSObject, NSCoding  {
         aCoder.encodeObject(friendlist, forKey: "friendlist")
         aCoder.encodeObject(mainProfilePicture, forKey: "mainProfilePicture")
         aCoder.encodeObject(pairings, forKey: "pairings")
-        aCoder.encodeObject(interested_in, forKey: "interested_in")
+        aCoder.encodeObject(interestedIn, forKey: "interestedIn")
+        aCoder.encodeObject(profilePictureFromFb, forKey: "profilePictureFromFb")
+        aCoder.encodeObject(newMessagesPushNotifications, forKey: "newMessagesPushNotifications")
+        aCoder.encodeObject(newBridgesPushNotifications, forKey: "newBridgesPushNotifications")
     }
     
 }
