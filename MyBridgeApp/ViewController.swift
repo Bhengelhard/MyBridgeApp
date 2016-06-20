@@ -26,14 +26,6 @@ class ViewController: UIViewController {
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
         
         var global_name:String = ""
-        //fetchUsers()
-        
-        /*let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context: NSManagedObjectContext = appDel.managedObjectContext
-        
-        let newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context)
-        */
-        
         
         //Log user in with permissions public_profile, email and user_friends
         let permissions = ["public_profile", "email", "user_friends"]
@@ -61,7 +53,7 @@ class ViewController: UIViewController {
                     if user.isNew {
                         
                         print("got to new user")
-                        var localData = LocalData()
+                        let localData = LocalData()
                         
                         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, interested_in, name, gender, email, friends, birthday, location"])
                         graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
@@ -79,30 +71,22 @@ class ViewController: UIViewController {
                                     
                                     localData.setInterestedIN(interested_in as! String)
                                     PFUser.currentUser()?["interested_in"] = interested_in
-                                    //newUser.setValue(interested_in, forKey: "interested_in")
-                                    print("interested_in")
-                                    
                                 }
                                 
                                 if let gender: String = result["gender"]! as? String {
                                     
                                     PFUser.currentUser()?["gender"] = gender
                                     PFUser.currentUser()?["fb_gender"] = gender
-                                    //newUser.setValue(gender, forKey: "gender")
-                                    
                                     //saves a guess at the gender the current user is interested in if it doesn't already exist
                                 if result["interested_in"]! == nil {
                                     
                                     if gender == "male" {
                                         
                                         PFUser.currentUser()?["interested_in"] = "female"
-                                        //newUser.setValue("female", forKey: "interested_in")
-                                            
+                                        
                                     } else if gender == "female" {
                                             
                                         PFUser.currentUser()?["interested_in"] = "male"
-                                        //newUser.setValue("Male", forKey: "interested_in")
-                                            
                                     }
                                         
                                 }
@@ -121,25 +105,17 @@ class ViewController: UIViewController {
                                     PFUser.currentUser()?["business_name"] = name
                                     PFUser.currentUser()?["love_name"] = name
                                     PFUser.currentUser()?["friendship_name"] = name
-                                    /*newUser.setValue(name, forKey: "fb_name")
-                                    newUser.setValue(name, forKey: "business_name")
-                                    newUser.setValue(name, forKey: "love_name")
-                                    newUser.setValue(name, forKey: "friendship_name")*/
-                                    
+                                                                       
                                 }
                                 
                                 if let email = result["email"]! {
                                     
                                     PFUser.currentUser()?["email"] = email
-                                    
-                                    //newUser.setValue(email, forKey: "email")
-                                    
                                 }
                                 
                                 if let id = result["id"]! {
                                     
                                     PFUser.currentUser()?["fb_id"] =  id
-                                    //newUser.setValue(id, forKey: "fb_id")
                                     
                                 }
                                 
@@ -174,82 +150,15 @@ class ViewController: UIViewController {
                                 
                                 PFUser.currentUser()?["distance_interest"] = 100
                                 PFUser.currentUser()?["new_message_push_notifications"] = true
+                                localData.setNewMessagesPushNotifications(true)
                                 PFUser.currentUser()?["new_bridge_push_notifications"] = true
-                                /*newUser.setValue(100, forKey: "distance_interest")
-                                newUser.setValue(true, forKey: "new_message_push_notifications")
-                                newUser.setValue(true, forKey: "new_message_push_notifications")*/
-                                
-                                //initializing built_bridges and rejected_bridges
+                                localData.setNewBridgesPushNotifications(true)
                                 PFUser.currentUser()?["built_bridges"] = []
                                 PFUser.currentUser()?["rejected_bridges"] = []
-                                /*newUser.setValue([], forKey: "built_bridges")
-                                newUser.setValue([], forKey: "rejected_bridges")*/
-                                
-                                //adding facebook friend data to parse - returns name and id
-                                /*var friends = result["friends"]! as! NSDictionary
-                                 
-                                 var friendsData : NSArray = friends.objectForKey("data") as! NSArray
-                                 
-                                 var fbFriendIds = [String]()
-                                 
-                                 for friend in friendsData {
-                                 
-                                 let valueDict : NSDictionary = friend as! NSDictionary
-                                 fbFriendIds.append(valueDict.objectForKey("id") as! String)
-                                 
-                                 }
-                                 
-                                 
-                                 PFUser.currentUser()?["fb_friends"] = fbFriendIds
-                                 */
-                                
-                                //saving PFUser details
-                                /*newUser.setValue(PFUser.currentUser()?.objectId, forKey: "objectId")
-                                newUser.setValue(PFUser.currentUser()?.username, forKey: "username")
-                                newUser.setValue(PFUser.currentUser()?.password, forKey: "password")*/
                                
-                                //saves Core Data
-                                /*do {
-                                    
-                                    try context.save()
-                                    
-                                } catch {
-                                    
-                                    print("There was a problem saving the Core Data")
-                                    
-                                }*/
 
                                 PFUser.currentUser()?.saveInBackground()
-                                
-                                //get facebook profile picture
-                                let userId = result["id"]! as! String
-                                
-                                let facebookProfilePictureUrl = "https://graph.facebook.com/" + userId + "/picture?type=large"
-                                print(facebookProfilePictureUrl)
-                                if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
-                                    print("go into URL")
-                                    
-                                    if let data = NSData(contentsOfURL: fbpicUrl) {
-                                                                                print("got into Data")
-                                        localData.setMainProfilePicture(data)
-                                        let imageFile: PFFile = PFFile(data: data)!
-                                        print(imageFile)
-                                        //setting main profile pictures
-                                        PFUser.currentUser()?["fb_profile_picture"] = imageFile
-                                        PFUser.currentUser()?["main_business_profile_picture"] = imageFile
-                                        PFUser.currentUser()?["main_love_profile_picture"] = imageFile
-                                        PFUser.currentUser()?["main_friendship_profile_picture"] = imageFile
-                                        
-                                        //setting profile pictures as facebook pictures to true
-                                        PFUser.currentUser()?["fb_profile_picture_for_business"] = true
-                                        PFUser.currentUser()?["fb_profile_picture_for_love"] = true
-                                        PFUser.currentUser()?["fb_profile_picture_for_friendship"] = true
- 
-                                        
-                                    }
-                                    print("past bracket 1")
-                                }
-                                print("past bracket 2")
+                               
                                 LocalStorageUtility().getBridgePairings()
                                 localData.synchronize()
                                 
