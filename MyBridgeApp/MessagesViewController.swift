@@ -29,8 +29,9 @@ func getWeekDay(num:Int)->String{
 }
 
 
-class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchResultsUpdating {
     
+   
     @IBOutlet weak var tableView: UITableView!
    // @IBOutlet var tableView: UITableView!
     var emails = [String]()
@@ -42,7 +43,50 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var messages = [String]()
     var messageType = [String]()
     var messageTimestamps = [NSDate?]()
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredPositions = [Int]()
+    var toolbarTapped = false
+    @IBAction func friendshipTapped(sender: AnyObject) {
+       toolbarTapped = true
+        filteredPositions = [Int]()
+        for i in 0 ..< messageType.count{
+            if messageType[i] == "Friendship" {
+                filteredPositions.append(i)
+            }
+        }
+        self.tableView.reloadData()
+    }
+    @IBAction func loveTapped(sender: AnyObject) {
+        toolbarTapped = true
+        filteredPositions = [Int]()
+        for i in 0 ..< messageType.count{
+            if messageType[i] == "Love" {
+                filteredPositions.append(i)
+            }
+        }
+        self.tableView.reloadData()
+    }
+    @IBAction func businessTapped(sender: AnyObject) {
+        toolbarTapped = true
+        filteredPositions = [Int]()
+        for i in 0 ..< messageType.count{
+            if messageType[i] == "Business" {
+                filteredPositions.append(i)
+            }
+        }
+        print("Filtered positions count is \(messageType.count)")
+        self.tableView.reloadData()
+    }
+   
+    @IBAction func allBridgesTapped(sender: AnyObject) {
+        toolbarTapped = true
+        filteredPositions = [Int]()
+        for i in 0 ..< messageType.count{
+            filteredPositions.append(i)
+        }
 
+        self.tableView.reloadData()
+    }
     @IBAction func segueToBridgeViewController(sender: AnyObject) {
         
         navigationController?.popViewControllerAnimated(true)
@@ -80,18 +124,22 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                         messageQuery.whereKey("message_id", equalTo:result.objectId!)
                         messageQuery.orderByDescending("createdAt")
                         let messageObjects = try messageQuery.findObjects()
-                        for messageObject in messageObjects {
-                            if let _ = messageObject["message_text"] {
-                                self.messages.append(messageObject["message_text"] as! (String))
-                            }
-                            else{
-                                self.messages.append("")
-                            }
-                            
-                            
+                        if messageObjects.count == 0{
+                            self.messages.append("You guys have been bridged")
+                            self.messageTimestamps.append(result.createdAt!)
+                        }
+                        else {
+                         for messageObject in messageObjects {
+                             if let _ = messageObject["message_text"] {
+                                 self.messages.append(messageObject["message_text"] as! (String))
+                             }
+                             else{
+                                 self.messages.append("")
+                             }
                             self.messageTimestamps.append((messageObject.createdAt))
                             break
                             //friendsArray.append(object.objectId!)
+                         }
                         }
                     }
                     catch{
@@ -115,12 +163,41 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
         
     }
+    func filterContentForSearchText(searchText:String, scope: String = "All"){
+        filteredPositions = [Int]()
+        for i in 0 ..< names.count  {
+            var flag = true
+            for individualNames in names[i]{
+                if individualNames.lowercaseString.containsString(searchText.lowercaseString){
+                    filteredPositions.append(i)
+                    flag = false
+                    break
+                }
+            }
+            
+            if flag && messages[i].lowercaseString.containsString(searchText.lowercaseString){
+                filteredPositions.append(i)
+            }
+        }
+        tableView.reloadData()
+        
+    }
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateMessagesTable()
         tableView.delegate = self
         tableView.dataSource = self
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = searchController.searchBar
+        //self.navigationController!.toolbarHidden=false;
         //this should only update when a new message is created**
         //shouldn't be reloading the table more than once per viewDidLoad
         
@@ -164,22 +241,42 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        print("numberOfSectionsInTableView")
         return 1
     }
 
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print("numberOfRowsInSection \( IDsOfMessages.count + 1) \(LocalData().getUsername())")
-        return IDsOfMessages.count
+        //print("numberOfRowsInSection \( IDsOfMessages.count + 1) \(LocalData().getUsername())")
+        if (searchController.active && searchController.searchBar.text != "") || toolbarTapped {
+            print ("Search term is \(searchController.searchBar.text) and number of results is \(filteredPositions.count)")
+            return filteredPositions.count
+        }
+        return messages.count
         
     }
 
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("Row is \(indexPath.row)")
+        //print("Row is \(indexPath.row)")
+        var names = self.names
+        var messages = self.messages
+        var messageType = self.messageType
+        var messageTimestamps = self.messageTimestamps
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MessagesTableCell
         
+        if (searchController.active && searchController.searchBar.text != "") || toolbarTapped {
+             names = [[String]]()
+             messages = [String]()
+             messageType = [String]()
+             messageTimestamps = [NSDate?]()
+
+            for index in filteredPositions {
+                names.append(self.names[index])
+                messages.append(self.messages[index])
+                messageType.append(self.messageType[index])
+                messageTimestamps.append(self.messageTimestamps[index])
+            }
+        }
         var stringOfNames = ""
         var users = names[indexPath.row]
         users = users.filter { $0 != PFUser.currentUser()?["name"] as? String }
@@ -251,20 +348,29 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             print(dateFormatter.stringFromDate(date))
             
         }
-        
+        if indexPath == filteredPositions.count - 1 {
+            toolbarTapped = false
+        }
         return cell
 
         
     }
     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        var IDsOfMessages = self.IDsOfMessages
         let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! MessagesTableCell
-        
+        if (searchController.active && searchController.searchBar.text != "") || toolbarTapped {
+            IDsOfMessages = [String]()
+            for index in filteredPositions {
+                IDsOfMessages.append(self.IDsOfMessages[index])
+            }
+        }
+
         singleMessageTitle = (currentCell.participants?.text)!
         messageId = IDsOfMessages[indexPath.row ]
         
         previousViewController = "MessagesViewController"
+        toolbarTapped = false
         //messageId =
         
         //print(singleMessageTitle)
