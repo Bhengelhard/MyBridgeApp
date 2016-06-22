@@ -956,15 +956,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkF-cS-ZYo">
-                                <rect key="frame" x="0.0" y="441" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem title="All Bridges" id="0Cn-yi-Osz"/>
-                                    <barButtonItem title="Business" id="gyZ-oH-qPi"/>
-                                    <barButtonItem title="Love" id="2aS-kF-so8"/>
-                                    <barButtonItem title="Friendship" id="uPg-yF-uTX"/>
-                                </items>
-                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJ6-Xw-l9y">
                                 <rect key="frame" x="0.0" y="72" width="600" height="369"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -980,7 +971,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECb-rJ-YNl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="426" height="45"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="426" id="oLV-5n-jwt"/>
                                                         <constraint firstAttribute="height" constant="45" id="pAx-np-HbJ"/>
@@ -1001,7 +992,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wh-wb-hif">
-                                                    <rect key="frame" x="490" y="0.0" width="110" height="45"/>
+                                                    <rect key="frame" x="280" y="3" width="110" height="45"/>
                                                     <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1011,17 +1002,18 @@
                                                 <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="ECb-rJ-YNl" secondAttribute="trailing" constant="8" id="7fm-BT-FdD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="OFe-b2-g1f" secondAttribute="trailing" constant="-8" id="A84-YW-Vsh"/>
                                                 <constraint firstItem="ECb-rJ-YNl" firstAttribute="top" secondItem="e1H-5M-cRe" secondAttribute="topMargin" constant="-8" id="BJ1-Li-N72"/>
-                                                <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="e1H-5M-cRe" secondAttribute="leadingMargin" constant="482" id="IE7-Hz-nCS"/>
-                                                <constraint firstItem="1Wh-wb-hif" firstAttribute="trailing" secondItem="e1H-5M-cRe" secondAttribute="trailingMargin" constant="8" id="Jul-mz-e1t"/>
+                                                <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="e1H-5M-cRe" secondAttribute="leadingMargin" constant="272" id="IE7-Hz-nCS"/>
+                                                <constraint firstItem="1Wh-wb-hif" firstAttribute="trailing" secondItem="e1H-5M-cRe" secondAttribute="trailingMargin" constant="-202" id="Jul-mz-e1t"/>
                                                 <constraint firstItem="OFe-b2-g1f" firstAttribute="leading" secondItem="e1H-5M-cRe" secondAttribute="leading" id="K8b-aw-ZPz"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="1Wh-wb-hif" secondAttribute="trailing" constant="1" id="Kz2-Wo-ckK"/>
                                                 <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="ECb-rJ-YNl" secondAttribute="trailing" constant="8" id="Nrq-mG-a1U"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="OFe-b2-g1f" secondAttribute="bottom" constant="-8.5" id="O1c-Be-QcL"/>
                                                 <constraint firstAttribute="trailing" secondItem="OFe-b2-g1f" secondAttribute="trailing" id="R8D-eO-W5c"/>
-                                                <constraint firstItem="ECb-rJ-YNl" firstAttribute="baseline" secondItem="1Wh-wb-hif" secondAttribute="baseline" id="SX3-LR-HW3"/>
+                                                <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="ECb-rJ-YNl" secondAttribute="trailing" constant="20" id="RBN-yj-p1J"/>
+                                                <constraint firstItem="ECb-rJ-YNl" firstAttribute="baseline" secondItem="1Wh-wb-hif" secondAttribute="baseline" constant="-3.5" id="SX3-LR-HW3"/>
                                                 <constraint firstItem="OFe-b2-g1f" firstAttribute="top" secondItem="ECb-rJ-YNl" secondAttribute="bottom" constant="8" id="Sa0-dY-wR1"/>
-                                                <constraint firstItem="ECb-rJ-YNl" firstAttribute="firstBaseline" secondItem="1Wh-wb-hif" secondAttribute="firstBaseline" constant="3" id="W30-dw-tm6"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="1Wh-wb-hif" secondAttribute="trailing" constant="-8" id="ZZf-TQ-53Z"/>
+                                                <constraint firstItem="ECb-rJ-YNl" firstAttribute="firstBaseline" secondItem="1Wh-wb-hif" secondAttribute="firstBaseline" id="W30-dw-tm6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1Wh-wb-hif" secondAttribute="trailing" constant="202" id="ZZf-TQ-53Z"/>
                                                 <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="ECb-rJ-YNl" secondAttribute="trailing" constant="8" id="adY-3u-E0z"/>
                                                 <constraint firstItem="OFe-b2-g1f" firstAttribute="top" secondItem="ECb-rJ-YNl" secondAttribute="bottom" constant="8" id="ftl-ia-PuW"/>
                                                 <constraint firstItem="OFe-b2-g1f" firstAttribute="top" secondItem="1Wh-wb-hif" secondAttribute="bottom" constant="8" id="jzw-cO-WD1"/>
@@ -1029,15 +1021,19 @@
                                                 <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="ECb-rJ-YNl" secondAttribute="trailing" constant="64" id="pXq-Xz-KB2"/>
                                                 <constraint firstItem="ECb-rJ-YNl" firstAttribute="leading" secondItem="e1H-5M-cRe" secondAttribute="leadingMargin" constant="-8" id="pzU-KC-deo"/>
                                                 <constraint firstItem="1Wh-wb-hif" firstAttribute="leading" secondItem="ECb-rJ-YNl" secondAttribute="trailing" constant="8" id="qzx-a6-Fko"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="1Wh-wb-hif" secondAttribute="trailing" constant="-8" id="rKT-ly-nC5"/>
-                                                <constraint firstItem="OFe-b2-g1f" firstAttribute="top" secondItem="1Wh-wb-hif" secondAttribute="bottom" constant="8" id="tBK-pL-wDy"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1Wh-wb-hif" secondAttribute="trailing" constant="202" id="rKT-ly-nC5"/>
+                                                <constraint firstItem="OFe-b2-g1f" firstAttribute="top" secondItem="1Wh-wb-hif" secondAttribute="bottom" constant="5" id="tBK-pL-wDy"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="Sa0-dY-wR1"/>
+                                                    <exclude reference="ftl-ia-PuW"/>
+                                                    <exclude reference="jzw-cO-WD1"/>
                                                     <exclude reference="7fm-BT-FdD"/>
                                                     <exclude reference="Kz2-Wo-ckK"/>
                                                     <exclude reference="Nrq-mG-a1U"/>
                                                     <exclude reference="adY-3u-E0z"/>
+                                                    <exclude reference="pXq-Xz-KB2"/>
                                                     <exclude reference="qzx-a6-Fko"/>
                                                 </mask>
                                             </variation>
@@ -1054,6 +1050,31 @@
                                     <outlet property="delegate" destination="zXt-b0-Sdf" id="Eig-jA-B55"/>
                                 </connections>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkF-cS-ZYo">
+                                <rect key="frame" x="0.0" y="441" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="All Bridges" id="0Cn-yi-Osz">
+                                        <connections>
+                                            <action selector="allBridgesTapped:" destination="zXt-b0-Sdf" id="ZNa-dB-fUz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Business" id="gyZ-oH-qPi">
+                                        <connections>
+                                            <action selector="businessTapped:" destination="zXt-b0-Sdf" id="get-lQ-iT7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Love" id="2aS-kF-so8">
+                                        <connections>
+                                            <action selector="loveTapped:" destination="zXt-b0-Sdf" id="1tQ-NU-wXm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Friendship" id="uPg-yF-uTX">
+                                        <connections>
+                                            <action selector="friendshipTapped:" destination="zXt-b0-Sdf" id="qgD-Gk-G3C"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
