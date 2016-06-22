@@ -14,15 +14,35 @@ var messageId = String()
 //var messageID =
 
 //Change to MessagesTableViewController so other can be MessageViewController
-class MessagesViewController: UITableViewController {
+
+func getWeekDay(num:Int)->String{
+    switch num {
+    case 1: return "Sunday"
+    case 2: return "Monday"
+    case 3: return "Tuesday"
+    case 4: return "Wednesday"
+    case 5: return "Thursday"
+    case 6: return "Friday"
+    case 7: return "Saturday"
+    default : return "A good day to die hard!"
+    }
+}
+
+
+class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+   // @IBOutlet var tableView: UITableView!
     var emails = [String]()
     var images = [UIImage]()
     
     //need to combine these into a dictionary
     var names = [[String]]()
     var IDsOfMessages = [String]()
-    
+    var messages = [String]()
+    var messageType = [String]()
+    var messageTimestamps = [NSDate?]()
+
     @IBAction func segueToBridgeViewController(sender: AnyObject) {
         
         navigationController?.popViewControllerAnimated(true)
@@ -49,10 +69,40 @@ class MessagesViewController: UITableViewController {
                     
                     self.names.append(result["names_in_message"] as! [String])
                     self.IDsOfMessages.append(result.objectId!)
+                    if let _ = result["message_type"] {
+                        self.messageType.append(result["message_type"] as! (String))
+                    }
+                    else{
+                        self.messageType.append("Default")
+                    }
+                    do{
+                        let messageQuery = PFQuery(className:"SingleMessages")
+                        messageQuery.whereKey("message_id", equalTo:result.objectId!)
+                        messageQuery.orderByDescending("createdAt")
+                        let messageObjects = try messageQuery.findObjects()
+                        for messageObject in messageObjects {
+                            if let _ = messageObject["message_text"] {
+                                self.messages.append(messageObject["message_text"] as! (String))
+                            }
+                            else{
+                                self.messages.append("")
+                            }
+                            
+                            
+                            self.messageTimestamps.append((messageObject.createdAt))
+                            break
+                            //friendsArray.append(object.objectId!)
+                        }
+                    }
+                    catch{
+                        print(error)
+                    }
+                    
                     
                 }
+
                 
-                dispatch_async(dispatch_get_main_queue(), {
+               dispatch_async(dispatch_get_main_queue(), {
                     
                     self.tableView.reloadData()
                     
@@ -68,11 +118,13 @@ class MessagesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.updateMessagesTable()
+        tableView.delegate = self
+        tableView.dataSource = self
         //this should only update when a new message is created**
         //shouldn't be reloading the table more than once per viewDidLoad
         
-        self.updateMessagesTable()
+        
         
         /*if segueFromExitedMessage == true {
             
@@ -110,82 +162,107 @@ class MessagesViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+        print("numberOfSectionsInTableView")
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
-        return IDsOfMessages.count + 1
+        print("numberOfRowsInSection \( IDsOfMessages.count + 1) \(LocalData().getUsername())")
+        return IDsOfMessages.count
         
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print("Row is \(indexPath.row)")
-        if indexPath.row == 0{
-            let cell = tableView.dequeueReusableCellWithIdentifier("SearchCell", forIndexPath: indexPath)
-            return cell
-        }
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MessagesTableCell
         
         var stringOfNames = ""
+        var users = names[indexPath.row]
+        users = users.filter { $0 != PFUser.currentUser()?["name"] as? String }
         
-        /*for (key, value) in users[indexPath.row] {
+        for i in 0 ..< users.count  {
             
-            stringOfNames = stringOfNames + value + " ,"
-            
-        }*/
-        
-        //take out 0th object if exitedMessage is true and turn it to false at the end
-            
-        for name in names[indexPath.row - 1] {
-        
-            //add & between last two users - currently adds & only when there are two users
-            
-            if names[indexPath.row - 1].count == 3 {
-                    
-                if name != PFUser.currentUser()?["name"] as? String {
-                        
-                    stringOfNames = stringOfNames + name + " & "
-                        
-                }
-                    
-            } else if name != PFUser.currentUser()?["name"] as? String {
-                    
-                stringOfNames = stringOfNames + name + ", "
-                    
-            }
+            var name = users[i]
+            if users.count > 2 && i < users.count - 2 {
+                var fullNameArr = name.characters.split{$0 == " "}.map(String.init)
+                stringOfNames = stringOfNames + fullNameArr[0] + " , "
                 
+            } else if users.count >= 2 && i == users.count - 2 {
+                var fullNameArr = name.characters.split{$0 == " "}.map(String.init)
+                stringOfNames = stringOfNames + fullNameArr[0] + " & "
+                
+            }
+            else {
+                if users.count > 1{
+                    name = name.characters.split{$0 == " "}.map(String.init)[0]
+                }
+                stringOfNames = stringOfNames + name
+            }
+            
         }
         
-        stringOfNames = String(stringOfNames.characters.dropLast())
-        stringOfNames = String(stringOfNames.characters.dropLast())
+        //cell.participants.lineBreakMode = .ByWordWrapping
+        //cell.participants.numberOfLines = 0
+        cell.participants.text = stringOfNames
+        cell.messageSnapshot.text = messages[indexPath.row]
+        switch messageType[indexPath.row]{
+            
+        case "Business": cell.backgroundColor = UIColor(red: 139.0/255, green: 217.0/255, blue: 176.0/255, alpha: 1.0)
+            break
+        case "Love": cell.backgroundColor = UIColor.init(red: 255.0/255, green: 129.0/255, blue: 125.0/255, alpha: 1.0)
+            break
+        case "Friendship": cell.backgroundColor = UIColor.init(red: 144.0/255, green: 207.0/255, blue: 214.0/255, alpha: 1.0)
+            break
+        default: cell.backgroundColor = UIColor.init(red: 139.0/255, green: 217.0/255, blue: 176.0/255, alpha: 1.0)
+            
+        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyy hh:mm:ss +zzzz"
+        let calendar = NSCalendar.currentCalendar()
+        let date = messageTimestamps[indexPath.row]!
+        let components = calendar.components([.Month, .Day, .Year, .WeekOfYear],
+                                             fromDate: date, toDate: NSDate(), options: NSCalendarOptions.WrapComponents)
+        if components.day > 7 {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyy"
+            print(dateFormatter.stringFromDate(date))
+            cell.messageTimestamp.text = dateFormatter.stringFromDate(date)+">"
+        }
+        else if components.day > 2 {
+            let calendar = NSCalendar.currentCalendar()
+            let date = messageTimestamps[indexPath.row]!
+            let components = calendar.components([.Weekday],
+                                                 fromDate: date)
+            print(components.weekday)
+            cell.messageTimestamp.text = String(getWeekDay(components.weekday))+">"
+        }
+        else if components.day > 1 {
+            print ("Yesterday")
+            cell.messageTimestamp.text = "Yesterday"+">"
+        }
+        else {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "hh:mm:ss"
+            cell.messageTimestamp.text = dateFormatter.stringFromDate(date)+">"
+            print(dateFormatter.stringFromDate(date))
+            
+        }
         
-        cell.textLabel?.text = stringOfNames
-        //set message cell labels to names of other users in message, timestamp of last sent message or otherwise of creation, and preview of text of last sent message
-        //namesLabel.text = stringOfNames
-        //timestampLabel.text = 
-        //messagePreviewLabel.text =
-
-        /*if images.count > indexPath.row {
-            
-            cell.imageView?.image = images[indexPath.row]
-            
-        }*/
-
         return cell
+
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! MessagesTableCell
         
-        singleMessageTitle = (currentCell.textLabel?.text)!
-        messageId = IDsOfMessages[indexPath.row - 1]
+        singleMessageTitle = (currentCell.participants?.text)!
+        messageId = IDsOfMessages[indexPath.row ]
         
         previousViewController = "MessagesViewController"
         //messageId =
