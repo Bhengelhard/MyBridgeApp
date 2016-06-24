@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VvB-sH-Hxl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="a0m-Jv-xyc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -394,7 +394,7 @@
         <!--New Message-->
         <scene sceneID="GLA-rq-wj8">
             <objects>
-                <viewController title="New Message" id="a0m-Jv-xyc" sceneMemberID="viewController">
+                <viewController title="New Message" id="a0m-Jv-xyc" customClass="NewMessageViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dbN-GX-HHE"/>
                         <viewControllerLayoutGuide type="bottom" id="9qC-kC-kkl"/>
@@ -410,7 +410,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="New Message" id="D2I-1K-u35">
-                                        <barButtonItem key="rightBarButtonItem" title="cancel" id="Icv-Jd-EdQ">
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Icv-Jd-EdQ">
                                             <connections>
                                                 <segue destination="zXt-b0-Sdf" kind="show" id="JzV-LS-8wx"/>
                                             </connections>
@@ -418,41 +418,147 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-bz-SYY">
+                                <rect key="frame" x="0.0" y="72" width="375" height="523"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="lf1-WK-9QT">
+                                    <rect key="frame" x="0.0" y="124" width="375" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="96" id="geX-aI-Dai" customClass="NewMessageTableCell" customModule="MyBridgeApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="geX-aI-Dai" id="1GK-eo-elS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="95.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL8-0O-hzJ">
+                                                    <rect key="frame" x="8" y="37" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JpT-cw-hqr">
+                                                    <rect key="frame" x="267" y="-2" width="54" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="54" id="gZO-cg-bEq"/>
+                                                        <constraint firstAttribute="height" constant="54" id="m34-Rt-TS0"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JL8-0O-hzJ" firstAttribute="leading" secondItem="1GK-eo-elS" secondAttribute="leadingMargin" id="HAN-j0-EPL"/>
+                                                <constraint firstItem="JpT-cw-hqr" firstAttribute="top" secondItem="1GK-eo-elS" secondAttribute="topMargin" constant="-10" id="Ia6-pD-AZU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JpT-cw-hqr" secondAttribute="trailing" constant="46" id="dHC-ZX-24R"/>
+                                                <constraint firstItem="JL8-0O-hzJ" firstAttribute="centerY" secondItem="1GK-eo-elS" secondAttribute="centerY" id="eqy-6E-dVk"/>
+                                                <constraint firstItem="JL8-0O-hzJ" firstAttribute="leading" secondItem="1GK-eo-elS" secondAttribute="leadingMargin" id="uGK-fe-9ct"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="JL8-0O-hzJ" id="2Fc-ks-o0J"/>
+                                            <outlet property="profilePhoto" destination="JpT-cw-hqr" id="pS1-oc-F5T"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AiT-Ge-GFc">
                                 <rect key="frame" x="-4" y="623" width="383" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="asl-jE-Dk1"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem style="plain" id="bUf-ss-urj">
-                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Message" textAlignment="natural" minimumFontSize="17" id="gHz-vU-ae6">
-                                            <rect key="frame" x="16" y="7" width="232" height="30"/>
+                                    <barButtonItem title="Item" style="plain" id="Gv5-ME-vyB">
+                                        <view key="customView" contentMode="scaleToFill" id="TuY-wQ-qtK">
+                                            <rect key="frame" x="16" y="2.5" width="42" height="39"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujX-q0-o8d">
+                                                    <rect key="frame" x="8" y="8" width="26" height="23.5"/>
+                                                    <state key="normal" title="Button" image="camera_icon_small.jpg"/>
+                                                    <connections>
+                                                        <action selector="photoButton:" destination="a0m-Jv-xyc" eventType="touchUpInside" id="Aco-fk-bje"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7rq-kl-h7I">
+                                                    <rect key="frame" x="33" y="11" width="17" height="17"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="leading" secondItem="TuY-wQ-qtK" secondAttribute="leadingMargin" id="Jzw-gh-FbG"/>
+                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="trailing" secondItem="TuY-wQ-qtK" secondAttribute="trailingMargin" id="QSV-EG-hn8"/>
+                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="top" secondItem="TuY-wQ-qtK" secondAttribute="topMargin" id="gsZ-YB-zyz"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ujX-q0-o8d" secondAttribute="bottom" id="tb8-dt-mHv"/>
+                                            </constraints>
+                                        </view>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="zd8-g8-maN"/>
-                                    <barButtonItem title="Send" id="gF2-wR-mHb">
-                                        <connections>
-                                            <action selector="sendMessage:" destination="ABc-Ef-uKn" id="quC-tT-I6P"/>
-                                            <segue destination="ABc-Ef-uKn" kind="show" id="zfb-yQ-060"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="nEC-gv-5e8">
+                                        <view key="customView" contentMode="scaleToFill" id="dvJ-qo-XwH">
+                                            <rect key="frame" x="68" y="5.5" width="168" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bridge Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ese-5Q-Caz">
+                                                    <rect key="frame" x="0.0" y="1" width="170" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="ese-5Q-Caz" firstAttribute="centerY" secondItem="dvJ-qo-XwH" secondAttribute="centerY" id="IdA-Oa-0zq"/>
+                                                <constraint firstAttribute="trailing" secondItem="ese-5Q-Caz" secondAttribute="trailing" constant="-2" id="dGq-qb-V15"/>
+                                                <constraint firstItem="ese-5Q-Caz" firstAttribute="leading" secondItem="dvJ-qo-XwH" secondAttribute="leading" id="jsS-Ec-nQP"/>
+                                            </constraints>
+                                        </view>
+                                    </barButtonItem>
+                                    <barButtonItem width="22" style="plain" systemItem="fixedSpace" id="2d9-zY-Mm1"/>
+                                    <barButtonItem style="plain" id="tTQ-La-zcJ">
+                                        <view key="customView" contentMode="scaleToFill" id="hZ0-aZ-XJu">
+                                            <rect key="frame" x="268" y="5.5" width="97" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTX-9h-TQU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
+                                                    <state key="normal" title="Send">
+                                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="NTX-9h-TQU" firstAttribute="leading" secondItem="hZ0-aZ-XJu" secondAttribute="leading" id="43p-43-vId"/>
+                                                <constraint firstItem="NTX-9h-TQU" firstAttribute="centerX" secondItem="hZ0-aZ-XJu" secondAttribute="centerX" id="HJn-Lr-0Gx"/>
+                                                <constraint firstItem="NTX-9h-TQU" firstAttribute="top" secondItem="hZ0-aZ-XJu" secondAttribute="top" id="duz-Rl-xB9"/>
+                                            </constraints>
+                                        </view>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qBQ-bz-SYY" firstAttribute="centerX" secondItem="yDx-iD-BoW" secondAttribute="centerX" id="1Po-0i-qF1"/>
                             <constraint firstItem="9qC-kC-kkl" firstAttribute="top" secondItem="AiT-Ge-GFc" secondAttribute="bottom" id="7zX-7I-G9r"/>
+                            <constraint firstItem="qBQ-bz-SYY" firstAttribute="top" secondItem="J75-mC-JeW" secondAttribute="bottom" id="Cwr-p8-MAL"/>
                             <constraint firstItem="AiT-Ge-GFc" firstAttribute="leading" secondItem="yDx-iD-BoW" secondAttribute="leadingMargin" constant="-20" id="K7b-TY-JjJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J75-mC-JeW" secondAttribute="trailing" constant="-20" id="MWe-gf-cQb"/>
+                            <constraint firstItem="qBQ-bz-SYY" firstAttribute="leading" secondItem="yDx-iD-BoW" secondAttribute="leading" id="VfF-Cv-joh"/>
+                            <constraint firstItem="qBQ-bz-SYY" firstAttribute="centerY" secondItem="yDx-iD-BoW" secondAttribute="centerY" id="a85-gh-oE1"/>
+                            <constraint firstItem="qBQ-bz-SYY" firstAttribute="top" secondItem="J75-mC-JeW" secondAttribute="bottom" id="fJl-N4-ymr"/>
                             <constraint firstItem="J75-mC-JeW" firstAttribute="leading" secondItem="yDx-iD-BoW" secondAttribute="leadingMargin" constant="-20" id="tB7-Ao-m7v"/>
                             <constraint firstItem="J75-mC-JeW" firstAttribute="top" secondItem="dbN-GX-HHE" secondAttribute="bottom" constant="8" id="wTw-Uu-OeB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AiT-Ge-GFc" secondAttribute="trailing" constant="-20" id="zya-GQ-Hzp"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageMessage" destination="7rq-kl-h7I" id="nxG-y7-ObD"/>
+                        <outlet property="sendButon" destination="NTX-9h-TQU" id="Be9-3K-ZZD"/>
+                        <outlet property="tableView" destination="qBQ-bz-SYY" id="CnQ-S2-lGJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kin-se-qVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1066,10 +1172,10 @@
             </objects>
             <point key="canvasLocation" x="1394.5" y="-250.5"/>
         </scene>
-        <!--Messages View Controller-->
+        <!--Old Messages View Controller-->
         <scene sceneID="yR7-m9-XyN">
             <objects>
-                <tableViewController id="MtK-gn-56M" customClass="MessagesViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Old Messages View Controller" id="MtK-gn-56M" customClass="MessagesViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="jTZ-XT-tJK"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
@@ -1449,15 +1555,16 @@
     <resources>
         <image name="Editing-Rectangle-Stroked-icon.png" width="32" height="32"/>
         <image name="bridgeVector.jpg" width="259" height="194"/>
+        <image name="camera_icon_small.jpg" width="25" height="25"/>
         <image name="login_with_facebook.png" width="732" height="100"/>
         <image name="suzy's_profile_picture.jpg" width="960" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5bU-kI-iEz"/>
-        <segue reference="JzV-LS-8wx"/>
-        <segue reference="0Jc-ZY-MLe"/>
+        <segue reference="Lus-h1-21q"/>
+        <segue reference="HGT-Vo-Kl8"/>
+        <segue reference="B19-eu-GHC"/>
         <segue reference="R3c-8L-9g2"/>
         <segue reference="hZa-MC-ZQr"/>
-        <segue reference="HGT-Vo-Kl8"/>
+        <segue reference="JzV-LS-8wx"/>
     </inferredMetricsTieBreakers>
 </document>
