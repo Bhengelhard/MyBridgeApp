@@ -11,17 +11,143 @@ import Parse
 class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchResultsUpdating, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate {
 
     
+    @IBOutlet weak var bridgeMessage: UITextField!
     @IBOutlet weak var imageMessage: UIImageView!
     @IBOutlet weak var sendButon: UIButton!
     @IBOutlet weak var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     var friendNames = [String]()
+    var friendObjectIds = [String]()
     var friendProfilePictures = [UIImage]()
     var filteredPositions = [Int]()
     var nameAdded = false
     var picker = UIImagePickerController()
     var imageViewRef = UIButton()
+    var sendToObjectIds = [String]()
+    var imageSet = false
     
+    func getFriendNames(){
+        let friendList = LocalData().getFriendList()
+        if let _ = friendList{
+            let query: PFQuery = PFQuery(className: "_User")
+            query.whereKey("objectId", containedIn: friendList!)
+            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+                if let error = error {
+                    print(error)
+                }
+                else if let results = results {
+                    for result in results{
+                        self.friendObjectIds.append(result.objectId!)
+                        if let name = result["name"] as? String{
+                            self.friendNames.append(name)
+                        }
+                        else {
+                            self.friendNames.append("Anonymous")
+                        }
+                        if let profilePhoto = result["fb_profile_picture"] as? PFFile{
+                            do {
+                                let imageData = try profilePhoto.getData()
+                                print("fb_profile_picture")
+                                self.friendProfilePictures.append(UIImage(data:imageData)!)
+                                
+                            }
+                            catch{
+                                print(error)
+                            }
+                            
+                        }
+                        else if let profilePhoto = result["profile_picture"] as? PFFile{
+                            do {
+                                let imageData = try profilePhoto.getData()
+                                print("profile_picture")
+                                self.friendProfilePictures.append(UIImage(data:imageData)!)
+                                
+                            }
+                            catch{
+                                print(error)
+                            }
+                            
+                        }
+                        
+                    }
+                }
+                
+            })
+        }
+    }
+
+    
+    
+    @IBAction func sendButtonTapped(sender: AnyObject) {
+        if bridgeMessage.text != "" || self.imageSet{
+            //self.imageSet = false
+            imageMessage.hidden = true
+            
+            self.sendButon.userInteractionEnabled = false
+            self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+            self.searchController.searchBar.text = ""
+            self.bridgeMessage.text = ""
+            let query: PFQuery = PFQuery(className: "Messages")
+            var objectIdsInMessage = sendToObjectIds
+            objectIdsInMessage.append((PFUser.currentUser()?.objectId)!)
+            print("objectIdsInMessage - \(objectIdsInMessage)")
+            query.whereKey("ids_in_message", containsAllObjectsInArray: objectIdsInMessage)
+            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+                if let error = error {
+                    print(error)
+                    
+                } else if let results = results {
+                    var messageId = String()
+                    var messageIdNotFound = true
+                    for result in results{
+                        let objectIdsRetrieved = result["ids_in_message"] as! [String]
+                        if objectIdsInMessage.count == objectIdsRetrieved.count{
+                            print("object found")
+                            messageId = result.objectId!
+                            messageIdNotFound = false
+                            result.saveInBackground() // to update the time
+                            break
+                        }
+                    }
+                    if (messageIdNotFound) {
+                        print("object not found")
+                        let message = PFObject(className: "Messages")
+                        message["ids_in_message"]  = objectIdsInMessage
+                        message["bridge_builder"] = PFUser.currentUser()?.objectId
+                        do{
+                            try message.save()
+                            messageId = message.objectId!
+                        }
+                        catch{
+                            print(error)
+                        }
+
+                    }
+                    let singleMessage = PFObject(className: "SingleMessages")
+                    if self.bridgeMessage.text != "" {
+                        singleMessage["message_text"] = self.bridgeMessage.text!
+                    }
+                    if self.imageSet {
+                        print("imageSet is Set to true")
+                        let file = PFFile(data: UIImageJPEGRepresentation(self.imageMessage.image!, 1.0)!)
+                        singleMessage["message_image"] = file
+                        self.imageSet = false
+                    }
+                    singleMessage["sender"] = PFUser.currentUser()?.objectId
+                    singleMessage["message_id"] = messageId
+                    do{
+                        try singleMessage.save()
+                    }
+                    catch{
+                        print(error)
+                    }
+
+                }
+            })
+            
+        }
+        
+    }
     @IBAction func photoButton(sender: AnyObject) {
         let savedSendTo = searchController.searchBar.text!
         searchController.active = false
@@ -47,7 +173,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         alert.addAction(galleryAction)
         alert.addAction(cancelAction)
         self.presentViewController(alert, animated: true, completion: nil)
-       searchController.searchBar.text = savedSendTo
+        searchController.searchBar.text = savedSendTo
     }
     func openCamera(){
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
@@ -65,66 +191,20 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(picker, animated: true, completion: nil)
     }
-    //MARK:UIImagePickerControllerDelegate
+   
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         picker .dismissViewControllerAnimated(true, completion: nil)
         imageMessage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         imageMessage.hidden = false
+        self.imageSet = true
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
         print("picker cancel.")
+        self.imageSet = false
     }
 
     
-    func getFriendNames(){
-        let friendList = LocalData().getFriendList()
-        if let _ = friendList{
-            let query: PFQuery = PFQuery(className: "_User")
-            query.whereKey("objectId", containedIn: friendList!)
-            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
-                if let error = error {
-                    print(error)
-                }
-                else if let results = results {
-                    for result in results{
-                        if let name = result["name"] as? String{
-                            self.friendNames.append(name)
-                        }
-                        else {
-                            self.friendNames.append("Anonymous")
-                        }
-                        if let profilePhoto = result["fb_profile_picture"] as? PFFile{
-                            do {
-                                 let imageData = try profilePhoto.getData()
-                                 print("fb_profile_picture")
-                                 self.friendProfilePictures.append(UIImage(data:imageData)!)
-                                
-                            }
-                            catch{
-                                print(error)
-                            }
-                            
-                        }
-                        else if let profilePhoto = result["profile_picture"] as? PFFile{
-                            do {
-                                let imageData = try profilePhoto.getData()
-                                print("profile_picture")
-                                self.friendProfilePictures.append(UIImage(data:imageData)!)
-                                
-                            }
-                            catch{
-                                print(error)
-                            }
-
-                        }
-                        
-                    }
-                }
-
-            })
-        }
-    }
-    override func viewDidLoad() {
+      override func viewDidLoad() {
         super.viewDidLoad()
         self.getFriendNames()
         
@@ -153,10 +233,11 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.sendButon.userInteractionEnabled = false
         self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        self.sendToObjectIds = [String]()
         print("cancel button tapped")
     }
     func filterContentForSearchText(searchText:String, scope: String = "All"){
-        print("searchText is \(searchText) and friend names are \(self.friendNames)")
+        print("searchText is \(searchText) and friend ids are \(self.friendObjectIds)")
         self.filteredPositions = [Int]()
         var searchTerms = searchText.characters.split{$0 == ","}.map(String.init)
         var searchFor = searchText
@@ -203,11 +284,18 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             for i in 0 ..< searchTerms.count-1 {
                 preSearchedTerms += searchTerms[i]+","
             }
+            self.sendToObjectIds.append(self.friendObjectIds[filteredPositions[indexPath.row]])
             searchController.searchBar.text = preSearchedTerms+friendNames[filteredPositions[indexPath.row]]+","
+            
         }
         else {
-        searchController.searchBar.text = friendNames[filteredPositions[indexPath.row]] + ","
+            print("filteredPositions \(filteredPositions) ")
+            self.sendToObjectIds.append(self.friendObjectIds[filteredPositions[indexPath.row]])
+            searchController.searchBar.text = friendNames[filteredPositions[indexPath.row]] + ","
+            
         }
+        
+        
         self.sendButon.userInteractionEnabled = true
         self.sendButon.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         self.nameAdded = true

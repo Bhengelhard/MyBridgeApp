@@ -525,6 +525,9 @@
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="sendButtonTapped:" destination="a0m-Jv-xyc" eventType="touchUpInside" id="rYS-IK-evg"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -555,6 +558,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="bridgeMessage" destination="ese-5Q-Caz" id="z4c-Kt-Xas"/>
                         <outlet property="imageMessage" destination="7rq-kl-h7I" id="nxG-y7-ObD"/>
                         <outlet property="sendButon" destination="NTX-9h-TQU" id="Be9-3K-ZZD"/>
                         <outlet property="tableView" destination="qBQ-bz-SYY" id="CnQ-S2-lGJ"/>
@@ -1560,11 +1564,11 @@
         <image name="suzy's_profile_picture.jpg" width="960" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lus-h1-21q"/>
-        <segue reference="HGT-Vo-Kl8"/>
+        <segue reference="00U-Jg-Jap"/>
         <segue reference="B19-eu-GHC"/>
         <segue reference="R3c-8L-9g2"/>
         <segue reference="hZa-MC-ZQr"/>
+        <segue reference="HGT-Vo-Kl8"/>
         <segue reference="JzV-LS-8wx"/>
     </inferredMetricsTieBreakers>
 </document>
