@@ -23,6 +23,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     var imageViewRef = UIButton()
     
     @IBAction func photoButton(sender: AnyObject) {
+        let savedSendTo = searchController.searchBar.text!
+        searchController.active = false
         let alert:UIAlertController=UIAlertController(title: "Choose Image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default)
         {
@@ -45,6 +47,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         alert.addAction(galleryAction)
         alert.addAction(cancelAction)
         self.presentViewController(alert, animated: true, completion: nil)
+       searchController.searchBar.text = savedSendTo
     }
     func openCamera(){
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
