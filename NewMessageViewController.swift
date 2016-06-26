@@ -25,7 +25,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     var imageViewRef = UIButton()
     var sendToObjectIds = [String]()
     var imageSet = false
-    
+    var messageId = String()
+    var segueToSingleMessage = false
     func getFriendNames(){
         let friendList = LocalData().getFriendList()
         if let _ = friendList{
@@ -44,7 +45,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                         else {
                             self.friendNames.append("Anonymous")
                         }
-                        if let profilePhoto = result["fb_profile_picture"] as? PFFile{
+                        if let profilePhoto = result["profile_picture"] as? PFFile{
                             do {
                                 let imageData = try profilePhoto.getData()
                                 print("fb_profile_picture")
@@ -56,7 +57,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                             }
                             
                         }
-                        else if let profilePhoto = result["profile_picture"] as? PFFile{
+                        else if let profilePhoto = result["fb_profile_picture"] as? PFFile{
                             do {
                                 let imageData = try profilePhoto.getData()
                                 print("profile_picture")
@@ -76,7 +77,14 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
 
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segueToSingleMessage {
+        segueToSingleMessage = false
+        let singleMessageVC:SingleMessageViewController = segue.destinationViewController as! SingleMessageViewController
+        singleMessageVC.isSeguedFromNewMessage = true
+        singleMessageVC.newMessageId = self.messageId
+        }
+    }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
         if bridgeMessage.text != "" || self.imageSet{
@@ -86,29 +94,29 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             self.sendButon.userInteractionEnabled = false
             self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             self.searchController.searchBar.text = ""
-            self.bridgeMessage.text = ""
             let query: PFQuery = PFQuery(className: "Messages")
             var objectIdsInMessage = sendToObjectIds
             objectIdsInMessage.append((PFUser.currentUser()?.objectId)!)
             print("objectIdsInMessage - \(objectIdsInMessage)")
             query.whereKey("ids_in_message", containsAllObjectsInArray: objectIdsInMessage)
-            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
-                if let error = error {
-                    print(error)
-                    
-                } else if let results = results {
-                    var messageId = String()
-                    var messageIdNotFound = true
-                    for result in results{
-                        let objectIdsRetrieved = result["ids_in_message"] as! [String]
-                        if objectIdsInMessage.count == objectIdsRetrieved.count{
-                            print("object found")
-                            messageId = result.objectId!
-                            messageIdNotFound = false
-                            result.saveInBackground() // to update the time
-                            break
-                        }
+            var messageIdNotFound = true
+            do{
+            let results = try query.findObjects()
+            self.messageId = String()
+            for result in results{
+                let objectIdsRetrieved = result["ids_in_message"] as! [String]
+                if objectIdsInMessage.count == objectIdsRetrieved.count{
+                    print("object found")
+                    self.messageId = result.objectId!
+                    messageIdNotFound = false
+                    result.saveInBackground() // to update the time
+                    break
                     }
+              }
+            }
+            catch {
+                
+            }
                     if (messageIdNotFound) {
                         print("object not found")
                         let message = PFObject(className: "Messages")
@@ -116,7 +124,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                         message["bridge_builder"] = PFUser.currentUser()?.objectId
                         do{
                             try message.save()
-                            messageId = message.objectId!
+                            self.messageId = message.objectId!
                         }
                         catch{
                             print(error)
@@ -125,6 +133,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                     }
                     let singleMessage = PFObject(className: "SingleMessages")
                     if self.bridgeMessage.text != "" {
+                        print("self.bridgeMessage.text \(self.bridgeMessage.text)")
                         singleMessage["message_text"] = self.bridgeMessage.text!
                     }
                     if self.imageSet {
@@ -134,7 +143,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                         self.imageSet = false
                     }
                     singleMessage["sender"] = PFUser.currentUser()?.objectId
-                    singleMessage["message_id"] = messageId
+                    singleMessage["message_id"] = self.messageId
                     do{
                         try singleMessage.save()
                     }
@@ -143,10 +152,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                     }
 
                 }
-            })
-            
-        }
-        
+            segueToSingleMessage = true
+            performSegueWithIdentifier("showSingleMessageFromNewMessage", sender: self)
     }
     @IBAction func photoButton(sender: AnyObject) {
         let savedSendTo = searchController.searchBar.text!

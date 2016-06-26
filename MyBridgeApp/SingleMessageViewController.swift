@@ -18,7 +18,8 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     var messageTextArray = [String]()
-    
+    var newMessageId = String()
+    var isSeguedFromNewMessage = false
     @IBOutlet weak var singleMessageTableView: UITableView!
     @IBOutlet weak var sendButton: UIBarButtonItem!
     
@@ -72,6 +73,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     func updateMessages() {
         
         //querying for messages
+        print("messageId is \(messageId)")
         let query: PFQuery = PFQuery(className: "SingleMessages")
         
         query.whereKey("message_id", equalTo: messageId)
@@ -218,11 +220,17 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         navigationBar.title = singleMessageTitle
-        if previousViewController == "MessagesViewController" {
+        if previousViewController == "MessagesViewController"   {
             
             updateMessages()
             
         }
+        else if isSeguedFromNewMessage   {
+            messageId = newMessageId
+            updateMessages()
+            
+        }
+
         
         //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField), recievers (recievers - current user) are displayed on title
         

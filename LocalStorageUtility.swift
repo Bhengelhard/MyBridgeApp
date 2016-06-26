@@ -68,7 +68,7 @@ class LocalStorageUtility{
                         let imageFile: PFFile = PFFile(data: data)!
                         PFUser.currentUser()?["profile_picture"] = imageFile
                         PFUser.currentUser()?["profile_picture_from_fb"] = true
-
+                        print("storing profile picture to local storage")
                         localData.setMainProfilePicture(data)
                         localData.setProfilePictureFromFb(true)
                         localData.synchronize()
