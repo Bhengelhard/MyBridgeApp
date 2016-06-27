@@ -151,7 +151,7 @@ class LoadPageViewController: UIViewController {
         PFUser.currentUser()?.fetchInBackgroundWithBlock({ (object, error) in
             let localData = LocalData()
             if let username = localData.getMainProfilePicture(){ //remember to change this back to username
-                print("Load page, username is \(username)")
+                //print("Load page, username is \(username)")
                 LocalStorageUtility().getUserFriends()
                 LocalStorageUtility().getMainProfilePicture()
                 LocalStorageUtility().getBridgePairings()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VvB-sH-Hxl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="a0m-Jv-xyc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -469,69 +469,20 @@
                                     <constraint firstAttribute="height" constant="44" id="asl-jE-Dk1"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" style="plain" id="Gv5-ME-vyB">
-                                        <view key="customView" contentMode="scaleToFill" id="TuY-wQ-qtK">
-                                            <rect key="frame" x="16" y="2.5" width="42" height="39"/>
+                                    <barButtonItem style="plain" id="Nsk-BZ-NOi">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ujX-q0-o8d">
+                                            <rect key="frame" x="16" y="2.5" width="27" height="39"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujX-q0-o8d">
-                                                    <rect key="frame" x="0.0" y="0.0" width="27" height="39"/>
-                                                    <state key="normal" title="Button" image="camera_icon_small.jpg"/>
-                                                    <connections>
-                                                        <action selector="photoButton:" destination="a0m-Jv-xyc" eventType="touchUpInside" id="Aco-fk-bje"/>
-                                                    </connections>
-                                                </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7rq-kl-h7I">
-                                                    <rect key="frame" x="23" y="9" width="18" height="21"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="ujX-q0-o8d" secondAttribute="trailing" constant="15" id="0Ry-Fp-vqH"/>
-                                                <constraint firstItem="7rq-kl-h7I" firstAttribute="top" secondItem="TuY-wQ-qtK" secondAttribute="top" constant="11" id="4ZN-UT-9QP"/>
-                                                <constraint firstItem="7rq-kl-h7I" firstAttribute="leading" secondItem="TuY-wQ-qtK" secondAttribute="leading" constant="2" id="56d-Qv-IqQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="7rq-kl-h7I" secondAttribute="trailing" constant="-8" id="GY9-FQ-GRD"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="leading" secondItem="TuY-wQ-qtK" secondAttribute="leadingMargin" id="Jzw-gh-FbG"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="leading" secondItem="TuY-wQ-qtK" secondAttribute="leading" id="N9h-xa-OeW"/>
-                                                <constraint firstItem="7rq-kl-h7I" firstAttribute="centerY" secondItem="ujX-q0-o8d" secondAttribute="centerY" id="Oly-xo-AsH"/>
-                                                <constraint firstAttribute="trailing" secondItem="ujX-q0-o8d" secondAttribute="trailing" id="Q2k-9y-G2h"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="trailing" secondItem="TuY-wQ-qtK" secondAttribute="trailingMargin" id="QSV-EG-hn8"/>
-                                                <constraint firstAttribute="trailing" secondItem="7rq-kl-h7I" secondAttribute="trailing" constant="1" id="TMl-TK-bFz"/>
-                                                <constraint firstItem="7rq-kl-h7I" firstAttribute="leading" secondItem="TuY-wQ-qtK" secondAttribute="leading" constant="23" id="TYB-n7-fli"/>
-                                                <constraint firstItem="7rq-kl-h7I" firstAttribute="top" secondItem="TuY-wQ-qtK" secondAttribute="top" constant="9" id="apV-yL-7SH"/>
-                                                <constraint firstAttribute="bottom" secondItem="ujX-q0-o8d" secondAttribute="bottom" id="buD-RZ-F9D"/>
-                                                <constraint firstAttribute="trailing" secondItem="ujX-q0-o8d" secondAttribute="trailing" constant="8" id="cyo-JN-ZXM"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="leading" secondItem="TuY-wQ-qtK" secondAttribute="leading" id="eCA-D6-MMg"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="top" secondItem="TuY-wQ-qtK" secondAttribute="topMargin" id="gsZ-YB-zyz"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="top" secondItem="TuY-wQ-qtK" secondAttribute="top" id="lct-jc-Lpe"/>
-                                                <constraint firstAttribute="bottom" secondItem="ujX-q0-o8d" secondAttribute="bottom" id="oIV-ns-PZG"/>
-                                                <constraint firstItem="ujX-q0-o8d" firstAttribute="top" secondItem="TuY-wQ-qtK" secondAttribute="top" id="rMM-Rk-3tj"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ujX-q0-o8d" secondAttribute="bottom" id="tb8-dt-mHv"/>
-                                                <constraint firstItem="7rq-kl-h7I" firstAttribute="centerY" secondItem="ujX-q0-o8d" secondAttribute="centerY" id="yA6-Bp-89J"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="Jzw-gh-FbG"/>
-                                                    <exclude reference="N9h-xa-OeW"/>
-                                                    <exclude reference="Q2k-9y-G2h"/>
-                                                    <exclude reference="QSV-EG-hn8"/>
-                                                    <exclude reference="cyo-JN-ZXM"/>
-                                                    <exclude reference="gsZ-YB-zyz"/>
-                                                    <exclude reference="lct-jc-Lpe"/>
-                                                    <exclude reference="oIV-ns-PZG"/>
-                                                    <exclude reference="tb8-dt-mHv"/>
-                                                    <exclude reference="4ZN-UT-9QP"/>
-                                                    <exclude reference="56d-Qv-IqQ"/>
-                                                    <exclude reference="GY9-FQ-GRD"/>
-                                                    <exclude reference="yA6-Bp-89J"/>
-                                                </mask>
-                                            </variation>
-                                        </view>
+                                            <state key="normal" title="Button" image="camera_icon_small.jpg"/>
+                                            <connections>
+                                                <action selector="photoButton:" destination="a0m-Jv-xyc" eventType="touchUpInside" id="Aco-fk-bje"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ZXw-f3-u4p"/>
                                     <barButtonItem style="plain" id="Qrv-02-PmN">
                                         <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bridge Message" textAlignment="natural" minimumFontSize="17" id="ese-5Q-Caz">
-                                            <rect key="frame" x="85" y="7" width="150" height="30"/>
+                                            <rect key="frame" x="78" y="7" width="150" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="dB9-Jh-ksQ"/>
@@ -547,7 +498,6 @@
                                             <rect key="frame" x="262" y="7" width="97" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Send">
-                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
@@ -557,6 +507,9 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7rq-kl-h7I">
+                                <rect key="frame" x="0.0" y="323" width="375" height="21"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -587,6 +540,7 @@
                     <connections>
                         <outlet property="bridgeMessage" destination="ese-5Q-Caz" id="z4c-Kt-Xas"/>
                         <outlet property="imageMessage" destination="7rq-kl-h7I" id="nxG-y7-ObD"/>
+                        <outlet property="navigationBar" destination="J75-mC-JeW" id="hnh-0M-Fvm"/>
                         <outlet property="sendButon" destination="NTX-9h-TQU" id="Be9-3K-ZZD"/>
                         <outlet property="tableView" destination="qBQ-bz-SYY" id="CnQ-S2-lGJ"/>
                         <segue destination="ABc-Ef-uKn" kind="presentation" identifier="showSingleMessageFromNewMessage" id="ZED-f0-itX"/>
@@ -892,21 +846,166 @@
         <!--New Bridge Status-->
         <scene sceneID="6dS-e7-LSj">
             <objects>
-                <viewController title="New Bridge Status" id="P6Q-JZ-W57" sceneMemberID="viewController">
+                <viewController title="New Bridge Status" id="P6Q-JZ-W57" customClass="NewBridgeStatusViewController" customModule="MyBridgeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cAW-U6-60g"/>
                         <viewControllerLayoutGuide type="bottom" id="F8U-Nj-mg2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tCt-ab-eGr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E7t-6x-wYP">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="New Bridge Status" id="8N0-r9-ACt">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YAG-Hh-p79">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="P6Q-JZ-W57" id="2wT-eW-hl1"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Post" id="Kte-GQ-fDo">
+                                            <connections>
+                                                <action selector="postButtonTapped:" destination="P6Q-JZ-W57" id="Hqx-43-JzC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J6i-km-Vkj">
+                                <rect key="frame" x="20" y="104" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="2VC-iu-wOa"/>
+                                    <constraint firstAttribute="height" constant="120" id="ieY-qO-cgi"/>
+                                    <constraint firstAttribute="width" constant="120" id="uQ1-24-4bH"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2VC-iu-wOa"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knZ-tB-bCT">
+                                <rect key="frame" x="195" y="104" width="116" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="PrY-wP-V23"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PrY-wP-V23"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Rzp-G5-CZI">
+                                <rect key="frame" x="195" y="181" width="116" height="127"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="185" id="MmU-rr-TV4"/>
+                                    <constraint firstAttribute="height" constant="127" id="q79-ay-ttU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MmU-rr-TV4"/>
+                                    </mask>
+                                </variation>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Bridge Type" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N1-ja-oAU">
+                                <rect key="frame" x="195" y="165" width="116" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="dN0-1s-kLa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dN0-1s-kLa"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your bridge status here ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xOe-Nn-W9u">
+                                <rect key="frame" x="20" y="398" width="280" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8I0-1Y-6FK"/>
+                                    <constraint firstAttribute="height" constant="30" id="WWb-AS-ktK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="WWb-AS-ktK"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6N1-ja-oAU" firstAttribute="trailing" secondItem="knZ-tB-bCT" secondAttribute="trailing" id="0Ni-Om-yR7"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="top" secondItem="tCt-ab-eGr" secondAttribute="top" constant="181" id="1sl-uA-2VE"/>
+                            <constraint firstItem="F8U-Nj-mg2" firstAttribute="top" secondItem="xOe-Nn-W9u" secondAttribute="bottom" constant="208" id="2n0-GT-nsQ"/>
+                            <constraint firstItem="xOe-Nn-W9u" firstAttribute="top" secondItem="Rzp-G5-CZI" secondAttribute="bottom" constant="114" id="87a-xh-Ade"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="top" secondItem="6N1-ja-oAU" secondAttribute="bottom" constant="2" id="BVP-CA-34y"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="top" secondItem="knZ-tB-bCT" secondAttribute="bottom" constant="8" symbolic="YES" id="CH6-bJ-Fod"/>
+                            <constraint firstItem="knZ-tB-bCT" firstAttribute="leading" secondItem="6N1-ja-oAU" secondAttribute="leading" id="H1P-bW-E6V"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="leading" secondItem="6N1-ja-oAU" secondAttribute="leading" id="MKW-2m-Cn3"/>
+                            <constraint firstItem="knZ-tB-bCT" firstAttribute="leading" secondItem="J6i-km-Vkj" secondAttribute="trailing" constant="55" id="MNb-ng-d4v"/>
+                            <constraint firstItem="xOe-Nn-W9u" firstAttribute="top" secondItem="Rzp-G5-CZI" secondAttribute="bottom" constant="56" id="OlS-Ot-ysN"/>
+                            <constraint firstItem="E7t-6x-wYP" firstAttribute="leading" secondItem="tCt-ab-eGr" secondAttribute="leading" id="P8e-Ez-M0U"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="knZ-tB-bCT" secondAttribute="trailing" constant="-11" id="QVk-dY-HyD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6N1-ja-oAU" secondAttribute="trailing" constant="-7" id="TYp-8K-wQA"/>
+                            <constraint firstItem="6N1-ja-oAU" firstAttribute="top" secondItem="tCt-ab-eGr" secondAttribute="top" constant="165" id="VxO-ce-m4g"/>
+                            <constraint firstItem="6N1-ja-oAU" firstAttribute="top" secondItem="tCt-ab-eGr" secondAttribute="top" constant="165" id="Wjd-9b-KC1"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="top" secondItem="knZ-tB-bCT" secondAttribute="bottom" constant="8" symbolic="YES" id="YRX-Tm-x2M"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6N1-ja-oAU" secondAttribute="trailing" constant="-7" id="adD-Wm-o7F"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="trailing" secondItem="6N1-ja-oAU" secondAttribute="trailing" id="cxK-2H-MHl"/>
+                            <constraint firstItem="J6i-km-Vkj" firstAttribute="top" secondItem="tCt-ab-eGr" secondAttribute="top" constant="104" id="euX-72-Oao"/>
+                            <constraint firstAttribute="trailing" secondItem="E7t-6x-wYP" secondAttribute="trailing" id="g7m-WI-tBU"/>
+                            <constraint firstItem="F8U-Nj-mg2" firstAttribute="top" secondItem="xOe-Nn-W9u" secondAttribute="bottom" constant="140" id="goq-u4-e1g"/>
+                            <constraint firstItem="knZ-tB-bCT" firstAttribute="trailing" secondItem="6N1-ja-oAU" secondAttribute="trailing" id="iu0-Ca-zvl"/>
+                            <constraint firstItem="6N1-ja-oAU" firstAttribute="top" secondItem="knZ-tB-bCT" secondAttribute="bottom" constant="100" id="k6o-qM-7yK"/>
+                            <constraint firstItem="6N1-ja-oAU" firstAttribute="top" secondItem="knZ-tB-bCT" secondAttribute="bottom" constant="3" id="kjV-Du-0sk"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="top" secondItem="6N1-ja-oAU" secondAttribute="bottom" constant="2" id="oZN-U4-uJF"/>
+                            <constraint firstItem="knZ-tB-bCT" firstAttribute="top" secondItem="J6i-km-Vkj" secondAttribute="top" id="sAU-ev-XE5"/>
+                            <constraint firstItem="xOe-Nn-W9u" firstAttribute="top" secondItem="Rzp-G5-CZI" secondAttribute="bottom" constant="20" id="sfs-QT-Dl8"/>
+                            <constraint firstItem="xOe-Nn-W9u" firstAttribute="leading" secondItem="J6i-km-Vkj" secondAttribute="leading" id="ueZ-dl-Zol"/>
+                            <constraint firstItem="xOe-Nn-W9u" firstAttribute="centerX" secondItem="E7t-6x-wYP" secondAttribute="centerX" id="wKy-Ct-Vzk"/>
+                            <constraint firstItem="J6i-km-Vkj" firstAttribute="leading" secondItem="tCt-ab-eGr" secondAttribute="leadingMargin" constant="4" id="xFJ-jL-4k7"/>
+                            <constraint firstItem="J6i-km-Vkj" firstAttribute="top" secondItem="E7t-6x-wYP" secondAttribute="bottom" constant="40" id="xbb-3A-GO9"/>
+                            <constraint firstItem="Rzp-G5-CZI" firstAttribute="top" secondItem="6N1-ja-oAU" secondAttribute="bottom" constant="2" id="xtG-ED-9o5"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QVk-dY-HyD"/>
+                                <exclude reference="0Ni-Om-yR7"/>
+                                <exclude reference="Wjd-9b-KC1"/>
+                                <exclude reference="adD-Wm-o7F"/>
+                                <exclude reference="k6o-qM-7yK"/>
+                                <exclude reference="1sl-uA-2VE"/>
+                                <exclude reference="CH6-bJ-Fod"/>
+                                <exclude reference="YRX-Tm-x2M"/>
+                                <exclude reference="oZN-U4-uJF"/>
+                                <exclude reference="xtG-ED-9o5"/>
+                                <exclude reference="87a-xh-Ade"/>
+                                <exclude reference="OlS-Ot-ysN"/>
+                                <exclude reference="sfs-QT-Dl8"/>
+                                <exclude reference="2n0-GT-nsQ"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="bridgeStatus" destination="xOe-Nn-W9u" id="oCK-ag-ofp"/>
+                        <outlet property="bridgeTypePicker" destination="Rzp-G5-CZI" id="sPb-RF-yoo"/>
+                        <outlet property="postButton" destination="Kte-GQ-fDo" id="RG0-hD-Gy3"/>
+                        <outlet property="profilePicture" destination="J6i-km-Vkj" id="NUR-wu-elp"/>
+                        <outlet property="username" destination="knZ-tB-bCT" id="G4g-Ov-dct"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4S1-vj-COi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796.5" y="-1080.5"/>
+            <point key="canvasLocation" x="1788" y="-919"/>
         </scene>
         <!--Bridge-->
         <scene sceneID="zUx-7Q-hEN">
@@ -1013,7 +1112,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="7mE-X6-kao"/>
                                     <barButtonItem title="Friendship" id="dSe-qW-iO7"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yft-M2-cOY"/>
-                                    <barButtonItem title="Status" id="seF-Oh-qNO"/>
+                                    <barButtonItem title="Status" id="seF-Oh-qNO">
+                                        <connections>
+                                            <segue destination="P6Q-JZ-W57" kind="show" id="5yu-aa-2MN"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RejectOrBridgeLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFI-yk-egX">
@@ -1094,36 +1197,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkF-cS-ZYo">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem title="All Bridges" id="0Cn-yi-Osz">
-                                        <connections>
-                                            <action selector="allBridgesTapped:" destination="zXt-b0-Sdf" id="ZNa-dB-fUz"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="R78-3O-fu3"/>
-                                    <barButtonItem title="Business" id="gyZ-oH-qPi">
-                                        <connections>
-                                            <action selector="businessTapped:" destination="zXt-b0-Sdf" id="get-lQ-iT7"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iZA-Hv-XWe"/>
-                                    <barButtonItem title="Love" id="2aS-kF-so8">
-                                        <connections>
-                                            <action selector="loveTapped:" destination="zXt-b0-Sdf" id="1tQ-NU-wXm"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Sp3-Qs-DFq"/>
-                                    <barButtonItem title="Friendship" id="uPg-yF-uTX">
-                                        <connections>
-                                            <action selector="friendshipTapped:" destination="zXt-b0-Sdf" id="qgD-Gk-G3C"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tgF-Z9-vbf"/>
-                                    <barButtonItem title="Status" id="7MV-qh-B1j"/>
-                                </items>
-                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJ6-Xw-l9y">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1220,6 +1293,40 @@
                                     <outlet property="delegate" destination="zXt-b0-Sdf" id="Eig-jA-B55"/>
                                 </connections>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkF-cS-ZYo">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="All Bridges" id="0Cn-yi-Osz">
+                                        <connections>
+                                            <action selector="allBridgesTapped:" destination="zXt-b0-Sdf" id="ZNa-dB-fUz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="R78-3O-fu3"/>
+                                    <barButtonItem title="Business" id="gyZ-oH-qPi">
+                                        <connections>
+                                            <action selector="businessTapped:" destination="zXt-b0-Sdf" id="get-lQ-iT7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iZA-Hv-XWe"/>
+                                    <barButtonItem title="Love" id="2aS-kF-so8">
+                                        <connections>
+                                            <action selector="loveTapped:" destination="zXt-b0-Sdf" id="1tQ-NU-wXm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Sp3-Qs-DFq"/>
+                                    <barButtonItem title="Friendship" id="uPg-yF-uTX">
+                                        <connections>
+                                            <action selector="friendshipTapped:" destination="zXt-b0-Sdf" id="qgD-Gk-G3C"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tgF-Z9-vbf"/>
+                                    <barButtonItem title="Status" id="7MV-qh-B1j">
+                                        <connections>
+                                            <segue destination="P6Q-JZ-W57" kind="show" id="54d-57-TXv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1633,11 +1740,12 @@
         <image name="suzy's_profile_picture.jpg" width="960" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hZa-MC-ZQr"/>
         <segue reference="HGT-Vo-Kl8"/>
+        <segue reference="Lus-h1-21q"/>
+        <segue reference="5yu-aa-2MN"/>
         <segue reference="R3c-8L-9g2"/>
-        <segue reference="5bU-kI-iEz"/>
-        <segue reference="Vf7-BV-Sao"/>
+        <segue reference="hZa-MC-ZQr"/>
+        <segue reference="JzV-LS-8wx"/>
         <segue reference="ZED-f0-itX"/>
     </inferredMetricsTieBreakers>
 </document>

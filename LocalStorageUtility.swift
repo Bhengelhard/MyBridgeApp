@@ -68,7 +68,7 @@ class LocalStorageUtility{
                         let imageFile: PFFile = PFFile(data: data)!
                         //PFUser.currentUser()?["profile_picture"] = imageFile
                         //PFUser.currentUser()?["profile_picture_from_fb"] = true
-                        print("storing profile picture to local storage")
+                        //print("storing profile picture to local storage")
                         var updateProfilePic = false
                         if let profilePictureFromFbBool = localData.getProfilePictureFromFb(){
                             updateProfilePic = profilePictureFromFbBool
@@ -160,7 +160,7 @@ class LocalStorageUtility{
                                         if let name = item["name"] as? String {
                                             if let id = item["id"] as? String {
                                                 
-                                                print("\(name)'s id is \(id)")
+                                                //print("\(name)'s id is \(id)")
                                                 friendsArrayFbId.append(id)
                                                 let query = PFQuery(className:"_User")
                                                 query.whereKey("fb_id", equalTo:id)
@@ -203,7 +203,7 @@ class LocalStorageUtility{
                                     localData.synchronize()
                                     PFUser.currentUser()?["friend_list"] = friendsArray
                                     }
-                                    print("friends array -\(friendsArray)")
+                                    //print("friends array -\(friendsArray)")
                                 }
                                 
                             }

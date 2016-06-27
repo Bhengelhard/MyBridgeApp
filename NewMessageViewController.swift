@@ -11,6 +11,7 @@ import Parse
 class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchResultsUpdating, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate {
 
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var bridgeMessage: UITextField!
     @IBOutlet weak var imageMessage: UIImageView!
     @IBOutlet weak var sendButon: UIButton!
@@ -95,7 +96,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             imageMessage.hidden = true
             
             self.sendButon.userInteractionEnabled = false
-            self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+            //self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             self.searchController.searchBar.text = ""
             let query: PFQuery = PFQuery(className: "Messages")
             var objectIdsInMessage = sendToObjectIds
@@ -208,7 +209,14 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         picker .dismissViewControllerAnimated(true, completion: nil)
         imageMessage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        imageMessage.hidden = false
+        //imageMessage.hidden = false
+        
+        let imageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        //view.addSubview(imageView)
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        bridgeMessage.leftView = imageView
         self.imageSet = true
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
@@ -224,7 +232,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         tableView.dataSource = self
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
@@ -233,6 +241,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.sendButon.userInteractionEnabled = false
         self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         imageMessage.hidden = true
+        
+        bridgeMessage.leftViewMode = UITextFieldViewMode.Always
         // Do any additional setup after loading the view.
     }
    
@@ -240,10 +250,52 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+   
+
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        navigationBar.hidden = true
+        let xPosition = tableView.frame.origin.x - 9
+        let yPosition = tableView.frame.origin.y - 30
+        let height = tableView.frame.size.height
+        let width = tableView.frame.size.width
+        
+        UIView.animateWithDuration(0, animations: {
+            
+            self.tableView.frame = CGRectMake(xPosition, yPosition, height, width)
+        })
+        /*for subView in searchController.searchBar.subviews  {
+            print("subView - \(subView)")
+            for subsubView in subView.subviews  {
+                print("subsubView - \(subsubView)")
+                if let textField = subsubView as? UITextField {
+                    var bounds: CGRect
+                    bounds = textField.frame
+                    print("searchController.searchBar.subviews - \(textField.bounds)")
+                    bounds.size.width = 184 //(set height whatever you want)
+                    textField.frame = bounds
+                    print("searchController.searchBar.subviews - \(textField.frame)")
+                }
+            }
+        }*/
+
         print("tapped")
+        
     }
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        navigationBar.hidden = false
+//        let xPosition = tableView.frame.origin.x
+//        
+//        //View will slide 20px up
+//        let yPosition = tableView.frame.origin.y + 40
+//        
+//        let height = tableView.frame.size.height
+//        let width = tableView.frame.size.width
+//        
+//        UIView.animateWithDuration(1.0, animations: {
+//            
+//            self.tableView.frame = CGRectMake(xPosition, yPosition, height, width)
+//        })
+
         self.sendButon.userInteractionEnabled = false
         self.sendButon.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         self.sendToObjectIds = [String]()
@@ -316,7 +368,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         
         self.sendButon.userInteractionEnabled = true
-        self.sendButon.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        //self.sendButon.tintColor = UIColor.init(red: 170.0/255, green: 170.0/255, blue: 170.0/255, alpha: 1.0)
+        self.sendButon.setTitleColor(UIColor.init(red: 0.196, green: 0.3098, blue: 0.52, alpha: 1.0), forState: UIControlState.Normal)
         self.nameAdded = true
         //tableView.reloadData()
     }
