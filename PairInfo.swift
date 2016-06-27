@@ -12,9 +12,9 @@ class PairInfo:NSObject, NSCoding {
     var objectId:String? = nil
     var mainProfilePicture:NSData? = nil
     var profilePictures: [NSData]? = nil
-    var location:String? = ""
+    var location:[Double]? = nil
     var bridgeStatus:String? = ""
-    init( name:String?, mainProfilePicture: NSData?, profilePictures: [NSData]?, location:String?, bridgeStatus:String?, objectId:String?) {
+    init( name:String?, mainProfilePicture: NSData?, profilePictures: [NSData]?, location:[Double]?, bridgeStatus:String?, objectId:String?) {
         self.name = name
         self.mainProfilePicture = mainProfilePicture
         self.profilePictures = profilePictures
@@ -28,7 +28,7 @@ class PairInfo:NSObject, NSCoding {
         let name = aDecoder.decodeObjectForKey("name") as! String?
         let mainProfilePicture = aDecoder.decodeObjectForKey("mainProfilePicture") as! NSData?
         let profilePictures = aDecoder.decodeObjectForKey("profilePictures") as! [NSData]?
-        let location = aDecoder.decodeObjectForKey("location") as! String?
+        let location = aDecoder.decodeObjectForKey("location") as! [Double]?
         let bridgeStatus = aDecoder.decodeObjectForKey("bridgeStatus") as! String?
         let objectId = aDecoder.decodeObjectForKey("objectId") as! String?
         self.init(name: name, mainProfilePicture: mainProfilePicture, profilePictures: profilePictures,

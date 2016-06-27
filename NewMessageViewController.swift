@@ -27,6 +27,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     var imageSet = false
     var messageId = String()
     var segueToSingleMessage = false
+    let transitionManager = TransitionManager()
+    
     func getFriendNames(){
         let friendList = LocalData().getFriendList()
         if let _ = friendList{
@@ -81,6 +83,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         if segueToSingleMessage {
         segueToSingleMessage = false
         let singleMessageVC:SingleMessageViewController = segue.destinationViewController as! SingleMessageViewController
+        singleMessageVC.transitioningDelegate = self.transitionManager
         singleMessageVC.isSeguedFromNewMessage = true
         singleMessageVC.newMessageId = self.messageId
         }
@@ -109,6 +112,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                     print("object found")
                     self.messageId = result.objectId!
                     messageIdNotFound = false
+                    result["ids_in_message"] = result["ids_in_message"]
                     result.saveInBackground() // to update the time
                     break
                     }
@@ -153,6 +157,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
 
                 }
             segueToSingleMessage = true
+            print("Segue now")
+            searchController.active = false
             performSegueWithIdentifier("showSingleMessageFromNewMessage", sender: self)
     }
     @IBAction func photoButton(sender: AnyObject) {
@@ -249,7 +255,13 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         var searchTerms = searchText.characters.split{$0 == ","}.map(String.init)
         var searchFor = searchText
         if searchTerms.count > 1 {
-         searchFor = searchTerms[searchTerms.count - 1]
+         print("searchTerms.count - \(searchTerms.count)")
+            if searchTerms.count == searchText.componentsSeparatedByString(",").count - 1{
+                searchFor = " "
+            }
+            else {
+                searchFor = searchTerms[searchTerms.count - 1]
+            }
         }
         for i in 0 ..< self.friendNames.count  {
             if self.friendNames[i].lowercaseString.containsString(searchFor.lowercaseString){

@@ -66,12 +66,29 @@ class LocalStorageUtility{
                 if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
                     if let data = NSData(contentsOfURL: fbpicUrl) {
                         let imageFile: PFFile = PFFile(data: data)!
-                        PFUser.currentUser()?["profile_picture"] = imageFile
-                        PFUser.currentUser()?["profile_picture_from_fb"] = true
+                        //PFUser.currentUser()?["profile_picture"] = imageFile
+                        //PFUser.currentUser()?["profile_picture_from_fb"] = true
                         print("storing profile picture to local storage")
+                        var updateProfilePic = false
+                        if let profilePictureFromFbBool = localData.getProfilePictureFromFb(){
+                            updateProfilePic = profilePictureFromFbBool
+                        }
+                        if let _ = localData.getMainProfilePicture(){
+                            PFUser.currentUser()?["fb_profile_picture"] = imageFile
+                            if updateProfilePic {
+                                PFUser.currentUser()?["profile_picture"] = imageFile
+                                localData.setMainProfilePicture(data)
+                                localData.synchronize()
+
+                            }
+                        }
+                        else {
+                        PFUser.currentUser()?["fb_profile_picture"] = imageFile
+                        PFUser.currentUser()?["profile_picture"] = imageFile
                         localData.setMainProfilePicture(data)
                         localData.setProfilePictureFromFb(true)
                         localData.synchronize()
+                        }
                     }
                 }
         
@@ -90,14 +107,14 @@ class LocalStorageUtility{
                     name = ob as? String
                 }
                 var main_profile_picture:NSData? = nil
-                if let ob = object["fb_profile_picture"] {
+                if let ob = object["profile_picture"] {
                     let main_profile_picture_file = ob as! PFFile
                     let data = try main_profile_picture_file.getData()
                     main_profile_picture = data
                 }
-                var location:String? = nil
-                if let ob = object["location"] {
-                    //location = ob as! String
+                var location:[Double]? = nil
+                if let ob = object["location"] as? PFGeoPoint{
+                    location = [ob.latitude, ob.longitude]
                 }
                 var bridge_status:String? = nil
                 if let ob = object["current_bridge_status"] {
@@ -159,15 +176,33 @@ class LocalStorageUtility{
                                             
                                         }
                                     }
-                                    //Update Parse DB to store the friendlist
+                                    //Update Parse DB to store the FBfriendlist
                                     
                                     PFUser.currentUser()?["fb_friends"] = friendsArrayFbId
-                                    PFUser.currentUser()?["friend_list"] = friendsArray
+                                   
                                     
-                                    //Update Iphone's local storage to store the friendlist
+                                    //Update Iphone's local storage and Parse to store the friendlist
                                     let localData = LocalData()
+                                    if let localFriendList = localData.getFriendList() {
+                                        var finalFriendList = localFriendList
+                                        for friend in friendsArray {
+                                            if finalFriendList.contains(friend){
+                                                
+                                            }
+                                            else{
+                                                finalFriendList.append(friend)
+                                            }
+                                        }
+                                        localData.setFriendList(finalFriendList)
+                                        localData.synchronize()
+                                        PFUser.currentUser()?["friend_list"] = finalFriendList
+                                        
+                                    }
+                                    else {
                                     localData.setFriendList(friendsArray)
                                     localData.synchronize()
+                                    PFUser.currentUser()?["friend_list"] = friendsArray
+                                    }
                                     print("friends array -\(friendsArray)")
                                 }
                                 

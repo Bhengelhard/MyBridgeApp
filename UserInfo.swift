@@ -8,11 +8,11 @@
 
 import Foundation
 class UserInfo:NSObject, NSCoding  {
-    var username: String? = ""
+    var username: String? = nil
     var interestedIn: String? = nil
     var friendlist: [String]? = []
     var mainProfilePicture: NSData? = nil
-    var pairings:[UserInfoPair]? = []
+    var pairings:[UserInfoPair]? = nil
     var profilePictureFromFb:Bool? = nil
     var newMessagesPushNotifications:Bool? = nil
     var newBridgesPushNotifications:Bool? = nil

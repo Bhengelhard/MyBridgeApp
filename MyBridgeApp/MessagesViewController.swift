@@ -93,11 +93,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     func updateMessagesTable() {
-        
-        //messages users_in_message are displayed in box, when clicked, open message with SingleMessages MessageId = Messages ObjectId
-        
         let query: PFQuery = PFQuery(className: "Messages")
-        
         query.whereKey("ids_in_message", containsString: PFUser.currentUser()?.objectId)
         query.orderByDescending("updatedAt")
         
@@ -178,6 +174,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
         
     }
+    // helper function for updateSearchResultsForSearchController
     func filterContentForSearchText(searchText:String, scope: String = "All"){
         filteredPositions = [Int]()
         for i in 0 ..< names.count  {
@@ -197,6 +194,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.reloadData()
         
     }
+    // update search reults
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
@@ -212,35 +210,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
-        //self.navigationController!.toolbarHidden=false;
-        //this should only update when a new message is created**
-        //shouldn't be reloading the table more than once per viewDidLoad
-        
-        
-        
-        /*if segueFromExitedMessage == true {
-            
-            IDsOfMessages.removeFirst()
-            names.removeFirst()
-            
-            print("ids")
-            print(IDsOfMessages)
-            print("names")
-            print(names)
-            
-            segueFromExitedMessage = false
-            
-            tableView.reloadData()
-            
-            
-            
-        }*/
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -251,8 +220,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -270,7 +237,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
 
-    
+    // Data to be shown on an individual row
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //print("Row is \(indexPath.row)")
         var names = self.names
@@ -317,8 +284,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             
         }
         
-        //cell.participants.lineBreakMode = .ByWordWrapping
-        //cell.participants.numberOfLines = 0
         cell.participants.text = stringOfNames
         cell.messageSnapshot.text = messages[indexPath.row]
         switch messageType[indexPath.row]{
@@ -370,7 +335,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
         
     }
-    
+    // A row is selected
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var IDsOfMessages = self.IDsOfMessages
         let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! MessagesTableCell
@@ -386,64 +351,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         previousViewController = "MessagesViewController"
         toolbarTapped = false
-        //messageId =
-        
-        //print(singleMessageTitle)
-        /*if let cellText = cell.textLabel?.text {
-            
-            print(cellText)
-            
-            singleMessageTitle = cellText
-            
-        }*/
-        
         performSegueWithIdentifier("showSingleMessageFromMessages", sender: self)
     
-
-        
-        //opening email to send mail
-        /*let url = NSURL(string: "mailto:" + emails[indexPath.row])
-        
-        UIApplication.sharedApplication().openURL(url!)
-        
-        print(url!)*/
         
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
 
     /*
     // MARK: - Navigation

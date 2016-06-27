@@ -23,6 +23,7 @@
 		1BE888D31D1300BF00EA6DA4 /* LocalStorageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */; };
 		1BE888D51D135A5800EA6DA4 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE888D41D135A5800EA6DA4 /* SignupViewController.swift */; };
 		1BE888D71D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BE888D61D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png */; };
+		1BF5A6C31D1FAB1800EE6B95 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A6C21D1FAB1800EE6B95 /* TransitionManager.swift */; };
 		1BF692CA1D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692C81D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld */; };
 		1BF692D31D09E1950030B6D0 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */; };
 		1BF692D41D09E1950030B6D0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF692D21D09E1950030B6D0 /* Users.swift */; };
@@ -67,6 +68,7 @@
 		1BE888D21D1300BF00EA6DA4 /* LocalStorageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageUtility.swift; sourceTree = "<group>"; };
 		1BE888D41D135A5800EA6DA4 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = SOURCE_ROOT; };
 		1BE888D61D146BC100EA6DA4 /* Editing-Rectangle-Stroked-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Editing-Rectangle-Stroked-icon.png"; sourceTree = "<group>"; };
+		1BF5A6C21D1FAB1800EE6B95 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionManager.swift; path = Resources/TransitionManager.swift; sourceTree = SOURCE_ROOT; };
 		1BF692C91D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyBridgeAppDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1BF692D11D09E1950030B6D0 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BF692D21D09E1950030B6D0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				CB5829441CAA26D900DC86C9 /* AppDelegate.swift */,
+				1BF5A6C21D1FAB1800EE6B95 /* TransitionManager.swift */,
 				CB6A329C1CE2461700FADB13 /* LoadPageViewController.swift */,
 				CB5829461CAA26D900DC86C9 /* ViewController.swift */,
 				CB5829451CAA26D900DC86C9 /* BridgeViewController.swift */,
@@ -295,6 +298,7 @@
 				CB6A32991CC483CD00FADB13 /* SingleMessageViewController.swift in Sources */,
 				1B4A11F71D1C4547002FB859 /* NewMessageViewController.swift in Sources */,
 				CB6A329D1CE2461800FADB13 /* LoadPageViewController.swift in Sources */,
+				1BF5A6C31D1FAB1800EE6B95 /* TransitionManager.swift in Sources */,
 				1BF692D31D09E1950030B6D0 /* Users+CoreDataProperties.swift in Sources */,
 				CB5829491CAA26D900DC86C9 /* ViewController.swift in Sources */,
 				1BF692CA1D09DA2E0030B6D0 /* MyBridgeAppDataModel.xcdatamodeld in Sources */,

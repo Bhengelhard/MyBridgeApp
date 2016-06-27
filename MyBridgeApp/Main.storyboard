@@ -589,7 +589,7 @@
                         <outlet property="imageMessage" destination="7rq-kl-h7I" id="nxG-y7-ObD"/>
                         <outlet property="sendButon" destination="NTX-9h-TQU" id="Be9-3K-ZZD"/>
                         <outlet property="tableView" destination="qBQ-bz-SYY" id="CnQ-S2-lGJ"/>
-                        <segue destination="ABc-Ef-uKn" kind="show" identifier="showSingleMessageFromNewMessage" id="ZED-f0-itX"/>
+                        <segue destination="ABc-Ef-uKn" kind="presentation" identifier="showSingleMessageFromNewMessage" id="ZED-f0-itX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kin-se-qVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1633,11 +1633,11 @@
         <image name="suzy's_profile_picture.jpg" width="960" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5bU-kI-iEz"/>
-        <segue reference="Vf7-BV-Sao"/>
-        <segue reference="0Jc-ZY-MLe"/>
-        <segue reference="R3c-8L-9g2"/>
         <segue reference="hZa-MC-ZQr"/>
         <segue reference="HGT-Vo-Kl8"/>
+        <segue reference="R3c-8L-9g2"/>
+        <segue reference="5bU-kI-iEz"/>
+        <segue reference="Vf7-BV-Sao"/>
+        <segue reference="ZED-f0-itX"/>
     </inferredMetricsTieBreakers>
 </document>

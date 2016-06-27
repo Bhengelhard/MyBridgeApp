@@ -218,7 +218,6 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationBar.title = singleMessageTitle
         if previousViewController == "MessagesViewController"   {
             
@@ -230,7 +229,7 @@ class SingleMessageViewController: UIViewController, UITableViewDelegate {
             updateMessages()
             
         }
-
+        
         
         //create singleMessage class in DB where row is created for each message sent with Sender (currentUser), MessageId (Id from Messages Class), MessageContent (TextField), recievers (recievers - current user) are displayed on title
         
